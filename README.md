@@ -94,6 +94,10 @@
 	</li>
 </ul>
 
+## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Test-Cases">Test Cases</a>** ##
+
+## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Project-Plan">Project Plan</a>** ##
+
 ## **Research Topics** ##
 
 <ul>
