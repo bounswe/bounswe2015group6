@@ -34,4 +34,8 @@ public class MathematicalOperations {
     	else
     		return x;
     }
+    //finds remainder
+    public int remainder(int x, int y){
+    	return x%y;
+    }
 }
