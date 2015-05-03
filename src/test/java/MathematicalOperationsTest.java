@@ -67,4 +67,13 @@ public class MathematicalOperationsTest {
     	assertEquals("Absolute value of 0 should be 0", 0, mathematicalOperations.abs(0));
     	assertEquals("Absolute value of 5 should be 5", 5, mathematicalOperations.abs(5));
     }
+    
+    @Test
+    public void testRemainder(){
+    	assertEquals("Remainder of 5 and 2 should be 1", 1, mathematicalOperations.remainder(5,1));
+    	assertEquals("Remainder of 14 and 43 should be 14 ", 14, mathematicalOperations.remainder(14,43));
+    	assertEquals("Remainder of 6 and 9 should be 6", 6, mathematicalOperations.remainder(6,9));
+    	assertEquals("Remainder of 13 and 5 should be 3", 3, mathematicalOperations.remainder(13,5));
+    	assertEquals("Remainder of 123 and 100 should be 23", 23, mathematicalOperations.remainder(123,100));
+    }
 }
