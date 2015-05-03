@@ -58,4 +58,13 @@ public class MathematicalOperationsTest {
         assertEquals("0 to the power of 0 should be 1", 1, mathematicalOperations.power(0, 0));
         assertEquals("-7 to the power of 3 should be -343", -343, mathematicalOperations.power(-7, 3));
     }
+    
+    @Test
+    public void testAbs(){
+    	assertEquals("Absolute value of -1 should be 1", 1, mathematicalOperations.abs(-1));
+    	assertEquals("Absolute value of -100 should be 100", 100, mathematicalOperations.abs(-100));
+    	assertEquals("Absolute value of -58 should be 58", 58, mathematicalOperations.abs(-58));
+    	assertEquals("Absolute value of 0 should be 0", 0, mathematicalOperations.abs(0));
+    	assertEquals("Absolute value of 5 should be 5", 5, mathematicalOperations.abs(5));
+    }
 }
