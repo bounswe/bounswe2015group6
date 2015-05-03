@@ -20,5 +20,11 @@ public class MathematicalOperations {
     public int divide(int x, int y){
         return x / y;
     }
+
+    // raises x to the power of y
+    public double power(double x, double y)
+    {
+        return Math.pow(x, y);
+    }
     
 }
