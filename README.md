@@ -98,6 +98,8 @@
 
 ## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Project-Plan">Project Plan</a>** ##
 
+## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/RAM">RAM</a>** ##
+
 ## **Research Topics** ##
 
 <ul>
