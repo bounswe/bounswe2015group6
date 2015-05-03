@@ -21,10 +21,10 @@ public class MathematicalOperationsTest {
     
     @Test
     public void testBinaryMinus() {
-    	assertEquals("10 minus 2 should be 8", 8, mathematicalOperations.binaryMinus(10,8));
+    	assertEquals("10 minus 2 should be 8", 8, mathematicalOperations.binaryMinus(10,2));
     	assertEquals("1 minus 1 should be 0", 0, mathematicalOperations.binaryMinus(1,1));
     	assertEquals("1 minus 0 should be 1", 1, mathematicalOperations.binaryMinus(1,0));
     	assertEquals("1 minus 2 should be -1", -1, mathematicalOperations.binaryMinus(1,2));
-    	assertEquals("-1 minus -2 should be -1", -3, mathematicalOperations.binaryMinus(-1,-2));
+    	assertEquals("-1 minus -2 should be 1", 1, mathematicalOperations.binaryMinus(-1,-2));
     }
 }
