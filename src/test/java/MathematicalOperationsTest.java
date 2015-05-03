@@ -27,4 +27,13 @@ public class MathematicalOperationsTest {
     	assertEquals("1 minus 2 should be -1", -1, mathematicalOperations.binaryMinus(1,2));
     	assertEquals("-1 minus -2 should be 1", 1, mathematicalOperations.binaryMinus(-1,-2));
     }
+    
+    @Test
+    public void testTimes() {
+    	assertEquals("3 times 4 should be 12", 12, mathematicalOperations.times(3,4));
+    	assertEquals("1 times 7 should be 7", 7, mathematicalOperations.times(1,7));
+    	assertEquals("0 times 4 should be 0", 0, mathematicalOperations.times(0,4));
+    	assertEquals("-1 times 2 should be -2", -2, mathematicalOperations.times(-1,2));
+    	assertEquals("-3 times -2 should be 6", 6, mathematicalOperations.times(-3,-2));
+    }
 }
