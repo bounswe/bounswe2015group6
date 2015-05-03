@@ -36,4 +36,17 @@ public class MathematicalOperationsTest {
     	assertEquals("-1 times 2 should be -2", -2, mathematicalOperations.times(-1,2));
     	assertEquals("-3 times -2 should be 6", 6, mathematicalOperations.times(-3,-2));
     }
+    
+    @Test
+    public void testDivide() {
+        assertEquals("12 divided by 4 should be 3", 3, mathematicalOperations.divide(12,4));
+        assertEquals("100 divided by 25 should be 4", 4, mathematicalOperations.divide(100,25));
+        assertEquals("12 divided by 4 should be 3", 3, mathematicalOperations.divide(12,4));
+        assertEquals("-24 divided by 8 should be -3", -3, mathematicalOperations.divide(-24,8));
+    }
+    
+    @Test(expected = ArithmeticException.class)
+    public void testDivisionWithException() {
+        int i = mathematicalOperations.divide(12,0);
+    }
 }
