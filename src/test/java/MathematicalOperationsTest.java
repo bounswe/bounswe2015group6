@@ -53,7 +53,7 @@ public class MathematicalOperationsTest {
     @Test
     public void testPower() {
         assertEquals("3 to the power of 4 should be 81", 81, mathematicalOperations.power(3, 4));
-        assertEquals("12 to the power of 12 should be 144", 144, mathematicalOperations.power(12, 12));
+        assertEquals("12 to the power of 2 should be 144", 144, mathematicalOperations.power(12, 2));
         assertEquals("2 to the power of -1 should be 0.5", 0.5, mathematicalOperations.power(2, -1));
         assertEquals("0 to the power of 0 should be 1", 1, mathematicalOperations.power(0, 0));
         assertEquals("-7 to the power of 3 should be -343", -343, mathematicalOperations.power(-7, 3));
