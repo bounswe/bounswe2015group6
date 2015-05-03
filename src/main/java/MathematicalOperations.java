@@ -5,4 +5,9 @@ public class MathematicalOperations {
     {
         return x + y;
     }
+    
+    // performs subtraction (x minus y)
+    public int binaryMinus(int x, int y) {
+    	return x - y;
+    }
 }
