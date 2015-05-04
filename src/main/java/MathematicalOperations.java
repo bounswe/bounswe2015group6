@@ -38,4 +38,14 @@ public class MathematicalOperations {
     public int remainder(int x, int y){
     	return x%y;
     }
+    //finds factorial of a number
+  public int factorial(int x){
+        if(x<0){
+            throw new ArithmeticException("Undefined factorial");
+        }else if(x==0 || x==1){
+            return 1;
+        }else{
+            return factorial(x-1)*x;
+        }
+    }
 }
