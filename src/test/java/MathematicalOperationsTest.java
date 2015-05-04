@@ -76,4 +76,10 @@ public class MathematicalOperationsTest {
     	assertEquals("Remainder of 13 and 5 should be 3", 3, mathematicalOperations.remainder(13,5));
     	assertEquals("Remainder of 123 and 100 should be 23", 23, mathematicalOperations.remainder(123,100));
     }
+   @Test
+   public void testFactorial() {
+    	assertEquals(1, mathematicalOperations.factorial(0));
+    	assertEquals(1, mathematicalOperations.factorial(1));
+    	assertEquals(5040, mathematicalOperations.factorial(7));
+    }
 }
