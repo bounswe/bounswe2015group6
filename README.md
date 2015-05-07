@@ -100,6 +100,8 @@
 
 ## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/RAM">RAM</a>** ##
 
+## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Documentation-of-Mathematical-Operations">Documentation of Mathematical Operations</a>** ##
+
 ## **Research Topics** ##
 
 <ul>
