@@ -102,6 +102,8 @@
 
 ## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Documentation-of-Mathematical-Operations">Documentation of Mathematical Operations</a>** ##
 
+## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Activity-Diagrams">Activity Diagrams</a>** ##
+
 ## **Research Topics** ##
 
 <ul>
