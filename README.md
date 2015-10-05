@@ -121,10 +121,24 @@
 	</li>
 </ul>
 
+## **Team Leader** ##
+<ul>
+	<li>
+		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Emre-Oral">Emre Oral</a><br>
+	</li>
+</ul>
+
 ## **Communicator** ##
 <ul>
 	<li>
-		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Hamza-Öztürk">Hamza Öztürk</a><br>
+		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Hamza-Temel-Can-Kandaz">Hamza Temel Can Kandaz</a><br>
+	</li>
+</ul
+
+## **Note Taker** ##
+<ul>
+	<li>
+		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Oğuzhan-Karaçakır">Oğuzhan Karaçakır</a><br>
 	</li>
 </ul>
 
@@ -134,9 +148,6 @@
 <ul>
 	<li>
 		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Berk-Dilek">Berk Dilek</a><br>
-	</li>
-	<li>
-		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Beytüllah-Yiğit">Beytüllah Yiğit</a><br>
 	</li>
 	<li>
 		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Emre-Oral">Emre Oral</a><br>
@@ -151,19 +162,13 @@
 		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Mahmut-Sami-Yağmur">Mahmut Sami Yağmur</a><br>
 	</li>
 	<li>
-		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Mert-Even">Mert Even</a><br>
-	</li>
-	<li>
 		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Oğuzhan-Karaçakır">Oğuzhan Karaçakır</a><br>
-	</li>
-	<li>
-		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Rebecca-Hao">Rebecca Hao</a><br>
 	</li>
 	<li>
 		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Sina-Andaç-Tan">Sina Andaç Tan</a><br>
 	</li>
 	<li>
-		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Serpil-Kuzu">Serpil Kuzu</a><br>
+		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Hamza-Temel-Can-Kandaz">Hamza Temel Can Kandaz</a><br>
 	</li>
 </ul>
 
