@@ -29,6 +29,9 @@
 	<li>
 		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Meeting-8-(April-26,-2015)">Meeting 8 (April 26, 2015)</a><br>
 	</li>
+	<li>
+		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Meeting-9-(September-3,-2015)">Meeting 9 (September 3, 2015)</a><br>
+	</li>
 </ul>
 
 ## **Customer Meeting Notes** ##
