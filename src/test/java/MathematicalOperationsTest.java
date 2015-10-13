@@ -52,11 +52,11 @@ public class MathematicalOperationsTest {
 
     @Test
     public void testPower() {
-        assertEquals("3 to the power of 4 should be 81", 81, mathematicalOperations.power(3, 4));
-        assertEquals("12 to the power of 2 should be 144", 144, mathematicalOperations.power(12, 2));
-        assertEquals("2 to the power of -1 should be 0.5", 0.5, mathematicalOperations.power(2, -1));
-        assertEquals("0 to the power of 0 should be 1", 1, mathematicalOperations.power(0, 0));
-        assertEquals("-7 to the power of 3 should be -343", -343, mathematicalOperations.power(-7, 3));
+        assertEquals("3 to the power of 4 should be 81", 81, mathematicalOperations.power(3, 4), 0.001);
+        assertEquals("12 to the power of 2 should be 144", 144, mathematicalOperations.power(12, 2), 0.001);
+        assertEquals("2 to the power of -1 should be 0.5", 0.5, mathematicalOperations.power(2, -1), 0.001);
+        assertEquals("0 to the power of 0 should be 1", 1, mathematicalOperations.power(0, 0), 0.001);
+       assertEquals("-7 to the power of 3 should be -343", -343, mathematicalOperations.power(-7, 3), 0.001);
     }
     
     @Test
@@ -70,7 +70,7 @@ public class MathematicalOperationsTest {
     
     @Test
     public void testRemainder(){
-    	assertEquals("Remainder of 5 and 2 should be 1", 1, mathematicalOperations.remainder(5,1));
+    	assertEquals("Remainder of 5 and 2 should be 1", 1, mathematicalOperations.remainder(5,2));
     	assertEquals("Remainder of 14 and 43 should be 14 ", 14, mathematicalOperations.remainder(14,43));
     	assertEquals("Remainder of 6 and 9 should be 6", 6, mathematicalOperations.remainder(6,9));
     	assertEquals("Remainder of 13 and 5 should be 3", 3, mathematicalOperations.remainder(13,5));
