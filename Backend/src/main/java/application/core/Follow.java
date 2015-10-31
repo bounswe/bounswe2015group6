@@ -36,7 +36,8 @@ public class Follow {
         return followerId;
     }
 
-    public void setFollower(int follower) {
+    public void setFollower(int follower)
+    {
         this.followerId = follower;
     }
 }

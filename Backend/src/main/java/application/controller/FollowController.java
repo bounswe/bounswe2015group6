@@ -27,7 +27,7 @@ public class FollowController {
         return repo.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    /*@RequestMapping(method = RequestMethod.GET)
     public List<Follow> findByFollowed(@RequestParam("followed") Integer followedId, @RequestParam("follower") Integer followerId){
         if(followedId != null)
             return repo.findByFollowedId(followedId);
@@ -45,4 +45,9 @@ public class FollowController {
    // public List<Integer> getFollowers(@PathVariable("id") int followedId){
    //     return repo.getFollowers(followedId);
    // }
+
+    @RequestMapping(method = RequestMethod.GET, value = "followers/{id}")
+    public List<Integer> getFollowers(@PathVariable("id") int id){
+        return repo.getFollowers(id);
+    }
 }

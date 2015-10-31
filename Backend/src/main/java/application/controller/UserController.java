@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.core.User;
+import application.repository.FollowRepository;
 import application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,16 @@ public class UserController {
     @Autowired
     private UserRepository repo;
 
+    @Autowired
+    private FollowRepository follow;
+
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ArrayList<User> findAll(){
-        return repo.findAll();
+        ArrayList<User> temp =  repo.findAll();
+        for(User user: temp){
+            user.setFollowList((ArrayList<Integer>)follow.getFollowers(user.getId()));
+        }
+        return temp;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/id/{id}")

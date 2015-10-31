@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -25,14 +27,14 @@ public class User {
     @NotEmpty
     private String email;
 
-    @Column(name = "isBanned")
+    @Column(name = "is_banned")
     private int isBanned = 0;
 
     @Column(name = "rating")
     private int rating = 0;
 
-    //@OneToMany(mappedBy = "user")
-    //private List<User> followList = new ArrayList<User>();
+    @Transient
+    private List<Integer> followList = new ArrayList<Integer>();
 
     @Column(name = "facebook_id")
     private String facebookId;
@@ -108,12 +110,12 @@ public class User {
     }
 
     /*Getter - setter: followList*/
-    /*
-    public ArrayList<User> getFollowList() {
-        return (ArrayList<User>)followList;
+
+    public ArrayList<Integer> getFollowList() {
+        return (ArrayList<Integer>)followList;
     }
 
-    public void setFollowList(ArrayList<User> followList) {
+    public void setFollowList(ArrayList<Integer> followList) {
         this.followList = followList;
-    }*/
+    }
 }
