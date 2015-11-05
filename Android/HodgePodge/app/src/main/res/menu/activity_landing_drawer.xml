@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_add_case" android:icon="@android:drawable/ic_menu_add"
+            android:title="Add Case" />
+        <item android:id="@+id/nav_add_topic" android:icon="@android:drawable/ic_menu_add"
+            android:title="Sign Topic" />
+        <item android:id="@+id/nav_add_relation" android:icon="@android:drawable/ic_menu_add"
+            android:title="Add Relation" />
+    </group>
+
+    <item android:title="Pre-Login">
+        <menu>
+            <item android:id="@+id/nav_sign_in" android:icon="@android:drawable/ic_menu_camera"
+                android:title="Sign In" />
+            <item android:id="@+id/nav_sign_up" android:icon="@android:drawable/ic_menu_search"
+                android:title="Sign Up" />
+        </menu>
+    </item>
+
+</menu>
