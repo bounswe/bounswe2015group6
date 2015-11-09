@@ -171,6 +171,10 @@
 	<li>
 		<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Hamza-Temel-Can-Kandaz">Hamza Temel Can Kandaz</a><br>
 	</li>
+	
+	<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Hüseyin-Barış-Özmen">Hüseyin Barış Özmen</a><br>
+	</li>
+	<li>
 </ul>
 
 
