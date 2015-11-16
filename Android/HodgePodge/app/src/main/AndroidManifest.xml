@@ -5,18 +5,23 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo_white"
-        android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:label="@string/app_name">
 
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter         >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SignIn"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:permission="android.permission.INTERNET">
         </activity>
         <activity
             android:name=".SignUp"
@@ -26,11 +31,7 @@
             android:name=".LandingActivity"
             android:label="Hodgepodge"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

@@ -35,7 +35,8 @@
         android:layout_marginRight="20dp"
         android:text="Sign In"
         android:background="@color/colorPrimary"
-        android:textColor="@color/colorPrimary_text"/>
+        android:textColor="@color/colorPrimary_text"
+        android:onClick="signInClicked"/>
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -53,5 +54,7 @@
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
         android:clickable="true" />
+
+
 
 </LinearLayout>

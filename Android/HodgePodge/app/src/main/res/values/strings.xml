@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Hodge Podge</string>
+    <string name="app_name">Hodgepodge</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_landing">Hodgepodge</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="myurl">http://hodge-podge.info/graph.html</string>
 </resources>
