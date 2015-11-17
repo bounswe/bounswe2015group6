@@ -1,16 +1,19 @@
 package application.core;
 
+import application.miscalleneous.Result;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
 public class User {
+
+    @Transient
+    Result result;
 
     @Id
     @GeneratedValue
@@ -21,20 +24,16 @@ public class User {
     private String username;
 
     @NotNull
-    @Size(min = 4, max = 10)
     private String password;
 
     @NotEmpty
     private String email;
 
-    @Column(name = "is_banned")
+    @Column(name = "isBanned")
     private int isBanned = 0;
 
     @Column(name = "rating")
     private int rating = 0;
-
-    @Transient
-    private List<Integer> followList = new ArrayList<Integer>();
 
     @Column(name = "facebook_id")
     private String facebookId;
@@ -45,7 +44,6 @@ public class User {
     @Column(name = "google_id")
     private String googleId;
 
-    /*getter - setter: id*/
     public int getId() {
         return id;
     }
@@ -110,12 +108,25 @@ public class User {
     }
 
     /*Getter - setter: followList*/
-
-    public ArrayList<Integer> getFollowList() {
-        return (ArrayList<Integer>)followList;
+    @ElementCollection
+    @CollectionTable(name = "follow", joinColumns = @JoinColumn(name = "id", referencedColumnName = "followed_id"))
+    @Column(name = "follower_id")
+    public List<Integer> getFollowList() {
+        return followList;
     }
 
-    public void setFollowList(ArrayList<Integer> followList) {
+    public void setFollowList(List<Integer> followList){
         this.followList = followList;
+    }
+
+    @Transient
+    private List<Integer> followList;
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
+    public Result getResult() {
+        return result;
     }
 }
