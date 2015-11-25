@@ -1,8 +1,11 @@
 package application.controller;
 
 import application.core.Tag;
+import application.core.TagPostRelation;
 import application.miscalleneous.Result;
+import application.repository.TagPostRelationRepository;
 import application.repository.TagRepository;
+import application.repository.TagTopicRelationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,12 @@ public class TagController {
 
     @Autowired
     private TagRepository tagRepo;
+
+    @Autowired
+    private TagPostRelationRepository tagPostRelationRepository;
+
+    @Autowired
+    private TagTopicRelationRepository tagTopicRelationRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "/tags")
     public ArrayList<Tag> getAll(){
@@ -64,4 +73,11 @@ public class TagController {
     }
 
     /*Implement delete method*/
+    @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
+    public void deleteTag(@RequestParam("tagID") int tagID){
+            Tag tag = tagRepo.findById(tagID);
+        tagRepo.delete(tagID);
+        tagPostRelationRepository.deleteByTagId(tagID);
+        tagTopicRelationRepository.deleteByTagId(tagID);
+    }
 }

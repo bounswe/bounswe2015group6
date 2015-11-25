@@ -9,4 +9,5 @@ public interface TagTopicRelationRepository extends CrudRepository<TagTopicRelat
     ArrayList<TagTopicRelation> findAll();
     ArrayList<TagTopicRelation> findByTopicId(int topicId);
     ArrayList<TagTopicRelation> findByTagId(int TagId);
+    void deleteByTagId(int tagID);
 }

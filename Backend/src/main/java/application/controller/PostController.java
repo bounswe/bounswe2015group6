@@ -1,11 +1,9 @@
 package application.controller;
 
-import application.core.Post;
-import application.core.PostUser;
-import application.core.Tag;
-import application.core.User;
+import application.core.*;
 import application.repository.PostRepository;
 import application.repository.PostUserRepository;
+import application.repository.TagPostRelationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import application.miscalleneous.Result;
@@ -25,11 +23,20 @@ public class PostController {
     @Autowired
     private PostUserRepository postUserRepo;
 
+    @Autowired
+    private TagPostRelationRepository tagPostRelationRepo;
+
     @RequestMapping(method = RequestMethod.GET, value = "/posts")
     public ArrayList<Post> getAll(){
         ArrayList<Post> list =  postRepo.findAll();
         for(Post p: list){
           p.setResult(new Result(Result.RESULT_OK, "Post found"));
+            ArrayList<Integer> tags = new ArrayList<Integer>();
+            for (TagPostRelation t:tagPostRelationRepo.findByPostId(p.getId())
+                 ) {
+                tags.add(t.getTagId());
+            }
+            p.setTagsOfPost(tags);
         }
         return list;
     }
@@ -40,10 +47,17 @@ public class PostController {
         if(post == null){
             post = new Post();
             post.setResult(new Result(Result.RESULT_FAILED, "Post not found"));
+
             return post;
         }
 
         post.setResult(new Result(Result.RESULT_OK, "Post found"));
+        ArrayList<Integer> tags = new ArrayList<Integer>();
+        for (TagPostRelation t:tagPostRelationRepo.findByPostId(post.getId())
+                ) {
+            tags.add(t.getTagId());
+        }
+        post.setTagsOfPost(tags);
         return post;
     }
     //TODO: yeniden bak
@@ -63,11 +77,21 @@ public class PostController {
         pu.setOwnerId(temp.getOwnerId());
         postUserRepo.save(pu);
 
+
+
+        for (int tagID :temp.getTagsOfPost()) {
+            TagPostRelation tpg = new TagPostRelation();
+            tpg.setPostId(temp.getId());
+            tpg.setTagId(tagID);
+            tagPostRelationRepo.save(tpg);
+        }
+
+
         return temp;
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
-    public void delete(@PathVariable ("id") int id){
+    public void deletePost(@RequestParam ("id") int id){
         Post post = postRepo.findById(id);
         postRepo.delete(id);
         /* Delete the relation also from the post_user table */
