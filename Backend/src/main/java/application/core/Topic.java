@@ -1,44 +1,37 @@
 package application.core;
 
 import javax.persistence.*;
-import javax.validation.constraints.AssertFalse;
 import java.util.ArrayList;
 
-/**
- * Created by Baris on 18.11.2015.
- */
 @Entity
-@Table(name="topic")
-
+@Table(name = "topic")
 public class Topic {
 
     @Id
     @GeneratedValue
-    int id;
+    private int id;
+
+    @Column(name = "title")
+    private String title;
+
+    @Transient
+    private ArrayList<Integer> tags;
 
 
-    @Column(name="title")
-    String title;
     @Transient
-    ArrayList<Post> content = new ArrayList<>();
+    private ArrayList<Post> posts;
+
+
     @Transient
-    ArrayList<Tag> tag = new ArrayList<>();
-    @Transient
-    ArrayList<Topic> related = new ArrayList<>();
+    private ArrayList<Integer> topicRelations;
+
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
-    }
-
-    public ArrayList<Post> getContent() {
-        return content;
-    }
-
-    public void setContent(ArrayList<Post> content) {
-        this.content = content;
     }
 
     public String getTitle() {
@@ -49,20 +42,27 @@ public class Topic {
         this.title = title;
     }
 
-    public ArrayList<Tag> getTag() {
-        return tag;
+    public ArrayList<Integer> getTags() {
+        return tags;
     }
 
-    public void setTag(ArrayList<Tag> tag) {
-        this.tag = tag;
+    public void setTags(ArrayList<Integer> tags) {
+        this.tags = tags;
     }
 
-    public ArrayList<Topic> getRelated() {
-        return related;
-    }
-    public void setRelated(ArrayList<Topic> related) {
-        this.related = related;
+    public ArrayList<Post> getPosts() {
+        return posts;
     }
 
+    public void setPosts(ArrayList<Post> posts) {
+        this.posts = posts;
+    }
 
+    public ArrayList<Integer> getTopicRelations() {
+        return topicRelations;
+    }
+
+    public void setTopicRelations(ArrayList<Integer> topicRelations) {
+        this.topicRelations = topicRelations;
+    }
 }

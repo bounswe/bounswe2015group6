@@ -1,13 +1,16 @@
 package application.controller;
 
 import application.core.Post;
+import application.core.PostUser;
 import application.core.Tag;
 import application.core.User;
 import application.repository.PostRepository;
+import application.repository.PostUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import application.miscalleneous.Result;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 
@@ -18,6 +21,9 @@ public class PostController {
 
     @Autowired
     private PostRepository postRepo;
+
+    @Autowired
+    private PostUserRepository postUserRepo;
 
     @RequestMapping(method = RequestMethod.GET, value = "/posts")
     public ArrayList<Post> getAll(){
@@ -41,19 +47,30 @@ public class PostController {
         return post;
     }
     //TODO: yeniden bak
-    @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public Post createPost(@RequestParam("postContent") String postContent, @RequestParam("postTags") ArrayList<Tag> tags, @PathVariable("postOwner") User user){
-        Post post = new Post();
-        post.setContent(postContent);
-        post.setUser(user);
-        post.setTags(tags);
-        post.setResult(new Result(Result.RESULT_OK,"Succesfully created"));
-        return post;
+    /* Method changed to accept request body */
+    @RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
+    public Post createPost(@RequestBody @Valid Post post){
+        Post temp = new Post();
+        temp.setContent(post.getContent());
+        temp.setOwnerId(post.getOwnerId());
+        temp.setTagsOfPost(post.getTagsOfPost());
+        temp.setResult(new Result(Result.RESULT_OK,"Succesfully created"));
+        postRepo.save(temp);
+
+        /* Add a new row to the Post-User relation*/
+        PostUser pu = new PostUser();
+        pu.setPostId(temp.getId());
+        pu.setOwnerId(temp.getOwnerId());
+        postUserRepo.save(pu);
+
+        return temp;
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
     public void delete(@PathVariable ("id") int id){
+        Post post = postRepo.findById(id);
         postRepo.delete(id);
-
+        /* Delete the relation also from the post_user table */
+        postUserRepo.deleteByOwnerIdAndPostId(post.getOwnerId(), post.getId());
     }
 }

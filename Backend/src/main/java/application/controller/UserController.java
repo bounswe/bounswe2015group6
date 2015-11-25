@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,12 +61,33 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/signup")
+    @RequestMapping(method = RequestMethod.POST, value = "/signup", headers = "Accept=application/json")
     public User save(
-            @RequestParam("username") String username, @RequestParam("password") String password,
-            @RequestParam("email") String email)
+          @Valid @RequestBody User user)
     {
-        User user = repo.findByUsername(username);
+        String userName = user.getUsername();
+        User temp = repo.findByUsername(userName);
+
+        if(temp != null){
+            temp = new User();
+            temp.setResult(new Result(Result.RESULT_FAILED, "User has already registered"));
+            return temp;
+        }
+
+        String saltPassword = BCrypt.gensalt(12);
+        String hashPassword = BCrypt.hashpw(user.getPassword(), saltPassword);
+
+        temp = new User();
+        temp.setUsername(user.getUsername());
+        temp.setPassword(hashPassword);
+        temp.setEmail(user.getEmail());
+        temp.setFacebookId(user.getFacebookId() + "@facebook");
+        temp.setGoogleId(user.getGoogleId() + "@google");
+        temp.setTwitterId(user.getTwitterId() + "@twitter");
+        temp.setResult(new Result(Result.RESULT_OK, "User has been succesfully registered"));
+        repo.save(temp);
+        return temp;
+        /*User user = repo.findByUsername(username);
         if(user != null){
             user.setResult(new Result(Result.RESULT_FAILED, "User has already registered"));
             return user;
@@ -83,7 +105,7 @@ public class UserController {
         user.setTwitterId(username + "@twitter");
         user.setResult(new Result(Result.RESULT_OK, "User has been succesfully registered"));
         repo.save(user);
-        return user;
+        return user;*/
     }
     /* Controller returns all available information even though password authentication fails*/
     @RequestMapping(method = RequestMethod.GET, value = "/login")
@@ -100,7 +122,7 @@ public class UserController {
         if(!BCrypt.checkpw(password, user.getPassword())){
           user.setResult(new Result(Result.RESULT_FAILED, "Password did not match"));
         }
-
+        user.setResult(new Result(Result.RESULT_OK, "Login confirmed"));
         return user;
 
     }

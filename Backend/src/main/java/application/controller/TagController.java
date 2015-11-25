@@ -59,6 +59,7 @@ public class TagController {
 
         tag = new Tag(tagName);
         tag.setResult(new Result(Result.RESULT_OK,"Succesfully created"));
+        tagRepo.save(tag);
         return tag;
     }
 

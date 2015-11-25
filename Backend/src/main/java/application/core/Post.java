@@ -1,32 +1,31 @@
 package application.core;
 
-/**
- * Created by Oguzhan on 18.11.2015.
- */
+import application.miscalleneous.Result;
 
 import javax.persistence.*;
-import application.miscalleneous.Result;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "post")
+@Table(name = "posts")
 public class Post {
+
+    /* Result of action */
+    @Transient
+    Result result;
 
     @Id
     @GeneratedValue
-    private int id;
+    int id;
+
+    /* Add post owner id*/
+    @Transient
+    int ownerId;
 
     @Column(name = "content")
-    private String content;
+    String content;
 
     @Transient
-    private ArrayList<Tag> tags;
-
-    @Transient
-    private User user;
-
-    @Transient
-    Result result;
+    ArrayList<Integer> tagsOfPost = new ArrayList<Integer>();
 
     public int getId() {
         return id;
@@ -36,17 +35,29 @@ public class Post {
         this.id = id;
     }
 
-    public String getContent(){return content;}
+    public int getOwnerId() {
+        return ownerId;
+    }
 
-    public void setContent(String content) {this.content = content;}
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
 
-    public ArrayList<Tag> getTags() {return tags;}
+    public String getContent() {
+        return content;
+    }
 
-    public void setTags(ArrayList<Tag> tags){this.tags = tags;}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-    public User getUser(){return user;}
+    public ArrayList<Integer> getTagsOfPost() {
+        return tagsOfPost;
+    }
 
-    public void setUser(User user){this.user = user;}
+    public void setTagsOfPost(ArrayList<Integer> tagsOfPost) {
+        this.tagsOfPost = tagsOfPost;
+    }
 
     public Result getResult() {
         return result;
@@ -55,6 +66,4 @@ public class Post {
     public void setResult(Result result) {
         this.result = result;
     }
-
-
 }

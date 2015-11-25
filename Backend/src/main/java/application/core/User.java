@@ -44,6 +44,22 @@ public class User {
     @Column(name = "google_id")
     private String googleId;
 
+    public int getIsBanned() {
+        return isBanned;
+    }
+
+    public void setIsBanned(int isBanned) {
+        this.isBanned = isBanned;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     public int getId() {
         return id;
     }
