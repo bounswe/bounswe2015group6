@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -22,14 +23,23 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void attemptSignIn(View view) throws JSONException{
-        EditText e2 = (EditText) findViewById(R.id.editText2);
-        EditText e1 = (EditText) findViewById(R.id.editText);
-        ServiceClient.get("user/login?username="+e1.getText()+"&password="+e2.getText(), null, new JsonHttpResponseHandler() {
+        final EditText emailField = (EditText) findViewById(R.id.editText);
+        final EditText passwordField = (EditText) findViewById(R.id.editText2);
+        final TextView errorTextView = (TextView) findViewById(R.id.errorTextView);
+        ServiceClient.get("user/login?username="+emailField.getText()+"&password="+passwordField.getText(), null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 // If the response is JSONObject instead of expected JSONArray
                 try {
-                    System.out.println(response.get("email"));
+                    JSONObject resultArray = (JSONObject) response.get("result");
+                    if (resultArray.get("result").equals("OK")) {
+                        //LOGIN SUCCESS => direct to homepage
+                    } else {
+                        emailField.setText("");
+                        passwordField.setText("");
+                        errorTextView.setVisibility(View.VISIBLE);
+                        //LOGIN FAILURE => try again
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
