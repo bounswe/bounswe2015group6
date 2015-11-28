@@ -87,25 +87,6 @@ public class UserController {
         temp.setResult(new Result(Result.RESULT_OK, "User has been succesfully registered"));
         repo.save(temp);
         return temp;
-        /*User user = repo.findByUsername(username);
-        if(user != null){
-            user.setResult(new Result(Result.RESULT_FAILED, "User has already registered"));
-            return user;
-        }
-
-        String saltPassword = BCrypt.gensalt(12);
-        String hashPassword = BCrypt.hashpw(password, saltPassword);
-
-        user = new User();
-        user.setUsername(username);
-        user.setPassword(hashPassword);
-        user.setEmail(email);
-        user.setFacebookId(username + "@facebook");
-        user.setGoogleId(username  + "@google");
-        user.setTwitterId(username + "@twitter");
-        user.setResult(new Result(Result.RESULT_OK, "User has been succesfully registered"));
-        repo.save(user);
-        return user;*/
     }
     /* Controller returns all available information even though password authentication fails*/
     @RequestMapping(method = RequestMethod.GET, value = "/login")
@@ -120,7 +101,9 @@ public class UserController {
         }
 
         if(!BCrypt.checkpw(password, user.getPassword())){
-          user.setResult(new Result(Result.RESULT_FAILED, "Password did not match"));
+            user = new User();
+            user.setResult(new Result(Result.RESULT_FAILED, "Password did not match"));
+            return user;
         }
         user.setResult(new Result(Result.RESULT_OK, "Login confirmed"));
         return user;
