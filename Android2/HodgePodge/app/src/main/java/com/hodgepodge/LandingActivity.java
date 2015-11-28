@@ -89,7 +89,7 @@ public class LandingActivity extends AppCompatActivity
             Intent intent = new Intent(context, LoginActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sign_in) {
-            Intent intent = new Intent(context, LoginActivity.class);
+            Intent intent = new Intent(context, SignInActivity.class);
             startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
