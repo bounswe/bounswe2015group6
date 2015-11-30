@@ -1,6 +1,13 @@
 package com.hodgepodge;
 
-import com.loopj.android.http.*;
+import android.content.Context;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.ResponseHandlerInterface;
+
+import cz.msebera.android.httpclient.HttpEntity;
 
 
 /**
@@ -19,6 +26,10 @@ public class ServiceClient {
         client.addHeader("Content-Type", "application/json");
         client.addHeader("Accept", "application/json");
         client.post(getAbsoluteUrl(url), params, responseHandler);
+    }
+
+    public static void post(Context context, String url, HttpEntity entity, String contentType, ResponseHandlerInterface responseHandlerInterface) {
+        client.post(context, getAbsoluteUrl(url), entity, contentType, responseHandlerInterface);
     }
 
     private static String getAbsoluteUrl(String relativeUrl) {

@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONException;
@@ -31,62 +31,46 @@ public class SignUpActivity extends AppCompatActivity {
         final EditText passwordField = (EditText) findViewById(R.id.password_field);
         final EditText passwordRepeatField = (EditText) findViewById(R.id.password_repeat_field);
 
-        AsyncHttpClient client = new AsyncHttpClient();
-//        client.addHeader("Content-Type", "application/json");
-//        client.addHeader("Accept", "application/json");
-//        client.setURLEncodingEnabled(false);
+        if (!passwordField.getText().toString().equals(passwordRepeatField.getText().toString())){
+            TextView errorTextView = (TextView) findViewById(R.id.errorSingUpTextView);
+            errorTextView.setVisibility(View.VISIBLE);
+            errorTextView.setText("Passwords do not match. Please try again.");
+            passwordField.setText("");
+            passwordRepeatField.setText("");
+        } else {
+            JSONObject jsonParams = new JSONObject();
+            jsonParams.put("username", usernameField.getText().toString());
+            jsonParams.put("password", passwordField.getText().toString());
+            jsonParams.put("email", emailField.getText().toString());
+            jsonParams.put("facebookId", "");
+            jsonParams.put("twitterId", "");
+            jsonParams.put("googleId", "");
+            StringEntity entity = null;
+            try {
+                entity = new StringEntity(jsonParams.toString());
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
 
-//        RequestParams requestParams = new RequestParams();
-//        requestParams.put("username", usernameField.getText().toString());
-//        requestParams.put("email", emailField.getText().toString());
-//        requestParams.put("password", passwordField.getText().toString());
-//        requestParams.put("facebookId", "");
-//        requestParams.put("twitterId", "");
-//        requestParams.put("googleId", "");
-//        requestParams.setForceMultipartEntityContentType(true);
 
+            ServiceClient.post(this, "user/signup", entity, "application/json",
+                    new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            System.out.println("Register Sucess");
+                            //Send user to homepage
+                        }
 
-
-        JSONObject jsonParams = new JSONObject();
-        jsonParams.put("username", "berkdilekberk");
-        jsonParams.put("password", "berk124123");
-        jsonParams.put("email", "berk@berk.com");
-        jsonParams.put("facebookId", "berk");
-        jsonParams.put("twitterId", "12s");
-        jsonParams.put("googleId", "bebee");
-        StringEntity entity = null;
-        try {
-            entity = new StringEntity(jsonParams.toString());
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            System.out.println(error.getMessage());
+                            //if (error.getMessage().equals("Usernameexist")) {
+                            //  errorTextView.setText("Passwords do not match. Please try again.");
+                            //  usernameField.setText("");
+                            //}
+                        }
+                    });
         }
-
-
-        client.post(this, "http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080/api/user/signup", entity, "application/json",
-                new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        int c = 1;
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        int c = 1;
-                    }
-                });
-
-        //        client.post("user/signup", requestParams, new AsyncHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-//                System.out.println("RegisterSuccess");
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-//                System.out.println(error.getMessage());
-//
-//            }
-//        });
 
     }
 }

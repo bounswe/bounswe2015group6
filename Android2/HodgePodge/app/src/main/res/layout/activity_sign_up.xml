@@ -69,4 +69,13 @@
         android:layout_alignEnd="@+id/password_repeat_field"
         android:onClick="attemptSignUp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/errorSingUpTextView"
+        android:layout_below="@+id/sign_up_button"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FF0000"
+        android:visibility="invisible" />
+
 </RelativeLayout>
