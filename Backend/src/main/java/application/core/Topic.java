@@ -1,5 +1,7 @@
 package application.core;
 
+import application.miscalleneous.Result;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 
@@ -11,6 +13,12 @@ public class Topic {
     @GeneratedValue
     private int id;
 
+    @Transient
+    Result result;
+
+    @Column(name = "owner_id")
+    private int ownerId;
+
     @Column(name = "title")
     private String title;
 
@@ -19,7 +27,7 @@ public class Topic {
 
 
     @Transient
-    private ArrayList<Post> posts;
+    private ArrayList<Integer> posts;
 
 
     @Transient
@@ -50,11 +58,11 @@ public class Topic {
         this.tags = tags;
     }
 
-    public ArrayList<Post> getPosts() {
+    public ArrayList<Integer> getPosts() {
         return posts;
     }
 
-    public void setPosts(ArrayList<Post> posts) {
+    public void setPosts(ArrayList<Integer> posts) {
         this.posts = posts;
     }
 
@@ -64,5 +72,21 @@ public class Topic {
 
     public void setTopicRelations(ArrayList<Integer> topicRelations) {
         this.topicRelations = topicRelations;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 }
