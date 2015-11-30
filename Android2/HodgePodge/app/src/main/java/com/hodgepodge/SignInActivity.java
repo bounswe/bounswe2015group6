@@ -1,5 +1,8 @@
 package com.hodgepodge;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,7 +18,10 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class SignInActivity extends AppCompatActivity {
-
+    private static final String APP_SHARED_PREFS = "asdasd_preferences";
+    SharedPreferences sharedPrefs;
+    SharedPreferences.Editor editor;
+    private boolean isUserLoggedIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +32,8 @@ public class SignInActivity extends AppCompatActivity {
         final EditText emailField = (EditText) findViewById(R.id.editText);
         final EditText passwordField = (EditText) findViewById(R.id.editText2);
         final TextView errorTextView = (TextView) findViewById(R.id.errorTextView);
+        final Context context = this;
+
         ServiceClient.get("user/login?username="+emailField.getText()+"&password="+passwordField.getText(), null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -35,7 +43,20 @@ public class SignInActivity extends AppCompatActivity {
                     if (resultArray.get("result").equals("OK")) {
                         errorTextView.setVisibility(View.VISIBLE);
                         errorTextView.setText("Login Success");
+                        /*
+                            author: Emre Oral
+                            In that part we put username and id of logged in user to settings
+                            it is a SharedPreferences.
+                        */
+                        SharedPreferences settings = getSharedPreferences("UserInfo", 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putString("Username",response.getString("username"));
+                        editor.putString("ID", Integer.toString(response.getInt("id")));
+                        editor.commit();
 
+                        Intent intent = new Intent(context,HomePageActivity.class);
+                        startActivity(intent);
+                        // end of Emre Oral's code.
                         //LOGIN SUCCESS => direct to homepage
                     } else {
                         emailField.setText("");

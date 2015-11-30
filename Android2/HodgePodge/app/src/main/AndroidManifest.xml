@@ -30,7 +30,12 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
-            android:label="@string/title_activity_sign_up">
+            android:label="@string/title_activity_sign_up" >
+        </activity>
+        <activity
+            android:name=".HomePageActivity"
+            android:label="@string/title_activity_home_page"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 
