@@ -36,13 +36,13 @@ public class User {
     private int rating = 0;
 
     @Column(name = "facebook_id")
-    private String facebookId;
+    private String facebookId = "";
 
     @Column(name = "twitter_id")
-    private String twitterId;
+    private String twitterId = "";
 
     @Column(name = "google_id")
-    private String googleId;
+    private String googleId = "";
 
     public int getIsBanned() {
         return isBanned;
