@@ -16,6 +16,8 @@ public class ServiceClient {
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.addHeader("Content-Type", "application/json");
+        client.addHeader("Accept", "application/json");
         client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 

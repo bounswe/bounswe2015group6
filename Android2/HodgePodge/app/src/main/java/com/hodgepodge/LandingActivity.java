@@ -86,7 +86,7 @@ public class LandingActivity extends AppCompatActivity
         int id = item.getItemId();
         final Context context = this;
         if (id == R.id.nav_sign_up) {
-            Intent intent = new Intent(context, SignInActivity.class);
+            Intent intent = new Intent(context, SignUpActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sign_in) {
             Intent intent = new Intent(context, SignInActivity.class);

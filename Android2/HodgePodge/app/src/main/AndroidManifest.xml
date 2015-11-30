@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +28,10 @@
             android:name=".SignInActivity"
             android:label="@string/title_activity_sign_in" >
         </activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:label="@string/title_activity_sign_up">
+        </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

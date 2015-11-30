@@ -33,11 +33,15 @@ public class SignInActivity extends AppCompatActivity {
                 try {
                     JSONObject resultArray = (JSONObject) response.get("result");
                     if (resultArray.get("result").equals("OK")) {
+                        errorTextView.setVisibility(View.VISIBLE);
+                        errorTextView.setText("Login Success");
+
                         //LOGIN SUCCESS => direct to homepage
                     } else {
                         emailField.setText("");
                         passwordField.setText("");
                         errorTextView.setVisibility(View.VISIBLE);
+                        errorTextView.setText("Wrong password or username");
                         //LOGIN FAILURE => try again
                     }
                 } catch (JSONException e) {
