@@ -3,15 +3,18 @@ package com.hodgepodge;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -32,8 +35,12 @@ public class CreateTopicActivity extends AppCompatActivity {
         JSONObject jsonParams = new JSONObject();
         jsonParams.put("ownerId", user.getString("ID", ""));
         jsonParams.put("title", titleEditText.getText().toString());
-        jsonParams.put("tags", null);
 
+        // Taking tags which are  seperated by space
+        String delims = "[ ]+";
+        String[] tags = tagsEditText.getText().toString().split(delims);
+        JSONArray tagsJson = new JSONArray(Arrays.asList(tags));
+        jsonParams.put("tags", tagsJson);
 
         StringEntity entity = null;
         try {
@@ -54,6 +61,8 @@ public class CreateTopicActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         System.out.println(error.getMessage());
+                        Log.d("TOPIC CREATE ERROR" ,error.getMessage().toString());
+
                         //if (error.getMessage().equals("Usernameexist")) {
                         //  errorTextView.setText("Passwords do not match. Please try again.");
                         //  usernameField.setText("");
