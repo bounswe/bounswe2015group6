@@ -90,7 +90,7 @@
           <div class="modal-body">
             <div style="display:none;" id="registerMessages"></div>
             <form id="registerform" class="form-horizontal" role="form">
-              <div class="form-group">
+<!--               <div class="form-group">
                 <label class="control-label col-sm-2" for="registerName">Name:</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="registerName" placeholder="Enter name" required>
@@ -101,11 +101,11 @@
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="registerSurname" placeholder="Enter surname" required>
                 </div>
-              </div>
+              </div> -->
               <div class="form-group">
                 <label class="control-label col-sm-2" for="username">Username:</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="registerUsername" placeholder="Enter username" required>
+                  <input type="text" class="form-control" id="registerUsername" placeholder="Enter username" data-minlength="6" required>
                 </div>
               </div>
               <div class="form-group">
@@ -301,40 +301,55 @@ $('#loginform').validator().on('submit', function (e) {
       var btn = $('#loginButton');
       btn.button('loading');
 
-      $.get(api + "/api/user/login",
-      {
+      $.ajax({
+        method: "GET",
+        url: api + "/api/user/login",
+        dataType: "json",
+        data: { 
           username: $('#username').val(),
           password: $('#password').val()
-      },
-      function(data){
-        if (data.result.result === "FAILED") {
-
-          $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
-          $('#messages').show('slow');
-
-          setTimeout(function () {
-              $('#messages').hide('slow');
-          }, 3000);
-
-        } else {
+        },
+      })
+      .done(function( data ) {
           
-          $.cookie('username', data.user["username"], { expires: 1 });
-          var currentusr = $.cookie('username');
+          if (data.result.result === "OK") {
 
-          $('#loginform').hide();
-          $('#logindetails').show('slow');
+            $.cookie('username', data.result["username"], { expires: 1 });
+            var currentusr = $.cookie('username');
 
-          $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Login is successful</div>');
-          $('#messages').show('slow');
+            $('#loginform').hide();
+            $('#logindetails').show('slow');
 
-          setTimeout(function () {
-              $('#messages').hide('slow');
-          }, 3000);
-        }  
-          // alert("Data: " + data + "\nStatus: ");
-          btn.button('reset');
-      },
-      "json");
+            $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+            }, 3000);
+          } else {
+
+            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+            }, 3000);
+
+          }  
+            btn.button('reset');
+
+        })
+        .fail(function( data ) {
+
+            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+            }, 3000);
+
+              btn.button('reset');
+          });
   }
 })
 
@@ -347,40 +362,54 @@ $('#registerform').validator().on('submit', function (e) {
       var btn = $('#registerButton');
       btn.button('loading');
 
-      $.post("api/register",
-      {
-          name:     $('#registerName').val(),
-          surname:  $('#registerSurname').val(),
+      $.ajax({
+        method: "POST",
+        url: api + "/api/user/signup",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ 
+          // name:     $('#registerName').val(),
+          // surname:  $('#registerSurname').val(),
           username: $('#registerUsername').val(),
           email:    $('#registerEmail').val(),
           password: $('#registerPassword').val()
-      },
-      function(data){
-
-        if (data['result'] === "success") {
-
-          $('#registerMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Successfully registered.</div>');
-          $('#registerMessages').show('slow');
-          // window.setTimeout('location.reload()', 2000); // refresh after 2 sec
+        })
+      })
+        .done(function( data ) {
           
-          setTimeout(function () {
-            $('#registerMessages').hide('slow');
-            $('#registerPage').modal('hide');
-          }, 2000);
-        } else {
+          if (data.result.result === "OK") {
 
-          $('#registerMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data['message'] + '</div>');
-          $('#registerMessages').show('slow');
-
-          setTimeout(function () {
+            $('#registerMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#registerMessages').show('slow');
+            // window.setTimeout('location.reload()', 2000); // refresh after 2 sec
+            
+            setTimeout(function () {
               $('#registerMessages').hide('slow');
-          }, 3000);
+              $('#registerPage').modal('hide');
+            }, 2000);
+          } else {
 
-        }  
-          // alert("Data: " + data + "\nStatus: ");
-          btn.button('reset');
-      },
-      "json");
+            $('#registerMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#registerMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 3000);
+
+          }  
+            btn.button('reset');
+
+        })
+        .fail(function( data ) {
+            $('#registerMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#registerMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 3000);
+
+              btn.button('reset');
+          });
   }
 })
 
