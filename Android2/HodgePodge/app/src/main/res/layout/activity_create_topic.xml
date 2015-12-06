@@ -40,4 +40,17 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="createTopic" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please, Enter a title"
+        android:id="@+id/errorCreateTopicTextView"
+        android:textAlignment="center"
+        android:singleLine="false"
+
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        android:layout_below="@+id/createTopicButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
