@@ -1,0 +1,42 @@
+<div class="scrollable"  ui-if='uiSidebarLeft' ui-state='uiSidebarLeft' ng-swipe-left="swipeCloseLeft()">
+    <h1 class="scrollable-header app-name">{{sideBarContent.label}}</h1>
+    <div class="scrollable-content">
+        <div class="panel-group" ng-show="sideBarContent.label">
+            &nbspName: {{sideBarContent.label}}
+        </div>
+        <div class="panel-group" ng-show="sideBarContent.connection">
+            &nbspConnection: {{sideBarContent.connection}}
+        </div>
+        <div class="panel-group" ng-show="sideBarContent.role">
+            &nbspRole: {{sideBarContent.role}}
+        </div>
+<!--         <table class="table">
+            <tr>
+                <td class="active">OG:<br> {{sideBarContent.OG}}</td>
+                <td class="success">FG:<br> {{sideBarContent.FG}}</td>
+                <td class="info">ABV:<br> {{sideBarContent.ABV}}</td>
+            </tr>
+            <tr>
+                <td class="warning">ABV:<br> {{sideBarContent.ABV}}</td>
+                <td class="danger">SRM:<br> {{sideBarContent.SRM}}</td>
+            </tr>
+        </table> -->
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Primary Connections
+                    </h4>
+                </div>
+            </div>
+        </div>
+                <div class="panel-group" ui-state='myAccordion'>
+            <div class="panel panel-default" ng-repeat="i in sideBarConnectionsArray">
+                    <h4 class="panel-title" style="padding:10px;" ng-click="focusToNode({{i.id}})">
+                        {{i.name}}
+                    </h4>
+            </div>
+        </div>
+
+    </div>
+</div>
