@@ -4,6 +4,8 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_create_topic" android:icon="@android:drawable/ic_menu_add"
             android:title="Create Topic" />
+        <item android:id="@+id/nav_create_relation" android:icon="@android:drawable/ic_menu_add"
+            android:title="Create Relation" />
     </group>
 
 

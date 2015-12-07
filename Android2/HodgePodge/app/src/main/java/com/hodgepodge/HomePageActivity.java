@@ -86,6 +86,9 @@ public class HomePageActivity extends AppCompatActivity
         if (id == R.id.nav_create_topic) {
             Intent intent = new Intent(context, CreateTopicActivity.class);
             startActivity(intent);
+        }else if (id == R.id.nav_create_relation){
+            Intent intent = new Intent(context, CreateRelationActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
