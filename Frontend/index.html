@@ -194,46 +194,6 @@
             </div>
             <div class="panel-body">
               <div id="mynetwork"></div>
-
-              <script type="text/javascript">
-
-                $( document ).ready(function() {
-
-                    $.get( "api/nodes", function( result ) {
-
-                        var container = document.getElementById('mynetwork');
-
-                        var nodes = new vis.DataSet();
-                        var edges = new vis.DataSet();
-
-                        nodes.add(result.nodes);
-                        edges.add(result.edges);
-
-                      var data = {
-                          nodes: nodes,
-                          edges: edges
-                        };
-
-                            var options = {
-                        autoResize: true,
-                        height: '100%',
-                        nodes: {
-                            shape: 'dot'
-                        },
-                        layout:{
-                            randomSeed:2
-                        }
-                    };
-                        var network = new vis.Network(container, data, options);
-
-
-                    }, "json" );
-
-                    }); 
-
-
-
-                </script>
             </div>
           </div>
         </div><!-- /.col-sm-4 -->
@@ -429,6 +389,59 @@ $('#logoutbtn').on('click', function(e){
       // window.location.reload();
     }
   });
+</script>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+  var nodesDataset;
+  var edgesDataset
+
+  $.when(
+
+    $.get(api + "/api/topic/topics", function(data) {
+      nodesDataset = new vis.DataSet(data);
+    }),
+
+    $.get(api + "/api/edge/edges", function(data) {
+      edgesDataset = new vis.DataSet(data);
+    })
+
+  ).then(function() {
+
+    var container = document.getElementById('mynetwork');
+
+    // var nodes = new vis.DataSet();
+    // var edges = new vis.DataSet();
+
+    // nodes.add(result.nodes);
+    // edges.add(result.edges);
+
+    var data = {
+      nodes: nodesDataset,
+      edges: edgesDataset
+    };
+
+    var options = {
+      autoResize: true,
+      height: '100%',
+      nodes: {
+        shape: 'dot'
+      },
+      layout:{
+        randomSeed:2
+      }
+    };
+    var network = new vis.Network(container, data, options);
+
+    console.log(nodesDataset);
+    console.log(edgesDataset);
+
+  });
+
+}); 
+
 </script>
 
   </body>
