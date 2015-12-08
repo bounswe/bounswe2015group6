@@ -69,19 +69,10 @@
           </form>
           <div style="display:none;" id="logindetails">
             <ul class="nav navbar-nav navbar-right">
-              <li style="border-radius:20px; font-color:white"><a data-toggle="modal" href="#topicPage" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Add New Topic</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
               <li><a href="#" id="logoutbtn"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
             </ul>
           </div>
-          <form style="display:none;" class="navbar-form" role="search" id="searchArea">
-            <div class="input-group">
-              <input style="width:300px" type="text" class="form-control" placeholder="Search" name="search">
-                <div class="input-group-btn">
-                  <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
-            </div>
-          </form>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
@@ -124,7 +115,8 @@
         </div>
       </div>
     </div>
-<!-- REGISTER PAGE MODAL --!>
+<!-- END OF CREATE TOPIC MODAL -->
+<!-- REGISTER PAGE MODAL -->
     <div id="registerPage" class="modal fade" role="dialog">
       <div class="modal-dialog">
 
@@ -190,7 +182,20 @@
         <h1>HodgePodge</h1>
         <p>Connections of a topic is not restricted with your aspect. Hodgepodge is an application that you can meet others who has common topics with you. You can subscript topics and discover points of a topic that you do not know. Thanks to Hodgepodge, you can discover new points and lose yourself in an advanture.</p>
       </div>
-
+      <!-- SEARCH BAR -->
+      <div class="input-group col-sm-offset-2 col-sm-8" style="margin-bottom:20px">
+          <input type="text" class="form-control" placeholder="Search" name="search">
+            <div class="input-group-btn">
+              <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+          </div>
+      </div>
+      <!-- END OF SEARCH BAR -->
+      <!-- CREATE A TOPIC AND CREATE RELATION BUTTONS -->
+      <div style="display:none; margin-bottom:20px;" class="col-sm-offset-4" id="topicAndRelation">
+          <a data-toggle="modal" href="#topicPage" class="btn btn-success" style="border-radius:20px; font-color:white; margin-right:5px"><span class="glyphicon glyphicon-plus"></span>Add New Topic</a>
+          <a data-toggle="modal" href="#relationPage" class="btn btn-success" style="border-radius:20px; font-color:white"><span class="glyphicon glyphicon-resize-horizontal"></span>Create a Relation</a>
+      </div>
+      <!-- END OF CREATE A TOPIC AND CREATE RELATION BUTTONS -->
       <div class="row">
         <div class="col-sm-4">
           <div class="panel panel-default">
@@ -233,7 +238,7 @@
               </div>
             </div>
           </div>
-        </div><!-- /.col-sm-4 -->
+        </div>
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -333,10 +338,13 @@ $(function(){
   if($.cookie('username')) {
     $('#loginform').hide();
     $('#logindetails').show('slow');
+    $('.jumbotron').hide();
+    $('#topicAndRelation').show();
   } else {
     $('#loginform').show('slow');
-    $('#searchArea').show('slow');
+    $('.jumbotron').show();
     $('#logindetails').hide();
+    $('#topicAndRelation').hide();
   }
 
     var max_fields      = 5; //maximum input boxes allowed
@@ -385,9 +393,10 @@ $('#loginform').validator().on('submit', function (e) {
             var currentusr = $.cookie('username');
 
             $('#loginform').hide();
+            $('.jumbotron').hide();
+            $('#topicAndRelation').show();
             $('#profile').html(data.username + "'s Profile");
             $('#logindetails').show('slow');
-            $('#searchArea').show('slow');
 
             $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
             $('#messages').show('slow');
