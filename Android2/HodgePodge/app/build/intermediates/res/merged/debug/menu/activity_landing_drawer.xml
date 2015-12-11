@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_sign_up"
+            android:title="Sign Up" />
+        <item android:id="@+id/nav_sign_in"
+            android:title="Sign In" />
+    </group>
+
+
+</menu><!-- From: file:/Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/res/menu/activity_landing_drawer.xml -->
