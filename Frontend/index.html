@@ -59,10 +59,10 @@
         <div id="navbar" class="navbar-collapse collapse">
           <form style="display:none;" id="loginform" class="navbar-form navbar-right">
             <div class="form-group">
-              <input id="username" type="text" value="temelkandaz" class="form-control" required>
+              <input id="username" type="text" placeholder="Username" class="form-control" required>
             </div>
             <div class="form-group">
-              <input id="password" type="password" value="147735836" class="form-control" required>
+              <input id="password" type="password" placeholder="Password" class="form-control" required>
             </div>
             <button id="loginButton" type="submit" class="btn btn-success">Sign in</button>
             <button data-toggle="modal" data-target="#registerPage" type="button" class="btn btn-info">Sign up</button>
@@ -81,7 +81,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-dismiss="modal" onClick='location.reload()'>&times;</button>
             <h4 class="modal-title">Add a New Topic</h4>
           </div>
           <div class="modal-body">
@@ -146,7 +146,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" onClick='location.reload()'>Close</button>
           </div>
         </div>
       </div>
@@ -158,29 +158,27 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-dismiss="modal" onClick='location.reload()'>&times;</button>
             <h4 class="modal-title">Create a Relation</h4>
           </div>
           <div class="modal-body">
             <div style="display:none;" id="createRelationMessages"></div>
             <form id="createRelationForm" class="form-horizontal" role="form">
               <div class="form-group">
-                <label class="control-label col-sm-4" for="relation_1">First Relation:</label>
-                <div class="input-group col-sm-offset-2 col-sm-7" style="margin-bottom:20px">
+                <label class="control-label col-sm-4" for="relation_1">First Topic:</label>
+                <div class="col-sm-7" style="margin-bottom:10px">
                   <input type="text" class="form-control" id="relation1" placeholder="Please enter a topic name" data-minlength="3" required>
-                <div class="input-group-btn">
-                  <button class="btn btn-default" id="relationButton1"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
-                </div>
+                  <input style="display:none" type="text" id="topicId1">
+                </div>  
+                <div class="col-sm-1" id="relation1result"></div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-4" for="relation_2">Second Relation:</label>
-                <div class="input-group col-sm-offset-2 col-sm-7" style="margin-bottom:20px">
+                <label class="control-label col-sm-4" for="relation_2">Second Topic:</label>
+                <div class="col-sm-7" style="margin-bottom:10px">
                   <input type="text" class="form-control" id="relation2" placeholder="Please enter a topic name" data-minlength="3" required>
-                <div class="input-group-btn">
-                  <button class="btn btn-default" id="relationButton1"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
-                </div>
+                  <input style="display:none" type="text" id="topicId2">
+                </div> 
+                <div class="col-sm-1" id="relation2result"></div>
               </div>
               <div class="form-group"> 
                 <div class="col-sm-offset-9">
@@ -190,7 +188,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" onClick='location.reload()'>Close</button>
           </div>
         </div>
       </div>
@@ -423,6 +421,7 @@ $(function(){
     $('#newsFeed2').hide();
     $('#newsFeed1').show();
     $('#topicAndRelation').show();
+    $('#profile').html($.cookie('username'));
   } else {
     $('#loginform').show('slow');
     $('.jumbotron').show();
@@ -499,17 +498,14 @@ $('#loginform').validator().on('submit', function (e) {
       .done(function( data ) {
           
           if (data.result.result === "OK") {
-
-            $.cookie('username', data.result["username"], { expires: 1 });
-            $.cookie('id', data.result["id"], {expires:1});
-            console.log($.cookie('username'));
-            console.log($.cookie('id'));
+            $.cookie('username', data.username, { expires: 1 });
+            $.cookie('id', data.id, { expires: 1 });
             var currentusr = $.cookie('username');
 
             $('#loginform').hide();
             $('.jumbotron').hide();
             $('#topicAndRelation').show();
-            $('#profile').html(data.username + "'s Profile");
+            $('#profile').html(data.username);
             $('#logindetails').show('slow');
             $('#newsFeed1').show();
             $('#newsFeed2').hide();
@@ -562,8 +558,6 @@ $('#registerform').validator().on('submit', function (e) {
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify({ 
-          // name:     $('#registerName').val(),
-          // surname:  $('#registerSurname').val(),
           username: $('#registerUsername').val(),
           email:    $('#registerEmail').val(),
           password: $('#registerPassword').val()
@@ -631,7 +625,6 @@ $('#topicform').validator().on('submit', function (e) {
     if($('div#tag5').css("display") != "none" && $('#tag5').val().length>=2){
       tagsArray.push($('#tag5').val());
     }
-
       $.ajax({
         method: "POST",
         url: api + "/api/topic/create/",
@@ -676,6 +669,107 @@ $('#topicform').validator().on('submit', function (e) {
 })
 //END OF CREATE TOPIC FORM
 
+//CREATE A RELATION - FIRST TOPIC INPUT VALIDATION
+$('#relation1').keyup(function(){
+  var topicName = $('#relation1').val();
+
+  $.ajax({
+    url: api + "/api/topic/title/" + topicName,
+    success: function(data){
+      if (data.result.result === "OK") {
+        $('#relation1result').html('<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;margin-top:10px"></span>');
+        $('#relation1').css('border','3px solid green');
+        $('#topicId1').val(data.id);
+        if($('#relation1').css('border-color')=='rgb(0, 128, 0)'){
+          $('#createRelationButton').prop('disabled', false);
+        }
+      } else {
+        $('#relation1result').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+        $('#relation1').css('border','3px solid red');
+        $('#createRelationButton').prop('disabled',true);
+      }
+    },
+    error: function(){
+      $('#relation1result').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+      $('#relation1').css('border','3px solid red');
+      $('#createRelationButton').prop('disabled',true);
+    }, 
+  });
+});
+//END OF CREATE A RELATION - FIRST TOPIC INPUT VALIDATION
+
+//CREATE A RELATION - SECOND TOPIC INPUT VALIDATION
+$('#relation2').keyup(function(){
+  var topicName = $('#relation2').val();
+
+  $.ajax({
+    url: api + "/api/topic/title/" + topicName,
+    success: function(data){
+      if (data.result.result === "OK") {
+        $('#relation2result').html('<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;margin-top:10px"></span>');
+        $('#relation2').css('border','3px solid green');
+        $('#topicId2').val(data.id);
+
+        if($('#relation1').css('border-color')=='rgb(0, 128, 0)'){
+          $('#createRelationButton').prop('disabled',false);
+        }
+      } else {
+          $('#relation2result').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+          $('#relation2').css('border','3px solid red');
+          $('#createRelationButton').prop('disabled',true);
+      }
+    },
+    error: function(){
+      $('#relation2result').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+      $('#relation2').css('border','3px solid red');
+      $('#createRelationButton').prop('disabled',true);
+    }, 
+  });
+});
+//END OF CREATE A RELATION - SECOND TOPIC INPUT VALIDATION
+
+//CREATE A NEW RELATION
+$('#createRelationForm').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    // everything looks good!
+      var btn = $('#createRelationButton');
+      btn.button('loading');
+      var topicId1 = $('#topicId1').val();
+      var topicId2 = $('#topicId2').val();
+      $.ajax({
+        method: "POST",
+        url: api + "/api/edge/create",
+        data: {
+          source: topicId1,
+          dest: topicId2,
+        },
+      })
+        .done(function( data ) {
+          if (data.id) {
+            $('#createRelationMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong>Relation is created</div>');
+            $('#createRelationMessages').show('slow');
+            
+            setTimeout(function () {
+              $('#createRelationMessages').hide('slow');
+              $('#createRelationMessages').modal('hide');
+            }, 2000);
+          }
+        })
+        .fail(function( data ) {
+            $('#createRelationMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#createRelationMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 3000);
+              btn.button('reset');
+          });
+  }
+});
+
 $('#logoutbtn').on('click', function(e){
     e.preventDefault();
     if($.removeCookie('username')) {
@@ -687,11 +781,9 @@ $('#logoutbtn').on('click', function(e){
           $('#messages').hide('slow');
           window.location.reload();
       }, 2000);
-
-      // window.setTimeout('location.reload()', 2000); // refresh after 2 sec
-      // window.location.reload();
     }
   });
+
 </script>
 </body>
 </html>
