@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:2:1-44:12
+ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:2:1-48:12
 	package
 		ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:3:5-29
 		INJECTED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml
@@ -30,7 +30,7 @@ ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/
 	android:name
 		ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:9:22-64
 application
-ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:11:5-42:19
+ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:11:5-46:19
 MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.1.0] /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:23.1.0] /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/AndroidManifest.xml:22:5-20
@@ -90,6 +90,14 @@ activity#com.hodgepodge.CreateTopicActivity
 ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:40:9-41:20
 	android:name
 		ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:40:19-54
+activity#com.hodgepodge.PostAddActivity
+ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:42:9-43:20
+	android:name
+		ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:42:19-50
+activity#com.hodgepodge.PostsListActivity
+ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:44:9-45:20
+	android:name
+		ADDED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml:44:19-52
 uses-sdk
 INJECTED from /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:20:5-43
