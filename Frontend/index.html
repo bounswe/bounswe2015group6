@@ -69,7 +69,7 @@
           </form>
           <div style="display:none;" id="logindetails">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
+              <li><a href="profile.html"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
               <li><a href="#" id="logoutbtn"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
             </ul>
           </div>
@@ -81,26 +81,62 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-dismiss="modal" onClick='location.reload()'>&times;</button>
             <h4 class="modal-title">Add a New Topic</h4>
           </div>
           <div class="modal-body">
-            <div style="display:none;" id="registerMessages"></div>
+            <div style="display:none;" id="createTopicMessages"></div>
             <form id="topicform" class="form-horizontal" role="form">
               <div class="form-group">
-                <label class="control-label col-sm-3" for="topicTitle">Topic Title:</label>
+                <label class="control-label col-sm-3" for="topicTitle_">Topic Title:</label>
                 <div class="col-sm-7">
                   <input type="text" class="form-control" id="topicTitle" placeholder="Please enter a topic title." data-minlength="3" required>
                 </div>
               </div>
-              <div class="form-group" id="tags">
-                <label class="control-label col-sm-3" for="topicTitle">Tags:</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id="topicTitle" placeholder="Please enter a tag." data-minlength="3" required>
-                </div>
-                <div class="col-sm-3">
-                  <a href=# class="btn btn-success btn-sm" id="addButton"><span class="glyphicon glyphicon-plus"></span></a>
-                </div>
+              <div class="form-group">
+                  <label class="control-label col-sm-3" for="tag_1">Tags:</label>
+                  <div class="col-sm-6">
+                  <input type="text" class="form-control" id="tag1" placeholder="Please enter a tag." data-minlength='2'>
+                  </div>
+                  <div class="col-sm-3">
+                    <a href=# class="btn btn-success btn-sm" id="addButton"><span class="glyphicon glyphicon-plus"></span></a>
+                  </div>
+              </div>
+              <div style="display:none;" class="form-group" id="tag_2">
+                  <label class="control-label col-sm-3" for="tag_2"></label>
+                  <div class="col-sm-6">
+                  <input type="text" class="form-control" id="tag2" placeholder="Please enter a tag." data-minlength='2'>
+                  </div>
+                  <div class="col-sm-3">
+                    <a href=# class="btn btn-danger btn-sm" id="remove2"><span class="glyphicon glyphicon-minus"></span></a>
+                  </div>
+              </div>
+              <div style="display:none;" class="form-group" id="tag_3">
+                  <label class="control-label col-sm-3" for="tag_3"></label>
+                  <div class="col-sm-6">
+                  <input type="text" class="form-control" id="tag3" placeholder="Please enter a tag." data-minlength='2'>
+                  </div>
+                  <div class="col-sm-3">
+                    <a href=# class="btn btn-danger btn-sm" id="remove3"><span class="glyphicon glyphicon-minus"></span></a>
+                  </div>
+              </div>
+              <div style="display:none;" class="form-group" id="tag_4">
+                  <label class="control-label col-sm-3" for="tag_4"></label>
+                  <div class="col-sm-6">
+                  <input type="text" class="form-control" id="tag4" placeholder="Please enter a tag." data-minlength='2'>
+                  </div>
+                  <div class="col-sm-3">
+                    <a href=# class="btn btn-danger btn-sm" id="remove4"><span class="glyphicon glyphicon-minus"></span></a>
+                  </div>
+              </div>
+              <div style="display:none;" class="form-group" id="tag_5">
+                  <label class="control-label col-sm-3" for="tag_5"></label>
+                  <div class="col-sm-6">
+                  <input type="text" class="form-control" id="tag5" placeholder="Please enter a tag." data-minlength='2'>
+                  </div>
+                  <div class="col-sm-3">
+                    <a href=# class="btn btn-danger btn-sm" id="remove5"><span class="glyphicon glyphicon-minus"></span></a>
+                  </div>
               </div>
               <div class="form-group"> 
                 <div class="col-sm-offset-8 col-sm-10">
@@ -110,12 +146,55 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" onClick='location.reload()'>Close</button>
           </div>
         </div>
       </div>
     </div>
 <!-- END OF CREATE TOPIC MODAL -->
+
+<!-- CREATE A RELATION MODAL -->
+    <div id="createRelationPage" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" onClick='location.reload()'>&times;</button>
+            <h4 class="modal-title">Create a Relation</h4>
+          </div>
+          <div class="modal-body">
+            <div style="display:none;" id="createRelationMessages"></div>
+            <form id="createRelationForm" class="form-horizontal" role="form">
+              <div class="form-group">
+                <label class="control-label col-sm-4" for="relation_1">First Topic:</label>
+                <div class="col-sm-7" style="margin-bottom:10px">
+                  <input type="text" class="form-control" id="relation1" placeholder="Please enter a topic name" data-minlength="3" required>
+                  <input style="display:none" type="text" id="topicId1">
+                </div>  
+                <div class="col-sm-1" id="relation1result"></div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4" for="relation_2">Second Topic:</label>
+                <div class="col-sm-7" style="margin-bottom:10px">
+                  <input type="text" class="form-control" id="relation2" placeholder="Please enter a topic name" data-minlength="3" required>
+                  <input style="display:none" type="text" id="topicId2">
+                </div> 
+                <div class="col-sm-1" id="relation2result"></div>
+              </div>
+              <div class="form-group"> 
+                <div class="col-sm-offset-9">
+                  <button id="createRelationButton" type="submit" class="btn btn-default">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" onClick='location.reload()'>Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- END OF CREATE A RELATION MODAL -->
+
 <!-- REGISTER PAGE MODAL -->
     <div id="registerPage" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -193,7 +272,7 @@
       <!-- CREATE A TOPIC AND CREATE RELATION BUTTONS -->
       <div style="display:none; margin-bottom:20px;" class="col-sm-offset-4" id="topicAndRelation">
           <a data-toggle="modal" href="#topicPage" class="btn btn-success" style="border-radius:20px; font-color:white; margin-right:5px"><span class="glyphicon glyphicon-plus"></span>Add New Topic</a>
-          <a data-toggle="modal" href="#relationPage" class="btn btn-success" style="border-radius:20px; font-color:white"><span class="glyphicon glyphicon-resize-horizontal"></span>Create a Relation</a>
+          <a data-toggle="modal" href="#createRelationPage" class="btn btn-success" style="border-radius:20px; font-color:white"><span class="glyphicon glyphicon-resize-horizontal"></span>Create a Relation</a>
       </div>
       <!-- END OF CREATE A TOPIC AND CREATE RELATION BUTTONS -->
       <div class="row">
@@ -282,9 +361,6 @@
                     }, "json" );
 
                     }); 
-
-
-
                 </script>
             </div>
           </div>
@@ -295,7 +371,7 @@
               <h3 class="panel-title" style="height:29px;margin-top:11px;">News Feed</h3>
             </div>
             <div class="panel-body">
-              <div class="list-group">
+              <div class="list-group" id="newsFeed1" style="display:none">
                 <a href="#" class="list-group-item">hamzaozturk created a new topic.</a>
                 <a href="#" class="list-group-item">uskudarli created a new connection.</a>
                 <a href="#" class="list-group-item">kindiroglu created a new topic.</a>
@@ -306,6 +382,9 @@
                 <a href="#" class="list-group-item">uskudarli created a new topic.</a>
                 <a href="#" class="list-group-item">samiyagmur created a new connection.</a>
                 <a href="#" class="list-group-item">oguzhan created a new post.</a>
+              </div>
+              <div class="list-group" id="newsFeed2">
+                <a href="#" class="list-group-item">Please login to see your News Feed</a>
               </div>
             </div>
           </div>
@@ -339,32 +418,64 @@ $(function(){
     $('#loginform').hide();
     $('#logindetails').show('slow');
     $('.jumbotron').hide();
+    $('#newsFeed2').hide();
+    $('#newsFeed1').show();
     $('#topicAndRelation').show();
+    $('#profile').html($.cookie('username'));
   } else {
     $('#loginform').show('slow');
     $('.jumbotron').show();
     $('#logindetails').hide();
     $('#topicAndRelation').hide();
+    $('#newsFeed2').show();
+    $('#newsFeed1').hide();
   }
-
-    var max_fields      = 5; //maximum input boxes allowed
-    var wrapper         = $("#tags"); //Fields wrapper
-    var add_button      = $("#addButton"); //Add button ID
-    
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper).append('<div class="form-group" id="additional"><label class="control-label col-sm-3" for="topicTitle"></label><div class="col-sm-6"><input type="text" class="form-control" id="topicTitle" placeholder="Please enter a tag." data-minlength="3" required></div><div class="col-sm-3"><a href=# class="btn btn-danger btn-sm" id="removeTag"><span class="glyphicon glyphicon-minus"></span></a></div></div></div>'); //add input box
-        }
-    });
-    
-    $(wrapper).on("click","#removeTag", function(e){ //user click on remove text
-        e.preventDefault(); $('#additional').remove(); x--;
-    });
-
 });
+
+//DYNAMICALLY ADDING AND DELETING TAG ROWS
+$('#addButton').on('click',function(){
+    if($('div#tag_2').css("display") == "none"){
+      $('div#tag_2').show();
+    }
+    else if($('div#tag_3').css("display") == "none"){
+      $('div#tag_3').show();
+    }
+    else if($('div#tag_4').css("display") == "none"){
+      $('div#tag_4').show();
+    }
+    else if($('div#tag_5').css("display") == "none"){
+      $('div#tag_5').show();
+    }
+    else{
+      $('#createTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Maximum of 5 tags can be added while creating a new topic!</div>');
+      $('#createTopicMessages').show('slow');
+
+      setTimeout(function () {
+        $('#createTopicMessages').hide('slow');
+      }, 3000);
+    }
+});
+
+$('#remove2').on('click', function(){
+  $('div#tag_2').hide();
+  $('#tag2').val("");
+});
+
+$('#remove3').on('click', function(){
+  $('div#tag_3').hide();
+  $('#tag3').val("");
+});
+
+$('#remove4').on('click', function(){
+  $('div#tag_4').hide();
+  $('#tag4').val("");
+});
+
+$('#remove5').on('click', function(){
+  $('div#tag_5').hide();
+  $('#tag5').val("");
+});
+//END OF DYNAMICALLY ADDING AND DELETING TAG ROWS
 
 $('#loginform').validator().on('submit', function (e) {
   if (e.isDefaultPrevented()) {
@@ -387,16 +498,17 @@ $('#loginform').validator().on('submit', function (e) {
       .done(function( data ) {
           
           if (data.result.result === "OK") {
-
-            $.cookie('username', data.result["username"], { expires: 1 });
-            $.cookie('id', data.result["id"], {expires:1});
+            $.cookie('username', data.username, { expires: 1 });
+            $.cookie('id', data.id, { expires: 1 });
             var currentusr = $.cookie('username');
 
             $('#loginform').hide();
             $('.jumbotron').hide();
             $('#topicAndRelation').show();
-            $('#profile').html(data.username + "'s Profile");
+            $('#profile').html(data.username);
             $('#logindetails').show('slow');
+            $('#newsFeed1').show();
+            $('#newsFeed2').hide();
 
             $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
             $('#messages').show('slow');
@@ -446,8 +558,6 @@ $('#registerform').validator().on('submit', function (e) {
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify({ 
-          // name:     $('#registerName').val(),
-          // surname:  $('#registerSurname').val(),
           username: $('#registerUsername').val(),
           email:    $('#registerEmail').val(),
           password: $('#registerPassword').val()
@@ -490,6 +600,175 @@ $('#registerform').validator().on('submit', function (e) {
           });
   }
 })
+//CREATE TOPIC FORM
+$('#topicform').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+      e.preventDefault();
+      var btn = $('#topicButton');
+      btn.button('loading');
+      var tagsArray = [];
+
+    if($('#tag1').val().length>=2){
+      tagsArray.push($('#tag1').val());
+    }
+    if($('div#tag2').css("display") != "none" && $('#tag2').val().length>=2){
+      tagsArray.push($('#tag2').val());
+    }
+    if($('div#tag3').css("display") != "none" && $('#tag3').val().length>=2){
+      tagsArray.push($('#tag3').val());
+    }
+    if($('div#tag4').css("display") != "none" && $('#tag4').val().length>=2){
+      tagsArray.push($('#tag4').val());
+    }    
+    if($('div#tag5').css("display") != "none" && $('#tag5').val().length>=2){
+      tagsArray.push($('#tag5').val());
+    }
+      $.ajax({
+        method: "POST",
+        url: api + "/api/topic/create/",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ 
+          ownerId: $.cookie('id'),
+          title: $('#topicTitle').val(),
+          tags: tagsArray
+        })
+      })
+        .done(function( data ) {
+          if (data.result.result === "OK") {
+            $('#createTopicMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#createTopicMessages').show('slow');
+            
+            setTimeout(function () {
+              $('#createTopicMessages').hide('slow');
+              $('#topicPage').modal('hide');
+            }, 2000);
+          } else {
+            $('#createTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#createTopicMessages').show('slow');
+
+            setTimeout(function () {
+                $('#createTopicMessages').hide('slow');
+            }, 3000);
+
+          }  
+            btn.button('reset');
+        })
+        .fail(function( data ) {
+            $('#createTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#createTopicMessages').show('slow');
+
+            setTimeout(function () {
+                $('#createTopicMessages').hide('slow');
+            }, 3000);
+              btn.button('reset');
+          });
+  }
+})
+//END OF CREATE TOPIC FORM
+
+//CREATE A RELATION - FIRST TOPIC INPUT VALIDATION
+$('#relation1').keyup(function(){
+  var topicName = $('#relation1').val();
+
+  $.ajax({
+    url: api + "/api/topic/title/" + topicName,
+    success: function(data){
+      if (data.result.result === "OK") {
+        $('#relation1result').html('<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;margin-top:10px"></span>');
+        $('#relation1').css('border','3px solid green');
+        $('#topicId1').val(data.id);
+        if($('#relation1').css('border-color')=='rgb(0, 128, 0)'){
+          $('#createRelationButton').prop('disabled', false);
+        }
+      } else {
+        $('#relation1result').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+        $('#relation1').css('border','3px solid red');
+        $('#createRelationButton').prop('disabled',true);
+      }
+    },
+    error: function(){
+      $('#relation1result').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+      $('#relation1').css('border','3px solid red');
+      $('#createRelationButton').prop('disabled',true);
+    }, 
+  });
+});
+//END OF CREATE A RELATION - FIRST TOPIC INPUT VALIDATION
+
+//CREATE A RELATION - SECOND TOPIC INPUT VALIDATION
+$('#relation2').keyup(function(){
+  var topicName = $('#relation2').val();
+
+  $.ajax({
+    url: api + "/api/topic/title/" + topicName,
+    success: function(data){
+      if (data.result.result === "OK") {
+        $('#relation2result').html('<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;margin-top:10px"></span>');
+        $('#relation2').css('border','3px solid green');
+        $('#topicId2').val(data.id);
+
+        if($('#relation1').css('border-color')=='rgb(0, 128, 0)'){
+          $('#createRelationButton').prop('disabled',false);
+        }
+      } else {
+          $('#relation2result').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+          $('#relation2').css('border','3px solid red');
+          $('#createRelationButton').prop('disabled',true);
+      }
+    },
+    error: function(){
+      $('#relation2result').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+      $('#relation2').css('border','3px solid red');
+      $('#createRelationButton').prop('disabled',true);
+    }, 
+  });
+});
+//END OF CREATE A RELATION - SECOND TOPIC INPUT VALIDATION
+
+//CREATE A NEW RELATION
+$('#createRelationForm').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    // everything looks good!
+      var btn = $('#createRelationButton');
+      btn.button('loading');
+      var topicId1 = $('#topicId1').val();
+      var topicId2 = $('#topicId2').val();
+      $.ajax({
+        method: "POST",
+        url: api + "/api/edge/create",
+        data: {
+          source: topicId1,
+          dest: topicId2,
+        },
+      })
+        .done(function( data ) {
+          if (data.id) {
+            $('#createRelationMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong>Relation is created</div>');
+            $('#createRelationMessages').show('slow');
+            
+            setTimeout(function () {
+              $('#createRelationMessages').hide('slow');
+              $('#createRelationMessages').modal('hide');
+            }, 2000);
+          }
+        })
+        .fail(function( data ) {
+            $('#createRelationMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#createRelationMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 3000);
+              btn.button('reset');
+          });
+  }
+});
 
 $('#logoutbtn').on('click', function(e){
     e.preventDefault();
@@ -502,12 +781,9 @@ $('#logoutbtn').on('click', function(e){
           $('#messages').hide('slow');
           window.location.reload();
       }, 2000);
-
-      // window.setTimeout('location.reload()', 2000); // refresh after 2 sec
-      // window.location.reload();
     }
   });
-</script>
 
-  </body>
+</script>
+</body>
 </html>
