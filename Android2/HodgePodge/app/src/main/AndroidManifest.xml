@@ -41,6 +41,8 @@
         </activity>
         <activity android:name=".PostAddActivity" >
         </activity>
+        <activity android:name=".PostsListActivity" >
+        </activity>
     </application>
 
 </manifest>
