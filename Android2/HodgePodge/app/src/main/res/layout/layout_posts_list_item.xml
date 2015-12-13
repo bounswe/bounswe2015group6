@@ -1,25 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:padding="10dp">
-
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip">
     <TextView
-        android:id="@+id/postNumber"
+        android:id="@+id/usernameTextView"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+
+        android:ellipsize="marquee"
+        android:text="username"
+
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/contentTextView" />
+
+    <ImageButton
+        android:id="@+id/downVoteButton"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="false"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:text="UP"
+        android:layout_toRightOf="@+id/upVoteButton"
+        android:layout_alignTop="@+id/upVoteButton"
+        android:layout_alignBottom="@+id/upVoteButton"
+        android:background="@android:color/transparent"
+
+        android:src="@android:drawable/ic_delete"
          />
 
     <TextView
-        android:id="@+id/postContent"
+        android:id="@+id/postRatingTextView"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
 
-        android:layout_gravity="center_vertical" />
+        android:ellipsize="marquee"
+        android:text="+126"
 
-</LinearLayout>
+        android:layout_alignParentBottom="false"
+        android:layout_alignTop="@+id/dateTextView"
+        android:layout_alignBottom="@+id/dateTextView"
+        android:layout_toRightOf="@+id/downVoteButton"
+        android:textColor="#FF9900"/>
+
+    <ImageButton
+        android:id="@+id/upVoteButton"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="@android:color/transparent"
+
+        android:layout_alignParentBottom="false"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:text="UP"
+        android:layout_toRightOf="@+id/dateTextView"
+        android:layout_alignTop="@+id/dateTextView"
+        android:layout_alignBottom="@+id/dateTextView"
+
+        android:src="@android:drawable/ic_input_add"
+         />
+
+
+    <TextView
+        android:id="@+id/dateTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:ellipsize="marquee"
+        android:text="10.02.2016"
+        android:inputType="textImeMultiLine"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/contentTextView" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+
+        android:gravity="center_vertical"
+        android:text=""
+        android:id="@+id/contentTextView"
+        android:inputType="textMultiLine" />
+</RelativeLayout>

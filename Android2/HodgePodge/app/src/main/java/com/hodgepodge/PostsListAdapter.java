@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -52,12 +53,29 @@ public class PostsListAdapter extends BaseAdapter {
         } else {
             postViewHolder = (PostViewHolder)convertView.getTag();
         }
-
+        postViewHolder.contextTextView = (TextView) convertView.findViewById(R.id.contentTextView);
+        postViewHolder.contextTextView.setText(posts.get(position).getContent());
+        postViewHolder.dateTextView = (TextView) convertView.findViewById(R.id.dateTextView);
+        postViewHolder.dateTextView.setText(posts.get(position).getDate());
+        postViewHolder.ratingTextView = (TextView) convertView.findViewById(R.id.postRatingTextView);
+        Integer rating = posts.get(position).getRating();
+        String rS = rating.toString();
+        postViewHolder.ratingTextView.setText(rS);
+        postViewHolder.upVoteButton = (ImageButton) convertView.findViewById(R.id.upVoteButton);
+        postViewHolder.downVoteButton = (ImageButton) convertView.findViewById(R.id.downVoteButton);
+        postViewHolder.usernameTextView = (TextView) convertView.findViewById(R.id.usernameTextView);
+        postViewHolder.usernameTextView.setText(posts.get(position).getUsername());
         return convertView;
     }
 
-    private static  class PostViewHolder {
-        TextView idTextView;
+
+    private class PostViewHolder {
         TextView contextTextView;
+        TextView dateTextView;
+        ImageButton upVoteButton;
+        ImageButton downVoteButton;
+        TextView ratingTextView;
+        TextView usernameTextView;
+
     }
 }
