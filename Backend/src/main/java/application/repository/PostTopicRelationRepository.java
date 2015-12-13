@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public interface PostTopicRelationRepository extends CrudRepository<PostTopicRelation, Integer>{
     ArrayList<PostTopicRelation> findAll();
-    ArrayList<PostTopicRelation> findByPostId(int postId);
+    PostTopicRelation findByPostId(int postId);
     ArrayList<PostTopicRelation> findByTopicId(int TopicId);
-    void deleteByPostId(int postID);
-    void deleteByTopicId(int topicID);
+    void deleteByPostId(int postId);
+    void deleteByTopicId(int topicId);
 }
