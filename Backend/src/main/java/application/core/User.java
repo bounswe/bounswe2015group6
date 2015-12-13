@@ -1,6 +1,7 @@
 package application.core;
 
 import application.miscalleneous.Result;
+import org.hibernate.type.ArrayType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -43,6 +44,18 @@ public class User {
 
     @Column(name = "google_id")
     private String googleId = "";
+
+    @Transient
+    private ArrayList<Topic> createdTopics;
+
+    @Transient
+    private ArrayList<Integer> followedTopics;
+
+    @Transient
+    private ArrayList<Post> createdPosts;
+
+    @Transient
+    private ArrayList<String> followedUsers;
 
     public int getIsBanned() {
         return isBanned;
@@ -123,20 +136,16 @@ public class User {
         this.googleId = googleId;
     }
 
-    /*Getter - setter: followList*/
-    @ElementCollection
-    @CollectionTable(name = "follow", joinColumns = @JoinColumn(name = "id", referencedColumnName = "followed_id"))
-    @Column(name = "follower_id")
-    public List<Integer> getFollowList() {
+    public List<String> getFollowList() {
         return followList;
     }
 
-    public void setFollowList(List<Integer> followList){
+    public void setFollowList(List<String> followList){
         this.followList = followList;
     }
 
     @Transient
-    private List<Integer> followList;
+    private List<String> followList;
 
     public void setResult(Result result) {
         this.result = result;
@@ -144,5 +153,37 @@ public class User {
 
     public Result getResult() {
         return result;
+    }
+
+    public ArrayList<Post> getCreatedPosts() {
+        return createdPosts;
+    }
+
+    public void setCreatedPosts(ArrayList<Post> createdPosts) {
+        this.createdPosts = createdPosts;
+    }
+
+    public ArrayList<Topic> getCreatedTopics() {
+        return createdTopics;
+    }
+
+    public void setCreatedTopics(ArrayList<Topic> createdTopics) {
+        this.createdTopics = createdTopics;
+    }
+
+    public ArrayList<Integer> getFollowedTopics() {
+        return followedTopics;
+    }
+
+    public void setFollowedTopics(ArrayList<Integer> followedTopics) {
+        this.followedTopics = followedTopics;
+    }
+
+    public ArrayList<String> getFollowedUsers() {
+        return followedUsers;
+    }
+
+    public void setFollowedUsers(ArrayList<String> followedUsers) {
+        this.followedUsers = followedUsers;
     }
 }

@@ -7,22 +7,22 @@ import javax.persistence.*;
 public class TopicTopicRelation {
     @Id
     @GeneratedValue
-    int id;
+    private int id;
 
-    @Column(name = "source_id")
-    private int sourceId;
+    @Column(name = "from_id")
+    private int from;
 
-    @Column(name = "target_id")
-    private int targetId;
+    @Column(name = "to_id")
+    private int to;
 
     public TopicTopicRelation(){
-        this.sourceId= -1;
-        this.targetId= -1;
+        this.from= -1;
+        this.to= -1;
     }
 
-    public TopicTopicRelation(int sourceId, int targetId){
-        this.sourceId = sourceId;
-        this.targetId = targetId;
+    public TopicTopicRelation(int from, int to){
+        this.from = from;
+        this.to = to;
     }
 
     public int getId() {
@@ -33,17 +33,17 @@ public class TopicTopicRelation {
         this.id = id;
     }
 
-    public int getSourceId() {
-        return sourceId;
+    public int getFrom() {
+        return from;
     }
 
-    public void setSourceId(int sourceId) {
-        this.sourceId= sourceId;
+    public void setFrom(int from) {
+        this.from = from;
     }
 
-    public int getTargetId() {
-        return targetId;
+    public int getTo() {
+        return to;
     }
 
-    public void setTargetId(int targetId) {this.targetId= targetId;    }
+    public void setTo(int to) {this.to = to;}
 }

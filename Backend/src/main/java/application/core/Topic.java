@@ -1,6 +1,7 @@
 package application.core;
 
 import application.miscalleneous.Result;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,12 +23,27 @@ public class Topic {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "up_vote")
+    private int upVote = 0;
+
+    @Column(name = "down_vote")
+    private int downVote = 0;
+
+    @Column(name = "create_date")
+    private DateTime createDate;
+
+    @Column(name = "edit_date")
+    private DateTime editDate;
+
     @Transient
-    private ArrayList<Integer> tags;
+    private String label;
+
+    @Transient
+    private ArrayList<String> tags;
 
 
     @Transient
-    private ArrayList<Integer> posts;
+    private ArrayList<Post> posts;
 
 
     @Transient
@@ -50,19 +66,19 @@ public class Topic {
         this.title = title;
     }
 
-    public ArrayList<Integer> getTags() {
+    public ArrayList<String> getTags() {
         return tags;
     }
 
-    public void setTags(ArrayList<Integer> tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 
-    public ArrayList<Integer> getPosts() {
+    public ArrayList<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(ArrayList<Integer> posts) {
+    public void setPosts(ArrayList<Post> posts) {
         this.posts = posts;
     }
 
@@ -88,5 +104,45 @@ public class Topic {
 
     public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public int getDownVote() {
+        return downVote;
+    }
+
+    public void setDownVote(int downVote) {
+        this.downVote = downVote;
+    }
+
+    public int getUpVote() {
+        return upVote;
+    }
+
+    public void setUpVote(int upVote) {
+        this.upVote = upVote;
+    }
+
+    public DateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(DateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    public DateTime getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(DateTime editDate) {
+        this.editDate = editDate;
     }
 }
