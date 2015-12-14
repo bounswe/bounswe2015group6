@@ -40,8 +40,11 @@
     <!-- From: file:/C:/Users/samsung/Documents/GitHub/bounswe2015group6/Android2/HodgePodge/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorBackground">#F1F1F1</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorWhite">#ffffff</color>
     <!-- From: file:/C:/Users/samsung/Documents/GitHub/bounswe2015group6/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="design_fab_shadow_end_color">@android:color/transparent</color>
