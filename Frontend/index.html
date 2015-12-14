@@ -287,32 +287,8 @@
             <div class="panel-body">
               <div id = "myTabContent" class = "tab-content">
                   <div class="tab-pane fade in active" id="recent">
-                    <div class="list-group">
-                      <a href="#" class="list-group-item"><span class="badge">1</span>Twins</a>
-                      <a href="#" class="list-group-item"><span class="badge">13</span>Credit Card Debt</a>
-                      <a href="#" class="list-group-item"><span class="badge">5</span>Acid Rain</a>
-                      <a href="#" class="list-group-item"><span class="badge">9</span>Handwriting Analysis</a>
-                      <a href="#" class="list-group-item"><span class="badge">2</span>Sulfur</a>
-                      <a href="#" class="list-group-item"><span class="badge">42</span>Jet Lag</a>
-                      <a href="#" class="list-group-item"><span class="badge">34</span>Pediatrics</a>
-                      <a href="#" class="list-group-item"><span class="badge">22</span>United Kingdom (UK)</a>
-                      <a href="#" class="list-group-item"><span class="badge">12</span>Mass Media</a>
-                      <a href="#" class="list-group-item"><span class="badge">2</span>GPS</a>
-                    </div>
                  </div>
                  <div class="tab-pane fade" id="popular">
-                    <div class="list-group">
-                      <a href="#" class="list-group-item"><span class="badge">172</span>GPS</a>
-                      <a href="#" class="list-group-item"><span class="badge">146</span>United Kingdom (UK)</a>
-                      <a href="#" class="list-group-item"><span class="badge">135</span>Handwriting Analysis</a>
-                      <a href="#" class="list-group-item"><span class="badge">112</span>Jet Lag</a>
-                      <a href="#" class="list-group-item"><span class="badge">99</span>Credit Card Debt</a>
-                      <a href="#" class="list-group-item"><span class="badge">67</span>Mass Media</a>
-                      <a href="#" class="list-group-item"><span class="badge">54</span>Twins</a>
-                      <a href="#" class="list-group-item"><span class="badge">41</span>Sulfur</a>
-                      <a href="#" class="list-group-item"><span class="badge">32</span>Pediatrics</a>
-                      <a href="#" class="list-group-item"><span class="badge">19</span>Acid Rain</a>
-                    </div>
                  </div>
               </div>
             </div>
@@ -377,6 +353,50 @@
 var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
 
 $(function(){
+  //GETTING DATA FOR THE MOST RECENTLY ACTIVE TOPICS
+  $.ajax({
+    url: api + "/api/recent_popular/recent/",
+    success: function(data){
+      var recentOrPopular = "<div class='list-group'>";
+      if (data) {
+        for(var i = 0; i<10; i++){
+          recentOrPopular += "<a href='topic.html?title=" + data[i].title + "' class='list-group-item'><span class='badge'>" + (data[i].upVote - data[i].downVote) + "</span>" + data[i].title + "</a>";
+          $('#recent').html(recentOrPopular);
+        }
+      } else {
+        recentOrPopular += "<a href='#' class='list-group-item'>An error ocurred while retrieving data</a>";
+        $('#recentOrPopular').html(recentOrPopular);
+      }
+    },
+    error: function(){
+      recentOrPopular += "<a href='#' class='list-group-item'>An error ocurred while retrieving data</a>";
+      $('#recentOrPopular').html(recentOrPopular);
+    }, 
+  });
+  //END OF GETTING DATA FOR THE MOST RECENT TOPICS
+
+  //GETTING DATA FOR THE MOST RECENTLY ACTIVE TOPICS
+  $.ajax({
+    url: api + "/api/recent_popular/popular/",
+    success: function(data){
+      if (data) {
+        var recent = "<div class='list-group'>";
+        for(var i = 0; i<10; i++){
+          recent += "<a href='topic.html?title=" + data[i].title + "' class='list-group-item'><span class='badge'>" + (data[i].upVote - data[i].downVote) + "</span>" + data[i].title + "</a>";
+          $('#popular').html(recent);
+        }
+      } else {
+        recentOrPopular += "<a href='#' class='list-group-item'>An error ocurred while retrieving data</a>";
+        $('#recentOrPopular').html(recentOrPopular);
+      }
+    },
+    error: function(){
+        recentOrPopular += "<a href='#' class='list-group-item'>An error ocurred while retrieving data</a>";
+        $('#recentOrPopular').html(recentOrPopular);
+    }, 
+  });
+  //END OF GETTING DATA FOR THE MOST RECENTLY ACTIVE TOPICS
+
   if($.cookie('username')) {
     $('#loginform').hide();
     $('#logindetails').show('slow');
@@ -644,7 +664,7 @@ $('#relation1').keyup(function(){
         $('#relation1result').html('<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;margin-top:10px"></span>');
         $('#relation1').css('border','3px solid green');
         $('#topicId1').val(data.id);
-        if($('#relation1').css('border-color')=='rgb(0, 128, 0)'){
+        if($('#relation2').css('border-color')=='rgb(0, 128, 0)'){
           $('#createRelationButton').prop('disabled', false);
         }
       } else {
