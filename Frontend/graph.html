@@ -11,102 +11,375 @@
 
     <title>HodgePodge</title>
 
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="js/vis.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
+    <!-- Custom styles for this template -->
+    <link href="css/theme.css" rel="stylesheet">
 
-    <script src="js/angular-touch.js"></script>
-    <script src="js/angucomplete-alt.js"></script>
-    <script src="js/angular-busy.js"></script>
-    <script src="services/hodgePodgeGraph.services.js"></script>
-    <script src="js/hodgePodge.controller.js"></script>
-    <script src="js/mobile-angular-ui.min.js"></script>
-    <script src="js/mobile-angular-ui.gestures.min.js"></script>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
     <link rel="stylesheet" href="css/vis.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/angucomplete-alt.css">
-    <link rel="stylesheet" href="css/angular-busy.css">
-    <link rel="stylesheet" href="css/mobile-angular-ui-hover.min.css" />
-    <link rel="stylesheet" href="css/mobile-angular-ui-base.min.css" />
-    <link rel="stylesheet" href="css/mobile-angular-ui-desktop.min.css" />
-    <link href="css/hodgePodge.css" rel="stylesheet">
 
-</head>
-<body ng-app="hodgePodgeGraph" ng-controller="hodgePodgeController" ng-cloak>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/vis.min.js"></script>
 
-<div class="sidebar sidebar-left" ng-include="'html/left_side_bar.html'">
-</div>
+    <style type="text/css">
+        #mynetwork {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+  </head>
 
-
-<div class="sidebar sidebar-right" ng-include="'html/right_side_bar.html'">
-</div>
-
-<div class="app">
-    <div class="navbar navbar-app navbar-absolute-top">
-        <div class="navbar-brand navbar-brand-right">
-            HodgePodge Graph
+  <body role="document">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">HodgePodge</a>
         </div>
-<!--         <div class="btn-group pull-left" id="searchTextGroup">
-            <div class="btn btn-navbar">
-                <button type="submit" class="btn btn-default">
-                    <input type="search" class="form-control " placeholder="Search..." maxlength="20" ng-model="searchText">
-                </button>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form style="display:none;" id="loginform" class="navbar-form navbar-right">
+            <div class="form-group">
+              <input id="username" type="text" placeholder="Username" class="form-control" required>
             </div>
-        </div> -->
-    </div>
-<!--     <div class="navbar navbar-app navbar-absolute-bottom">
-        <div class="btn-group justified">
-            <a href="" class="btn btn-navbar" ui-turn-on="addBeerModal">
-                <button type="submit" class="btn btn-default">Add Topic <i class="fa fa-beer"></i></button>
-            </a>
-            <a href="" class="btn btn-navbar" ui-turn-on="addStyleModal">
-                <button type="submit" class="btn btn-default">Add Connection <i class="fa fa-circle"></i></button>
-            </a>
-            <a href="" ui-turn-on="aboutModal" class="btn btn-navbar">
-                <i class="fa fa-info-circle fa-lg"></i>
-            </a>
-        </div>
-    </div> -->
+            <div class="form-group">
+              <input id="password" type="password" placeholder="Password" class="form-control" required>
+            </div>
+            <button id="loginButton" type="submit" class="btn btn-success">Sign in</button>
+            <button data-toggle="modal" data-target="#registerPage" type="button" class="btn btn-info">Sign up</button>
+          </form>
+          <div style="display:none;" id="logindetails">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="profile.html"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
+              <li><a href="#" id="logoutbtn"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+            </ul>
+          </div>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
 
-    <!-- App body -->
 
-    <div class='app-body'>
-        <div class='app-content'>
-            <ng-view>
-                <div id="wrapper">
-                    <div id="graphContainer"></div>
+<!-- REGISTER PAGE MODAL -->
+    <div id="registerPage" class="modal fade" role="dialog">
+      <div class="modal-dialog">
 
-                    <div id="loadingBar">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <div class="outerBorder">
-                                    <div id="text">0%</div>
-                                    <div id="border">
-                                        <div id="bar"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Register</h4>
+          </div>
+          <div class="modal-body">
+            <div style="display:none;" id="registerMessages"></div>
+            <form id="registerform" class="form-horizontal" role="form">
+<!--               <div class="form-group">
+                <label class="control-label col-sm-2" for="registerName">Name:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="registerName" placeholder="Enter name" required>
                 </div>
-            </ng-view>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="registerSurname">Surname:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="registerSurname" placeholder="Enter surname" required>
+                </div>
+              </div> -->
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="username">Username:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="registerUsername" placeholder="Enter username" data-minlength="6" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="registerEmail">Email:</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="registerEmail" placeholder="Enter email" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="registerPassword">Password:</label>
+                <div class="col-sm-10"> 
+                  <input type="password" class="form-control" id="registerPassword" placeholder="Enter password" required>
+                </div>
+              </div>
+              <div class="form-group"> 
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button id="registerButton" type="submit" class="btn btn-default">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
-    </div>
-</div><!-- ~ .app -->
-    <div ui-yield-to="modals">
+      </div>
     </div>
 
-    <div ui-content-for="modals">
-        <div ng-include="'/html/about_modal.html'"></div>
-        <div ng-include="'/html/add_beer_modal.html'"></div>
-        <div ng-include="'/html/add_style_modal.html'"></div>
-        <div ng-include="'/html/confirmation_modal.html'"></div>
-    </div>
+    <div class="container theme-showcase" role="main">
+
+      <div style="display:none;" id="messages"></div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Graph View</h3>
+            </div>
+            <div class="panel-body">
+              <div id="mynetwork"></div>
+            </div>
+          </div>
+        </div><!-- /.col-sm-4 -->
+      </div>
+
+      <footer>
+        <p>&copy; HodgePodge 2015</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="assets/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script src="js/validator.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+
+<script>
+
+var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
+
+$(function(){
+
+  if($.cookie('username')) {
+    $('#loginform').hide();
+    $('#logindetails').show('slow');
+    $('#profile').html($.cookie('username'));
+  } else {
+    $('#loginform').show('slow');
+    $('#logindetails').hide();
+  }
+});
+
+$('#loginform').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    // everything looks good!
+      var btn = $('#loginButton');
+      btn.button('loading');
+
+      $.ajax({
+        method: "GET",
+        url: api + "/api/user/login",
+        dataType: "json",
+        data: { 
+          username: $('#username').val(),
+          password: $('#password').val(),
+        },
+      })
+      .done(function( data ) {
+          
+          if (data.result.result === "OK") {
+            $.cookie('username', data.username, { expires: 1 });
+            $.cookie('id', data.id, { expires: 1 });
+            var currentusr = $.cookie('username');
+
+            $('#loginform').hide();
+            $('.jumbotron').hide();
+            $('#topicAndRelation').show();
+            $('#profile').html(data.username);
+            $('#logindetails').show('slow');
+            $('#newsFeed1').show();
+            $('#newsFeed2').hide();
+
+            $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+            }, 3000);
+          } else {
+
+            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+            }, 3000);
+
+          }  
+            btn.button('reset');
+
+        })
+        .fail(function( data ) {
+
+            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+            }, 3000);
+
+              btn.button('reset');
+          });
+  }
+})
+
+$('#registerform').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    // everything looks good!
+      var btn = $('#registerButton');
+      btn.button('loading');
+
+      $.ajax({
+        method: "POST",
+        url: api + "/api/user/signup",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ 
+          username: $('#registerUsername').val(),
+          email:    $('#registerEmail').val(),
+          password: $('#registerPassword').val()
+        })
+      })
+        .done(function( data ) {
+          
+          if (data.result.result === "OK") {
+
+            $('#registerMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#registerMessages').show('slow');
+            // window.setTimeout('location.reload()', 2000); // refresh after 2 sec
+            
+            setTimeout(function () {
+              $('#registerMessages').hide('slow');
+              $('#registerPage').modal('hide');
+            }, 2000);
+          } else {
+
+            $('#registerMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#registerMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 3000);
+
+          }  
+            btn.button('reset');
+
+        })
+        .fail(function( data ) {
+            $('#registerMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#registerMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 3000);
+
+              btn.button('reset');
+          });
+  }
+})
+
+$('#logoutbtn').on('click', function(e){
+    e.preventDefault();
+    if($.removeCookie('username')) {
+
+      $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Successfully logged out! Refreshing the page now...</div>');
+      $('#messages').show('slow');
+
+      setTimeout(function () {
+          $('#messages').hide('slow');
+          window.location.reload();
+      }, 2000);
+    }
+  });
+</script>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+  var nodesDataset;
+  var edgesDataset
+
+  $.when(
+
+    $.get(api + "/api/topic/topics", function(data) {
+      nodesDataset = new vis.DataSet(data);
+    }),
+
+    $.get(api + "/api/edge/edges", function(data) {
+      edgesDataset = new vis.DataSet(data);
+    })
+
+  ).then(function() {
+
+    var container = document.getElementById('mynetwork');
+
+    // var nodes = new vis.DataSet();
+    // var edges = new vis.DataSet();
+
+    // nodes.add(result.nodes);
+    // edges.add(result.edges);
+
+    var data = {
+      nodes: nodesDataset,
+      edges: edgesDataset
+    };
+
+    var options = {
+      autoResize: true,
+      height: '100%',
+      nodes: {
+        shape: 'dot'
+      },
+      layout:{
+        randomSeed:2
+      }
+    };
+    var network = new vis.Network(container, data, options);
+
+    console.log(nodesDataset);
+    console.log(edgesDataset);
+
+  });
+
+}); 
+
+</script>
+
   </body>
+</html>
+
+</body>
 </html>
