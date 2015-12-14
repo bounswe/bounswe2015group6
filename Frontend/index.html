@@ -331,7 +331,7 @@
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title" style="height:29px;margin-top:11px;">News Feed</h3>
+              <h3 class="panel-title" id="newsFeed" style="height:29px;margin-top:11px;">News Feed</h3>
             </div>
             <div class="panel-body">
               <div class="list-group" id="newsFeed1" style="display:none">
@@ -383,6 +383,7 @@ $(function(){
     $('.jumbotron').hide();
     $('#newsFeed2').hide();
     $('#newsFeed1').show();
+    $('#newsFeed').html("News Feed - NOT ACTIVE YET");
     $('#topicAndRelation').show();
     $('#profile').html($.cookie('username'));
   } else {
@@ -607,6 +608,7 @@ $('#topicform').validator().on('submit', function (e) {
             setTimeout(function () {
               $('#createTopicMessages').hide('slow');
               $('#topicPage').modal('hide');
+              window.location.reload();
             }, 2000);
           } else {
             $('#createTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
@@ -615,7 +617,6 @@ $('#topicform').validator().on('submit', function (e) {
             setTimeout(function () {
                 $('#createTopicMessages').hide('slow');
             }, 3000);
-
           }  
             btn.button('reset');
         })
@@ -712,12 +713,13 @@ $('#createRelationForm').validator().on('submit', function (e) {
       })
         .done(function( data ) {
           if (data.id) {
-            $('#createRelationMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong>Relation is created</div>');
+            $('#createRelationMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Relation is created</div>');
             $('#createRelationMessages').show('slow');
             
             setTimeout(function () {
               $('#createRelationMessages').hide('slow');
-              $('#createRelationMessages').modal('hide');
+              $('#createRelationPage').modal('hide');
+              window.location.reload();
             }, 2000);
           }
         })
