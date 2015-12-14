@@ -8,6 +8,7 @@
     tools:context="com.hodgepodge.SignUpActivity">
 
     <EditText
+        android:drawableLeft="@drawable/ic_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/username_field"
@@ -16,9 +17,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:hint="Username" />
 
     <EditText
+        android:drawableLeft="@drawable/ic_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
@@ -29,9 +33,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/username_field"
         android:layout_alignEnd="@+id/username_field"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:hint="Email" />
 
     <EditText
+        android:drawableLeft="@drawable/ic_lock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -42,9 +49,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/email_field"
         android:layout_alignEnd="@+id/email_field"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:hint="Password" />
 
     <EditText
+        android:drawableLeft="@drawable/ic_lock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -55,6 +65,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/password_field"
         android:layout_alignEnd="@+id/password_field"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:hint="Password (Repeat)" />
 
     <Button
@@ -67,6 +79,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/password_repeat_field"
         android:layout_alignEnd="@+id/password_repeat_field"
+        android:background="@drawable/apptheme_btn_default_focused_holo_light"
         android:onClick="attemptSignUp"/>
 
     <TextView
@@ -79,4 +92,4 @@
         android:visibility="invisible" />
 
 </RelativeLayout>
-<!-- From: file:/Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/res/layout/activity_sign_up.xml -->
+<!-- From: file:/C:/Users/samsung/Documents/GitHub/bounswe2015group6/Android2/HodgePodge/app/src/main/res/layout/activity_sign_up.xml -->

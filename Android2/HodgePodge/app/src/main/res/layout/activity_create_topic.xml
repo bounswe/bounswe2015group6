@@ -16,16 +16,21 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:hint="Title" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleEditText"
+        android:layout_marginTop="4dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:hint="Tags"
         android:id="@+id/tagsEditText" />
 
@@ -39,5 +44,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:background="@drawable/apptheme_btn_default_focused_holo_light"
         android:onClick="createTopic" />
 </RelativeLayout>

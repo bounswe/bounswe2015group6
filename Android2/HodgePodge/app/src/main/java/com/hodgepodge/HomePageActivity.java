@@ -2,6 +2,7 @@ package com.hodgepodge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -86,8 +87,16 @@ public class HomePageActivity extends AppCompatActivity
         if (id == R.id.nav_create_topic) {
             Intent intent = new Intent(context, CreateTopicActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_add_post) {
+        }else if (id == R.id.nav_add_post) {
             Intent intent = new Intent(context, PostAddActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_create_relation){
+            Intent intent = new Intent(context, CreateRelationActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_log_out){
+            Intent intent = new Intent(context, LandingActivity.class);
+            SharedPreferences settings = context.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
+            settings.edit().clear().commit();
             startActivity(intent);
         }
 

@@ -9,16 +9,13 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark" android:orientation="vertical"
     android:gravity="bottom">
 
-    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@android:drawable/sym_def_app_icon" android:id="@+id/imageView" />
-
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing" android:text="Android Studio"
+        android:paddingTop="@dimen/nav_header_vertical_spacing" android:text="HodgePodge"
+        android:textSize="32dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="android.studio@android.com" android:id="@+id/textView" />
+        android:text="" android:id="@+id/textView" />
 
 </LinearLayout>
-<!-- From: file:/Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/res/layout/nav_header_home_page.xml -->
+<!-- From: file:/C:/Users/samsung/Documents/GitHub/bounswe2015group6/Android2/HodgePodge/app/src/main/res/layout/nav_header_home_page.xml -->

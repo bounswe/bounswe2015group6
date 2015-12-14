@@ -45,6 +45,10 @@
         </activity>
         <activity android:name="com.hodgepodge.CreateTopicActivity" >
         </activity>
+        <activity android:name="com.hodgepodge.PostAddActivity" >
+        </activity>
+        <activity android:name="com.hodgepodge.CreateRelationActivity" >
+        </activity>
     </application>
 
 </manifest>
