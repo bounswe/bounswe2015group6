@@ -34,7 +34,10 @@ public class PostsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posts_list);
 
-        ServiceClient.get("topic/id/getpost/1", null, new JsonHttpResponseHandler() {
+        Bundle extras = getIntent().getExtras();
+        int topicId = extras.getInt("id");
+
+        ServiceClient.get("topic/id/getpost/"+topicId, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray posts = null;

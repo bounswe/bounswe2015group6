@@ -683,7 +683,7 @@ int id action_menu_presenter 0x7f0c0003
 int id action_mode_bar 0x7f0c0057
 int id action_mode_bar_stub 0x7f0c0056
 int id action_mode_close_button 0x7f0c003c
-int id action_settings 0x7f0c00a6
+int id action_settings 0x7f0c00a8
 int id activity_chooser_view_content 0x7f0c003d
 int id addPostButton 0x7f0c0078
 int id alertTitle 0x7f0c0049
@@ -761,6 +761,8 @@ int id nav_add_post 0x7f0c00a1
 int id nav_create_relation 0x7f0c00a2
 int id nav_create_topic 0x7f0c00a0
 int id nav_log_out 0x7f0c00a3
+int id nav_popular_topics 0x7f0c00a6
+int id nav_recent_Topics 0x7f0c00a7
 int id nav_sign_in 0x7f0c00a5
 int id nav_sign_up 0x7f0c00a4
 int id nav_view 0x7f0c0073
@@ -785,7 +787,7 @@ int id scrollIndicatorDown 0x7f0c004e
 int id scrollIndicatorUp 0x7f0c004b
 int id scrollView 0x7f0c004c
 int id scrollable 0x7f0c0038
-int id search 0x7f0c00a7
+int id search 0x7f0c00a9
 int id search_badge 0x7f0c005e
 int id search_bar 0x7f0c005d
 int id search_button 0x7f0c005f

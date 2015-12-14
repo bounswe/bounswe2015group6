@@ -68,7 +68,6 @@ public class PostsListAdapter extends BaseAdapter {
         return convertView;
     }
 
-
     private class PostViewHolder {
         TextView contextTextView;
         TextView dateTextView;

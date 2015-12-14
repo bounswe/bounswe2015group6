@@ -2329,7 +2329,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c0057;
         public static final int action_mode_bar_stub=0x7f0c0056;
         public static final int action_mode_close_button=0x7f0c003c;
-        public static final int action_settings=0x7f0c00a6;
+        public static final int action_settings=0x7f0c00a8;
         public static final int activity_chooser_view_content=0x7f0c003d;
         public static final int addPostButton=0x7f0c0078;
         public static final int alertTitle=0x7f0c0049;
@@ -2407,6 +2407,8 @@ containing a value of this type.
         public static final int nav_create_relation=0x7f0c00a2;
         public static final int nav_create_topic=0x7f0c00a0;
         public static final int nav_log_out=0x7f0c00a3;
+        public static final int nav_popular_topics=0x7f0c00a6;
+        public static final int nav_recent_Topics=0x7f0c00a7;
         public static final int nav_sign_in=0x7f0c00a5;
         public static final int nav_sign_up=0x7f0c00a4;
         public static final int nav_view=0x7f0c0073;
@@ -2431,7 +2433,7 @@ containing a value of this type.
         public static final int scrollIndicatorUp=0x7f0c004b;
         public static final int scrollView=0x7f0c004c;
         public static final int scrollable=0x7f0c0038;
-        public static final int search=0x7f0c00a7;
+        public static final int search=0x7f0c00a9;
         public static final int search_badge=0x7f0c005e;
         public static final int search_bar=0x7f0c005d;
         public static final int search_button=0x7f0c005f;

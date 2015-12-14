@@ -89,6 +89,9 @@ public class LandingActivity extends AppCompatActivity
             Intent intent = new Intent(context, SignUpActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sign_in) {
+            Intent intent = new Intent(context, SignInActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_popular_topics) {
             Intent intent = new Intent(context, PopularActivity.class);
             startActivity(intent);
         }

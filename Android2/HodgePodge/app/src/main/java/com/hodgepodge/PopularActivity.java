@@ -1,9 +1,12 @@
 package com.hodgepodge;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -50,7 +53,7 @@ public class PopularActivity extends AppCompatActivity {
                         id.add(i);
                         title.add((String) topic.get("title"));
                         System.out.println(title);
-                        date.add(((String) topic.get("createDate")).substring(0,10));
+                        date.add(((String) topic.get("createDate")).substring(0, 10));
                         rating.add((Integer) topic.get("upVote") - (Integer) topic.get("downVote"));
                         username.add("BerkDilek");
                     }
@@ -63,6 +66,20 @@ public class PopularActivity extends AppCompatActivity {
 
                 getDataForList();
                 topicsListView.setAdapter(new PostsListAdapter(context, topicsList));
+                topicsListView.setClickable(true);
+
+                topicsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        PostListData item = (PostListData)topicsListView.getItemAtPosition(position);
+                        Intent intent = new Intent(context, PostsListActivity.class);
+
+                        intent.putExtra("id" , item.getId());
+                        startActivity(intent);
+
+
+                    }
+                });
             }
 
             @Override
@@ -79,6 +96,8 @@ public class PopularActivity extends AppCompatActivity {
 
 
         });
+
+
     }
 
     private void getDataForList() {
