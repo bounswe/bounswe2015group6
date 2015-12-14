@@ -41,7 +41,6 @@ public class PostsListActivity extends AppCompatActivity {
                 try {
                     posts = response.getJSONArray("posts");
                     try {
-                        System.out.println(posts.get(3));
                         for (int i = 0; i < posts.length(); i++) {
                             id.add(1);
                             JSONObject post = (JSONObject) posts.get(i);
