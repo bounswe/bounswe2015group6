@@ -51,6 +51,8 @@
         </activity>
         <activity android:name="com.hodgepodge.PopularActivity" >
         </activity>
+        <activity android:name="com.hodgepodge.CreateRelationActivity" >
+        </activity>
     </application>
 
 </manifest>

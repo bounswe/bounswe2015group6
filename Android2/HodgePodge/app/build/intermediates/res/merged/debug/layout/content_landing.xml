@@ -9,7 +9,5 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_landing" tools:context=".LandingActivity">
 
-    <TextView android:text="Hello World!" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </RelativeLayout>
-<!-- From: file:/Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/res/layout/content_landing.xml -->
+<!-- From: file:/Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/res/layout/content_landing.xml -->

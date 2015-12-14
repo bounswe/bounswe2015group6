@@ -11,8 +11,7 @@
     <android.support.design.widget.NavigationView android:id="@+id/nav_view"
         android:layout_width="wrap_content" android:layout_height="match_parent"
         android:layout_gravity="start" android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_home_page"
-        app:menu="@menu/activity_home_page_drawer" />
+        app:headerLayout="@layout/nav_header_home_page" app:menu="@menu/activity_home_page_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
-<!-- From: file:/Users/apple/Documents/bounswe2015group6/Android2/HodgePodge/app/src/main/res/layout/activity_home_page.xml -->
+<!-- From: file:/Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/res/layout/activity_home_page.xml -->

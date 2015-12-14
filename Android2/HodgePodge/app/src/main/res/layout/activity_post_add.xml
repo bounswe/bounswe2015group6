@@ -16,6 +16,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:hint="Topic your post belongs to" />
 
     <EditText
@@ -28,6 +30,8 @@
         android:layout_alignRight="@+id/topicEditText"
         android:layout_alignEnd="@+id/topicEditText"
         android:lines="8"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_tab_selected_focused_holo"
         android:hint="Write your post here..." />
 
     <EditText
@@ -39,17 +43,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/contentEditText"
         android:layout_alignEnd="@+id/contentEditText"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:hint="Tags" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Add Post"
         android:id="@+id/addPostButton"
         android:layout_below="@+id/tagsEditView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/tagsEditView"
         android:layout_alignEnd="@+id/tagsEditView"
+        android:background="@drawable/apptheme_btn_default_focused_holo_light"
         android:onClick="addPost" />
 </RelativeLayout>

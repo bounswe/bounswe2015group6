@@ -45,6 +45,8 @@
         </activity>
         <activity android:name=".PopularActivity" >
         </activity>
+        <activity android:name=".CreateRelationActivity" >
+        </activity>
     </application>
 
 </manifest>

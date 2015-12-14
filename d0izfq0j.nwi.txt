@@ -1,0 +1,14 @@
+﻿Adding tag functionality to the topic creation is implemented
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch Topic_Create
+# Your branch is up-to-date with 'origin/Topic_Create'.
+#
+# Changes to be committed:
+#	new file:   Android2/HodgePodge/.idea/encodings.xml
+#	modified:   Android2/HodgePodge/.idea/gradle.xml
+#	modified:   Android2/HodgePodge/.idea/vcs.xml
+#	modified:   Android2/HodgePodge/app/app.iml
+#	modified:   Android2/HodgePodge/app/src/main/java/com/hodgepodge/CreateTopicActivity.java
+#
+
