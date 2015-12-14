@@ -1,16 +1,20 @@
 package application.core;
 
+import application.miscalleneous.Result;
+import org.hibernate.type.ArrayType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
 public class User {
+
+    @Transient
+    Result result;
 
     @Id
     @GeneratedValue
@@ -21,31 +25,54 @@ public class User {
     private String username;
 
     @NotNull
-    @Size(min = 4, max = 10)
     private String password;
 
     @NotEmpty
     private String email;
 
-    @Column(name = "is_banned")
+    @Column(name = "isBanned")
     private int isBanned = 0;
 
     @Column(name = "rating")
     private int rating = 0;
 
-    @Transient
-    private List<Integer> followList = new ArrayList<Integer>();
-
     @Column(name = "facebook_id")
-    private String facebookId;
+    private String facebookId = "";
 
     @Column(name = "twitter_id")
-    private String twitterId;
+    private String twitterId = "";
 
     @Column(name = "google_id")
-    private String googleId;
+    private String googleId = "";
 
-    /*getter - setter: id*/
+    @Transient
+    private ArrayList<Topic> createdTopics;
+
+    @Transient
+    private ArrayList<Integer> followedTopics;
+
+    @Transient
+    private ArrayList<Post> createdPosts;
+
+    @Transient
+    private ArrayList<String> followedUsers;
+
+    public int getIsBanned() {
+        return isBanned;
+    }
+
+    public void setIsBanned(int isBanned) {
+        this.isBanned = isBanned;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     public int getId() {
         return id;
     }
@@ -109,13 +136,54 @@ public class User {
         this.googleId = googleId;
     }
 
-    /*Getter - setter: followList*/
-
-    public ArrayList<Integer> getFollowList() {
-        return (ArrayList<Integer>)followList;
+    public List<String> getFollowList() {
+        return followList;
     }
 
-    public void setFollowList(ArrayList<Integer> followList) {
+    public void setFollowList(List<String> followList){
         this.followList = followList;
+    }
+
+    @Transient
+    private List<String> followList;
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
+    public ArrayList<Post> getCreatedPosts() {
+        return createdPosts;
+    }
+
+    public void setCreatedPosts(ArrayList<Post> createdPosts) {
+        this.createdPosts = createdPosts;
+    }
+
+    public ArrayList<Topic> getCreatedTopics() {
+        return createdTopics;
+    }
+
+    public void setCreatedTopics(ArrayList<Topic> createdTopics) {
+        this.createdTopics = createdTopics;
+    }
+
+    public ArrayList<Integer> getFollowedTopics() {
+        return followedTopics;
+    }
+
+    public void setFollowedTopics(ArrayList<Integer> followedTopics) {
+        this.followedTopics = followedTopics;
+    }
+
+    public ArrayList<String> getFollowedUsers() {
+        return followedUsers;
+    }
+
+    public void setFollowedUsers(ArrayList<String> followedUsers) {
+        this.followedUsers = followedUsers;
     }
 }
