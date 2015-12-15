@@ -7,11 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/usernameText"
-        android:background="@drawable/custom_edit_text"
         android:hint="Username"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginRight="20dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -19,11 +17,9 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/emailTextSignUp"
-        android:background="@drawable/custom_edit_text"
         android:hint="E-mail"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginRight="20dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -31,11 +27,9 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/passwordText"
-        android:background="@drawable/custom_edit_text"
         android:hint="Password"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginRight="20dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -43,11 +37,9 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/passwordAgainText"
-        android:background="@drawable/custom_edit_text"
         android:hint="Password Again"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginRight="20dp" />
 
     <Button
         android:layout_width="match_parent"
@@ -57,8 +49,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorPrimary_text"
-        android:layout_marginTop="8dp"
-        android:onClick="sigUpClicked"/>
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorWhite"/>
 </LinearLayout>

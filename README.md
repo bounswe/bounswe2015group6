@@ -1,5 +1,9 @@
 # **Boun SWE 2015 CMPE 352 Group #6** #
 
+<a href="http://hodge-podge.info">HodgePodge Web Page</a>
+
+## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Code-Reviews">Code Reviews</a>** ##
+
 ## **Web Server Controller** ##
 <a href="http://ec2-54-68-47-54.us-west-2.compute.amazonaws.com:8080/WebApp/">Check out the web application</a>
 

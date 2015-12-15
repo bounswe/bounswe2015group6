@@ -29,8 +29,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorPrimary_text"/>
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorWhite"/>
 
     <Button
         android:id="@+id/signUp"
@@ -43,8 +43,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="20dp"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorPrimary_text"/>
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorWhite"/>
 
     <Space
         android:layout_width="20px"

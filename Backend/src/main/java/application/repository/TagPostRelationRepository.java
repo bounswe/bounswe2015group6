@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public interface TagPostRelationRepository extends CrudRepository<TagPostRelation, Integer>{
     ArrayList<TagPostRelation> findAll();
     ArrayList<TagPostRelation> findByPostId(int postId);
-    ArrayList<TagPostRelation> findByTagId(int TagId);
-    void deleteByTagId(int tagID);
+    ArrayList<TagPostRelation> findByTagId(int tagId);
+    void deleteByTagId(int tagId);
+    void deleteByPostId(int postId);
 }

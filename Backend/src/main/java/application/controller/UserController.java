@@ -1,7 +1,11 @@
 package application.controller;
 
+import application.core.Follow;
 import application.core.User;
 import application.miscalleneous.Result;
+import application.repository.FollowRepository;
+import application.repository.TopicFollowRepository;
+import application.repository.TopicRepository;
 import application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +15,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
@@ -21,12 +26,29 @@ public class UserController {
     @Autowired
     private FollowController follow;
 
+    @Autowired
+    private TopicRepository topicRepo;
+
+    @Autowired
+    private PostController postControl;
+
+    @Autowired
+    private TopicFollowRepository topicFollowRepo;
+
+    @Autowired
+    private FollowRepository followRepo;
+
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ArrayList<User> findAll(){
         ArrayList<User> list =  repo.findAll();
         for(User u: list){
-            u.setFollowList(follow.getFollowers(u.getId()));
+
+            u.setFollowList(followRepo.getFollowerNames(u.getId()));
             u.setResult(new Result(Result.RESULT_OK, "User founded"));
+            u.setFollowedTopics(topicFollowRepo.getByFollowerId(u.getId()));
+            u.setCreatedTopics(topicRepo.findTopicByOwnerId(u.getId()));
+            u.setCreatedPosts(postControl.findPostByOwnerId(u.getId()));
+            u.setFollowedUsers(followRepo.getFollowedNames(u.getId()));
         }
         return list;
     }
@@ -37,12 +59,18 @@ public class UserController {
         if(user == null){
             user = new User();
             user.setResult(new Result(Result.RESULT_FAILED, "User not found"));
-            user.setId(-1);
             return user;
         }
-        List<Integer> followers = follow.getFollowers(user.getId());
+
+        /* Get and set followers */
+        List<String> followers = followRepo.getFollowerNames(user.getId());
         user.setResult(new Result(Result.RESULT_OK, "User has found"));
         user.setFollowList(followers);
+        user.setFollowedTopics(topicFollowRepo.getByFollowerId(user.getId()));
+        user.setCreatedTopics(topicRepo.findTopicByOwnerId(user.getId()));
+        user.setCreatedPosts(postControl.findPostByOwnerId(user.getId()));
+        user.setFollowedUsers(followRepo.getFollowedNames(user.getId()));
+
         return user;
     }
 
@@ -52,12 +80,18 @@ public class UserController {
         if(user == null){
             user = new User();
             user.setResult(new Result(Result.RESULT_FAILED, "User not found"));
-            user.setId(-1);
             return user;
         }
-        List<Integer> followers = follow.getFollowers(user.getId());
+
+        /*Get and set followers */
+        List<String> followers = followRepo.getFollowerNames(user.getId());
         user.setResult(new Result(Result.RESULT_OK, "User has found"));
         user.setFollowList(followers);
+        user.setFollowedTopics(topicFollowRepo.getByFollowerId(user.getId()));
+        user.setCreatedTopics(topicRepo.findTopicByOwnerId(user.getId()));
+        user.setCreatedPosts(postControl.findPostByOwnerId(user.getId()));
+        user.setFollowedUsers(followRepo.getFollowedNames(user.getId()));
+
         return user;
     }
 
@@ -67,6 +101,14 @@ public class UserController {
     {
         String userName = user.getUsername();
         User temp = repo.findByUsername(userName);
+
+        if(temp != null){
+            temp = new User();
+            temp.setResult(new Result(Result.RESULT_FAILED, "User has already registered"));
+            return temp;
+        }
+
+        temp = repo.findByEmail(user.getEmail());
 
         if(temp != null){
             temp = new User();
@@ -105,7 +147,14 @@ public class UserController {
             user.setResult(new Result(Result.RESULT_FAILED, "Password did not match"));
             return user;
         }
+
+        user.setFollowList(followRepo.getFollowerNames(user.getId()));
         user.setResult(new Result(Result.RESULT_OK, "Login confirmed"));
+        user.setFollowedTopics(topicFollowRepo.getByFollowerId(user.getId()));
+        user.setCreatedTopics(topicRepo.findTopicByOwnerId(user.getId()));
+        user.setCreatedPosts(postControl.findPostByOwnerId(user.getId()));
+        user.setFollowedUsers(followRepo.getFollowedNames(user.getId()));
+
         return user;
 
     }
