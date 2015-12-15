@@ -158,4 +158,9 @@ public class UserController {
         return user;
 
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/id/{id}/getPicture")
+    public String getProfilePictureUrl( @PathVariable("id") int id){
+        return repo.getProfilePictureUrl(id);
+    }
 }

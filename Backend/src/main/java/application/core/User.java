@@ -189,4 +189,11 @@ public class User {
     public void setFollowedUsers(ArrayList<String> followedUsers) {
         this.followedUsers = followedUsers;
     }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
 }
