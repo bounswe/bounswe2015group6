@@ -35,6 +35,9 @@ public class User {
     @Column(name = "rating")
     private int rating = 0;
 
+    @Column(name="profile_picture_url")
+    private String profilePictureUrl;
+
     @Column(name = "facebook_id")
     private String facebookId = "";
 
