@@ -15,4 +15,6 @@ public interface TopicTopicRelationRepository extends CrudRepository<TopicTopicR
     TopicTopicRelation findByFromAndTo(int from, int to);
     void deleteByFromAndTo(int from, int to);
     void deleteById(int Id);
+    void deleteByFrom(int from);
+    void deleteByTo(int to);
 }

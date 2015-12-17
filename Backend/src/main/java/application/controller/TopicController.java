@@ -9,7 +9,6 @@ import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.lang.model.type.ArrayType;
 import javax.validation.Valid;
 import java.util.ArrayList;
 
@@ -38,6 +37,9 @@ public class TopicController {
 
     @Autowired
     private PostController postControl;
+
+    @Autowired
+    private FeedRepository feedRepo;
 
     @RequestMapping(method = RequestMethod.GET, value = "/topics")
     public ArrayList<Topic> getAll(){
@@ -273,12 +275,31 @@ public class TopicController {
 
         temp.setTags(topic.getTags());
         temp.setLabel(topic.getTitle());
+        /*
+        Search search = new Search();
+        for(String tag: topic.getTags()){
+            search.createTopicHasTag(topic.getTitle(), tag);
+        }
 
+        for(String tag: topic.getTags()){
+            for(String tag2: topic.getTags()) {
+                if(!tag.equals(tag2))
+                search.createUsedWith(tag, tag2);
+            }
+        }
+        */
+        Feed feed = new Feed();
+        feed.setDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")));
+        feed.setMessage("has created topic");
+        feed.setUserId(temp.getOwnerId());
+        feed.setType(1);
+        feed.setSubject(topicRepo.findByTitle(temp.getTitle()).getId());
+        feedRepo.save(feed);
         return temp;
     }
 
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
+    @RequestMapping(method = RequestMethod.GET, value = "/delete")
     public Topic delete(@RequestParam("id") int id){
 
         Topic temp = topicRepo.findById(id);
@@ -297,6 +318,10 @@ public class TopicController {
 
         /* Also delete post relations */
         postTopicRepo.deleteByTopicId(id);
+
+        /* Delete topic relations */
+        topicTopicRepo.deleteByFrom(id);
+        topicTopicRepo.deleteByTo(id);
 
         return temp;
     }
@@ -346,6 +371,55 @@ public class TopicController {
 
         int i = topicRepo.updateDownVote(id);
         return i;
+    }
+
+    /* Add new tag to the topic */
+    @RequestMapping(method = RequestMethod.POST, value = "/add_tag/id/{id}", headers = "Accept=application/json")
+    public Topic addNewtag(@RequestBody Tag tag, @PathVariable("id") int id){
+
+        Topic topic = topicRepo.findById(id);
+
+        if(topic == null){
+            topic = new Topic();
+            topic.setResult(new Result(Result.RESULT_FAILED, "Topic has not been found"));
+            return topic;
+        }
+
+        String tagName = tag.getTagName();
+
+        topic = this.getById(id);
+        ArrayList<String> tags = topic.getTags();
+        if(tags.contains(tag.getTagName())){
+            topic.setResult(new Result(Result.RESULT_FAILED, "Topic already added"));
+            return topic;
+        }
+
+        if(tagRepo.findByTagName(tagName) == null){
+            Tag temp = new Tag();
+            tag.setTagName(tagName);
+            tagRepo.save(temp);
+
+            temp = tagRepo.findByTagName(tagName);
+
+            TagTopicRelation ttr = new TagTopicRelation();
+            ttr.setTagId(temp.getId());
+            ttr.setTopicId(topic.getId());
+            tagTopicRelationRepo.save(ttr);
+
+            return this.getById(id);
+        }
+
+        TagTopicRelation ttr = new TagTopicRelation();
+        ttr.setTagId(tagRepo.findByTagName(tagName).getId());
+        ttr.setTopicId(id);
+        tagTopicRelationRepo.save(ttr);
+
+
+        /* Update edit date of the topic */
+        DateTime dateTime = new DateTime(DateTimeZone.forID("Europe/ıstanbul"));
+        topicRepo.updateEditDate(dateTime, id);
+
+        return this.getById(id);
     }
 
 }

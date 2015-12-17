@@ -1,6 +1,7 @@
 package application.repository;
 
 import application.core.Topic;
+import application.core.PostTopicRelation;
 import org.joda.time.DateTime;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -42,5 +43,5 @@ public interface TopicRepository extends CrudRepository<Topic, Integer> {
     @Modifying
     @Transactional
     @Query("UPDATE Topic t SET t.editDate = :editDate WHERE t.id = :id")
-    DateTime updateEditDate(@Param("editDate") DateTime editDate, @Param("id") int id);
+    int updateEditDate(@Param("editDate") DateTime editDate, @Param("id") int id);
 }

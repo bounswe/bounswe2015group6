@@ -36,9 +36,6 @@ public class User {
     @Column(name = "rating")
     private int rating = 0;
 
-    @Column(name="profile_picture_url")
-    private String profilePictureUrl;
-
     @Column(name = "facebook_id")
     private String facebookId = "";
 
@@ -188,12 +185,5 @@ public class User {
 
     public void setFollowedUsers(ArrayList<String> followedUsers) {
         this.followedUsers = followedUsers;
-    }
-
-    public String getProfilePictureUrl() {
-        return profilePictureUrl;
-    }
-    public void setProfilePictureUrl(String profilePictureUrl) {
-        this.profilePictureUrl = profilePictureUrl;
     }
 }

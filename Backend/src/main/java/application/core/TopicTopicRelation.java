@@ -1,10 +1,13 @@
 package application.core;
 
+import application.miscalleneous.Result;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "topic_topic_relation")
 public class TopicTopicRelation {
+
     @Id
     @GeneratedValue
     private int id;
@@ -14,6 +17,9 @@ public class TopicTopicRelation {
 
     @Column(name = "to_id")
     private int to;
+
+    @Column(name = "label")
+    private String label;
 
     public TopicTopicRelation(){
         this.from= -1;
@@ -46,4 +52,13 @@ public class TopicTopicRelation {
     }
 
     public void setTo(int to) {this.to = to;}
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
 }

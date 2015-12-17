@@ -1,8 +1,14 @@
 package application.controller;
 
+import application.core.Feed;
 import application.core.Topic;
 import application.core.TopicTopicRelation;
+import application.miscalleneous.Result;
+import application.repository.FeedRepository;
+import application.repository.TopicRepository;
 import application.repository.TopicTopicRelationRepository;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +21,13 @@ public class TopicTopicController {
 
     @Autowired
     private TopicTopicRelationRepository topicTopicRepo;
+
+    @Autowired
+    private TopicRepository topicRepo;
+
+    @Autowired
+    private FeedRepository feedRepo;
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/edges")
     public ArrayList<TopicTopicRelation> getAll(){
@@ -38,15 +51,31 @@ public class TopicTopicController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public TopicTopicRelation create(@RequestParam("source") int source, @RequestParam("dest") int destination){
+    public TopicTopicRelation create(@RequestParam("source") int source,
+                                     @RequestParam("dest")   int destination,
+                                     @RequestParam("label")  String label,
+                                     @RequestParam("user")   int user){
         TopicTopicRelation edge = new TopicTopicRelation(source, destination);
-        TopicTopicRelation edge2 = new TopicTopicRelation(destination, source);
 
         TopicTopicRelation temp = topicTopicRepo.findByFromAndTo(source, destination);
         if(temp != null){
             return temp;
         }
+
+        DateTime dateTime = new DateTime(DateTimeZone.forID("Europe/Istanbul"));
+        topicRepo.updateEditDate(dateTime, source);
+        topicRepo.updateEditDate(dateTime, destination);
+
+        edge.setLabel(label);
         topicTopicRepo.save(edge);
+
+        Feed feed = new Feed();
+        feed.setUserId(user);
+        feed.setDate(dateTime);
+        feed.setType(3);
+        feed.setMessage("has created relation between");
+        feed.setSubject(edge.getId());
+        feedRepo.save(feed);
         return edge;
     }
 

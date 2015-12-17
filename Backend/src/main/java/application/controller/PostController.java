@@ -34,6 +34,12 @@ public class PostController {
     @Autowired
     private PostTopicRelationRepository postTopicRelationRepo;
 
+    @Autowired
+    private TopicRepository topicRepo;
+
+    @Autowired
+    private FeedRepository feedRepo;
+
     @RequestMapping(method = RequestMethod.GET, value = "/posts")
     public ArrayList<Post> getAll(){
 
@@ -140,6 +146,8 @@ public class PostController {
         temp.setEditDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")));
         postRepo.save(temp);
 
+        topicRepo.updateEditDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")), topicId);
+
         /* Add a new row to the Post-User relation */
         PostUser pu = new PostUser();
         pu.setPostId(temp.getId());
@@ -161,6 +169,14 @@ public class PostController {
         postTopic.setPostId(temp.getId());
         postTopic.setTopicId(topicId);
         postTopicRelationRepo.save(postTopic);
+
+        Feed feed = new Feed();
+        feed.setDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")));
+        feed.setMessage("has created post in topic");
+        feed.setUserId(temp.getOwnerId());
+        feed.setType(2);
+        feed.setSubject(temp.getId());
+        feedRepo.save(feed);
 
         return temp;
     }
