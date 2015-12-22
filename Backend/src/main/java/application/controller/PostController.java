@@ -181,6 +181,42 @@ public class PostController {
         return temp;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "update/id/{id}")
+    public void updatePost(@RequestBody @Valid Post post){
+
+        String content = post.getContent();
+        int ownerId = post.getOwnerId();
+        int id = post.getId();
+        DateTime date = new DateTime(DateTimeZone.forID("Europe/Istanbul"));
+        postRepo.updatePost(id, content, ownerId, date);
+
+        /* Check whether new tags have been added */
+        ArrayList<String> oldTags = this.getById(id).getTagsOfPost();
+        ArrayList<String> tags = post.getTagsOfPost();
+        tags.removeAll(oldTags); /* Remove all occurences of old tags */
+
+        /* If any differences exist, then add new tags to the post */
+        if(tags.size() > 0){
+            for(String tagName: tags){
+                TagPostRelation tpg = new TagPostRelation();
+                tpg.setPostId(id);
+
+                Tag tag = tagRepo.findByTagName(tagName); /* Check if tag exists */
+                if(tag == null){
+                    tag = new Tag();
+                    tag.setTagName(tagName);
+                    tagRepo.save(tag);
+                }
+
+                int tagID = tagRepo.findByTagName(tagName).getId();
+                tpg.setTagId(tagID);
+                tagPostRelationRepo.save(tpg);
+            }
+        }
+
+
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
     public void deletePost(@RequestParam ("id") int id){
         Post post = postRepo.findById(id);
