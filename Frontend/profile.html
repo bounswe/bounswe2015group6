@@ -105,12 +105,9 @@ $('#logoutbtn').on('click', function(e){
       $('#messages').show('slow');
 
       setTimeout(function () {
-          $('#messages').hide('slow');
-          window.location.reload();
+        $('#messages').hide('slow');
+        window.location.href = './index.html';
       }, 2000);
-
-      // window.setTimeout('location.reload()', 2000); // refresh after 2 sec
-      // window.location.reload();
     }
   });
 </script>

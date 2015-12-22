@@ -354,8 +354,9 @@ $(function(){
       var recentOrPopular = "<div class='list-group'>";
       if (data) {
         for(var i = 0; i<(data.length>=10 ? 10 : data.length); i++){
-          var postLength = data[i].posts ? Number(data[i].posts.length) : 0 ;
-          recentOrPopular += "<a href='topic.html?id=" + data[i].id + "' class='list-group-item'><span class='badge'>" + postLength + "</span>" + data[i].title + "</a>";
+         // var postLength = data[i].posts ? Number(data[i].posts.length) : 0 ;
+         var rating = data[i].upVote + data[i].downVote;
+          recentOrPopular += "<a href='topic.html?id=" + data[i].id + "' class='list-group-item'><span class='badge'>" + rating + "</span>" + data[i].title + "</a>";
         }
         $('#recent').html(recentOrPopular);
       } else {
@@ -377,8 +378,9 @@ $(function(){
       if (data) {
         var recent = "<div class='list-group'>";
         for(var i = 0; i<(data.length>=10 ? 10 : data.length); i++){
-          var postLength = data[i].posts ? data[i].posts.length : 0 ;
-          recent += "<a href='topic.html?id=" + data[i].id + "' class='list-group-item'><span class='badge'>" + postLength + "</span>" + data[i].title + "</a>";
+          //var postLength = data[i].posts ? data[i].posts.length : 0 ;
+          var rating = Number(data[i].upVote) + Number(data[i].downVote);
+          recent += "<a href='topic.html?id=" + data[i].id + "' class='list-group-item'><span class='badge'>" + rating + "</span>" + data[i].title + "</a>";
           $('#popular').html(recent);
         }
       } else {
@@ -579,7 +581,7 @@ $('#registerform').validator().on('submit', function (e) {
               btn.button('reset');
           });
   }
-})
+});
 //CREATE TOPIC FORM
 $('#topicform').validator().on('submit', function (e) {
   if (e.isDefaultPrevented()) {

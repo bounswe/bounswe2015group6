@@ -50,6 +50,16 @@
           <a class="navbar-brand" href="index.html">HodgePodge</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+          <form style="display:none;" id="loginform" class="navbar-form navbar-right">
+            <div class="form-group">
+              <input id="username" type="text" placeholder="Username" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input id="password" type="password" placeholder="Password" class="form-control" required>
+            </div>
+            <button id="loginButton" type="submit" class="btn btn-success">Sign in</button>
+            <button data-toggle="modal" data-target="#registerPage" type="button" class="btn btn-info">Sign up</button>
+          </form>
           <div id="logindetails">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
@@ -60,13 +70,103 @@
       </div>
     </nav>
 
+<!--SIGN UP MODAL-->
+    <div id="registerPage" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Register</h4>
+          </div>
+          <div class="modal-body">
+            <div style="display:none;" id="registerMessages"></div>
+            <form id="registerform" class="form-horizontal" role="form">
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="username">Username:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="registerUsername" placeholder="Enter username" data-minlength="6" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="registerEmail">Email:</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="registerEmail" placeholder="Enter email" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="registerPassword">Password:</label>
+                <div class="col-sm-10"> 
+                  <input type="password" class="form-control" id="registerPassword" placeholder="Enter password" required>
+                </div>
+              </div>
+              <div class="form-group"> 
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button id="registerButton" type="submit" class="btn btn-default">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--END OF SIGN UP MODAL-->
     <div class="container theme-showcase" role="main">
 
-      <div style="display:none;" id="messages"></div>
-
       <div class="row">
-      <span id="a"></span>
+        <div class="col-sm-4" id="title"></div>
+        <div style="float:right" class="col-sm-offset-4 col-sm-2" id="rating"></div>
+        <div class="col-sm-offset-10 col-sm-2">
+          <a href='#' id="upVote">UpVote</a>
+          <a href='#' id="downVote">DownVote</a>
+        </div>
       </div>
+
+      <div class="row" style="margin-bottom:10px">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#Posts">Posts</a></li>
+          <li><a data-toggle="tab" href="#Tags">Tags</a></li>
+          <li><a data-toggle="tab" href="#Relations">Relations</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="Posts" class="tab-pane fade in active">
+
+          <div style="display:none; margin-top:10px" id="messages"></div>
+            <div class="col-sm-12" style="margin-top:20px">
+              <button type="button" data-toggle="collapse" data-target="#postScreen" class="btn btn-primary">Wanna Post?</button>
+            </div>
+            <div id="postScreen" class="col-sm-12 collapse" style="height:100px;border:1px solid #eee; background-color:#F3F3F3; border-radius:20px; margin-top:20px; padding-top:10px">
+              <div style="display:none;" id="createPostMessages"></div>
+              <div class="col-sm-7" style="margin-bottom:10px">
+                  <textarea id="postText" rows="3" cols="80" class="form-control" placeholder="Post something!" data-minlength="2" required></textarea>
+              </div> 
+              <div class="col-sm-4">
+                  <b><span class="col-sm-12">Tags:</span></b>
+                  <input type="text" id="tag1" placeholder="Please enter a tag." data-minlength='2'>
+                  <input type="text" id="tag2" placeholder="Please enter a tag." data-minlength='2'>
+                  <input type="text" id="tag3" placeholder="Please enter a tag." data-minlength='2'>
+                  <input type="text" id="tag4" placeholder="Please enter a tag." data-minlength='2'>
+              </div>
+              <div class="col-sm-1" style="margin-top:20px">
+                <button id="sendPostButton" type="submit" class="btn btn-success">Send</button>
+              </div>
+            </div>
+          </div>
+          <div id="Tags" class="tab-pane fade">
+              <h2><span id="tt"></span></h2>
+          </div>
+          <div id="Relations" class="tab-pane fade">
+
+          </div>
+
+        </div>
+      </div>
+
       <footer>
         <p>&copy; HodgePodge 2015</p>
       </footer>
@@ -88,50 +188,285 @@
 <script>
 
 var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
+var id = Number(GetURLParameter('id'));
+var rating = 0;
 
 $(function(){
   if($.cookie('username')) {
     $('#profile').html($.cookie('username'));
-    $('#a').html(GetURLParameter('title'));
+    $('#logindetails').show();
+    $('#loginform').hide();
   } else {
-    window.location.href = "./index.html"
+    $('#logindetails').hide();
+    $('#loginform').show();
+  }
+
+  $.ajax({
+    url: api + "/api/topic/id/" + id,
+    success: function(data){
+      if (data.result.result === "OK") {
+        var tagsOfTopic = [];
+        var tt = 'Tags: ';
+        console.log(data);
+        var url = '<h2>' + data.title + '</h2>';
+        rating = Number(data.upVote) + Number(data.downVote);
+        var ratingUrl = "<h3>Rating:" + rating + '</h3>';
+        $('#title').html(url);
+        $('#rating').html(ratingUrl);
+        url = "";
+        for (var i = 0; i < data.posts.length; i++) {
+          url = "<div id='" + id + "-" + data.posts[i].id + "' class='col-sm-12' style='height:150px;border:1px solid #eee; background-color:#F3F3F3; border-radius:20px; margin-top:20px; padding-top:10px'><div class='col-sm-10'><div class='col-sm-12' style='margin-bottom:10px'>" + data.posts[i].content + "</div><div class='col-sm-12' style='margin-bottom:10px'>Tags:" +  data.posts[i].tagsOfPost +"</div><div class='col-sm-12' style='margin-bottom:10px'>CreatedBy:" + data.posts[i].ownerId + "</div></div><div class='col-sm-2'><div class='col-sm-12'>Rating:" + (Number(data.posts[i].upVote) + Number(data.posts[i].downVote)) + "</div><div class='col-sm-12><a href='#' id='upVote1'>UpVote</a> <a href='#' id='downVote'>DownVote</a></div></div>";
+          $("#Posts").append(url);
+        };
+
+        for(var i=0;i<data.tags.length;i++){
+          tt += data.tags[i] + ", ";
+        }
+        $('#tt').append(tt);
+
+      } else {
+        alert('Ooops! We couldn\'t find that topic :( You\'re being redirected to HomePage');
+        window.location.href = "./index.html";
+      }
+    },
+    error: function(){
+      alert('Ooops! We couldn\'t find that topic :( You\'re being redirected to HomePage');
+      window.location.href = "./index.html";
+    }, 
+  });
+});
+
+
+//FUNCTION FOR GETTING THE ID OF THE TOPIC FROM URL
+function GetURLParameter(sParam)
+{
+  var sPageURL = window.location.search.substring(1);
+  var sURLVariables = sPageURL.split('&');
+  for (var i = 0; i < sURLVariables.length; i++)
+  {
+    var sParameterName = sURLVariables[i].split('=');
+    if(sParameterName[0]==sParam){
+      var sP = sParameterName[1].split('%20');
+      var title = "";
+    }
+    for(var i in sP){
+      title = title + sP[i] + " ";
+    }
+  }
+  return title;
+};
+//END OF FUNCTION FOR GETTING THE ID OF THE TOPIC FROM URL
+
+//upVote Click Event
+$('#upVote').on('click', function(){
+  var Url = api + "/api/topic/id/" + id +"/";
+  $.ajax({
+    method: "POST",
+    url: Url + "up_vote",
+  })
+  .done(function( data ) {
+    rating += 1;
+    $('#rating').html("<h3>Rating:" + rating + '</h3>');
+  })
+  .fail(function( data ) {
+
+  });
+});
+//End of upVote Click Event
+
+//downVote Click Event
+$('#downVote').on('click', function(){
+  var Url = api + "/api/topic/id/" + id +"/";
+  $.ajax({
+    method: "POST",
+    url: Url + "down_vote",
+  })
+  .done(function( data ) {
+    rating -= 1;
+    $('#rating').html("<h3>Rating:" + rating + '</h3>');
+  })
+  .fail(function( data ) {
+
+  });
+});
+//End of downVote Click Event
+
+$('#sendPostButton').on('click', function () {
+  var tags = [];
+  if($('#postText').val().length>2){
+    if($('#tag1').val()>2){
+      tags.push($('#tag1').val());
+    }
+    if($('#tag2').val()>2){
+      tags.push($('#tag2').val());
+    }
+    if($('#tag3').val()>2){
+      tags.push($('#tag1').val());
+    }
+    if($('#tag4').val()>2){
+      tags.push($('#tag1').val());
+    }
+
+    $.ajax({
+      method: "POST",
+      url: api + "/api/post/create?topicId=" + id,
+      contentType: "application/json",
+      dataType: "json",
+      data: JSON.stringify({
+        content: $('#postText').val(),
+        ownerId: Number($.cookie('id')),
+        tagsOfPost: tags,
+      }),
+      })
+      .done(function( data ) {
+        console.log(data);
+        console.log("ttuy");
+        $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+        $('#messages').show('slow');
+
+        setTimeout(function () {
+          $('#messages').hide('slow');
+          var urlReload = './topic.html?id=' + id;
+          window.location.href = urlReload; 
+        }, 3000);
+      })
+      .fail(function( data ) {
+        $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+        $('#messages').show('slow');
+        setTimeout(function () {
+          $('#messages').hide('slow');
+        }, 3000);
+      });
+  }
+  else{
+    $('#postText').css('border','3px solid red');
+    $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Please enter a longer post!</div>');
+    $('#messages').show('slow');
+    setTimeout(function () {
+      $('#messages').hide('slow');
+    }, 3000);
   }
 });
 
-function GetURLParameter(sParam)
-{
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++)
-    {
-        var sParameterName = sURLVariables[i].split('=');
-        if(sParameterName[0]==sParam){
-          var sP = sParameterName[1].split('%20');
-          var title = "";
-        }
-        for(var i in sP){
-          title = title + sP[i] + " ";
-        }
-    }
-    return title;
-};
+$('#loginform').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    // everything looks good!
+
+      $.ajax({
+        method: "GET",
+        url: api + "/api/user/login",
+        dataType: "json",
+        data: { 
+          username: $('#username').val(),
+          password: $('#password').val(),
+        },
+      })
+      .done(function( data ) {
+          
+          if (data.result.result === "OK") {
+            $.cookie('username', data.username, { expires: 1 });
+            $.cookie('id', data.id, { expires: 1 });
+            var currentusr = $.cookie('username');
+
+            $('#loginform').hide();
+            $('#profile').html(data.username);
+            $('#logindetails').show('slow');
+
+            $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+              $('#messages').hide('slow');
+            }, 3000);
+          } else {
+            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+            }, 3000);
+          }  
+        })
+        .fail(function( data ) {
+            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#messages').show('slow');
+            setTimeout(function () {
+              $('#messages').hide('slow');
+            }, 3000);
+            btn.button('reset');
+          });
+  }
+});
+
+$('#registerform').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    // everything looks good!
+      $.ajax({
+        method: "POST",
+        url: api + "/api/user/signup",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ 
+          username: $('#registerUsername').val(),
+          email:    $('#registerEmail').val(),
+          password: $('#registerPassword').val()
+        })
+      })
+        .done(function( data ) {
+          
+          if (data.result.result === "OK") {
+
+            $('#registerMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#registerMessages').show('slow');
+            
+            setTimeout(function () {
+              $('#registerMessages').hide('slow');
+              $('#registerPage').modal('hide');
+            }, 2000);
+          } else {
+
+            $('#registerMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#registerMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 3000);
+
+          }  
+            btn.button('reset');
+        })
+        .fail(function( data ) {
+            $('#registerMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#registerMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 3000);
+
+              btn.button('reset');
+          });
+  }
+});
 
 $('#logoutbtn').on('click', function(e){
-    e.preventDefault();
-    if($.removeCookie('username')) {
+  e.preventDefault();
+  if($.removeCookie('username')) {
 
-      $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Successfully logged out! Refreshing the page now...</div>');
-      $('#messages').show('slow');
+    $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Successfully logged out! Refreshing the page now...</div>');
+    $('#messages').show('slow');
 
-      setTimeout(function () {
-          $('#messages').hide('slow');
-          window.location.reload();
-      }, 2000);
-
-      // window.setTimeout('location.reload()', 2000); // refresh after 2 sec
-      // window.location.reload();
-    }
-  });
+    setTimeout(function () {
+      $('#messages').hide('slow');
+      window.location.reload();
+    }, 2000);
+  }
+});
 </script>
 </body>
 </html>
