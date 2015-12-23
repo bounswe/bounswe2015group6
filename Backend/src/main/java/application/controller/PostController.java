@@ -192,12 +192,15 @@ public class PostController {
 
         /* Check whether new tags have been added */
         ArrayList<String> oldTags = this.getById(id).getTagsOfPost();
-        ArrayList<String> tags = post.getTagsOfPost();
-        tags.removeAll(oldTags); /* Remove all occurences of old tags */
+        ArrayList<String> newTags = post.getTagsOfPost();
+        ArrayList<String> temp = new ArrayList<String>(oldTags);
+
+        oldTags.removeAll(newTags); /* Decide to be deleted tags */
+        newTags.removeAll(temp);    /* Remove all occurences of old tags */
 
         /* If any differences exist, then add new tags to the post */
-        if(tags.size() > 0){
-            for(String tagName: tags){
+        if(newTags.size() > 0){
+            for(String tagName: newTags){
                 TagPostRelation tpg = new TagPostRelation();
                 tpg.setPostId(id);
 

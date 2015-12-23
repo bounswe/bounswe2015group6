@@ -44,4 +44,12 @@ public interface TopicRepository extends CrudRepository<Topic, Integer> {
     @Transactional
     @Query("UPDATE Topic t SET t.editDate = :editDate WHERE t.id = :id")
     int updateEditDate(@Param("editDate") DateTime editDate, @Param("id") int id);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Topic t SET t.title= :title AND t.ownerId = :ownerId AND t.editDate = :editDate WHERE t.id = :id")
+    int editTopic(@Param("title")    String title,
+                  @Param("ownerId")  int ownerId,
+                  @Param("editDate") DateTime editDate,
+                  @Param("id")       int id);
 }

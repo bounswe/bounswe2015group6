@@ -1,9 +1,7 @@
 package application.controller;
 
 import application.core.Feed;
-import application.core.Topic;
 import application.core.TopicTopicRelation;
-import application.miscalleneous.Result;
 import application.repository.FeedRepository;
 import application.repository.TopicRepository;
 import application.repository.TopicTopicRelationRepository;

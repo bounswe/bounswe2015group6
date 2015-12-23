@@ -34,6 +34,11 @@ public class FeedController {
     @Autowired
     private UserRepository userRepo;
 
+    /*
+    * api/feed/feeds
+    * @return Returns all logged actions in table
+    * */
+
     @RequestMapping(method = RequestMethod.GET, value = "/feeds")
     public ArrayList<FeedResponse> getAll(){
 
@@ -51,6 +56,11 @@ public class FeedController {
         return responses;
     }
 
+    /*
+    * /api/feed/id/{id}
+    * @param id Id of specific log
+    * @return Returns log of given id
+    * */
     @RequestMapping(method = RequestMethod.GET, value = "/id/{id}")
     public FeedResponse getById(@PathVariable("id") int id){
 
@@ -62,6 +72,10 @@ public class FeedController {
         return fr;
     }
 
+    /*
+    * /api/feed/get_news_of?id={id}
+    * @param id User id which his followees' actions will be displayed
+    * @return Returns all logged actions of followees*/
     @RequestMapping(method = RequestMethod.GET, value = "/get_news_of")
     public ArrayList<FeedResponse> getNews(@RequestParam("id") int id){
 
@@ -79,6 +93,7 @@ public class FeedController {
         return responses;
     }
 
+    /* Helper method */
     private String generateSubjectName(int type, int subject){
 
         if(type == 1){

@@ -326,8 +326,8 @@ public class TopicController {
         return temp;
     }
 
-
-    @RequestMapping(method = RequestMethod.GET, value  = "/id/getpost/{id}")
+    /* !! Attenttion --> URL has changed */
+    @RequestMapping(method = RequestMethod.GET, value  = "/id/{id}/get_posts")
     public PostResponse getPosts(@PathVariable("id") int id){
 
         Topic temp = topicRepo.findById(id);
@@ -420,6 +420,59 @@ public class TopicController {
         topicRepo.updateEditDate(dateTime, id);
 
         return this.getById(id);
+    }
+    /* Addendum: check tag changes */
+    @RequestMapping(method = RequestMethod.GET, value = "/edit")
+    public int editTopic(@RequestBody @Valid Topic topic){
+
+        int id = topic.getId();
+        int ownerId = topic.getOwnerId();
+        String title = topic.getTitle();
+        DateTime date = new DateTime(DateTimeZone.forID("Europe/Istanbul"));
+
+        int result = topicRepo.editTopic(title, ownerId, date, id);
+
+        /* Find tag changes */
+        ArrayList<String> oldTags = this.getById(id).getTags();
+        ArrayList<String> newTags = topic.getTags();
+        ArrayList<String> temp = new ArrayList<String>(oldTags);
+
+        oldTags.removeAll(newTags); /* Tags to be deleted */
+        newTags.removeAll(temp);    /* Tags to be added */
+
+        /* Add new tags */
+        if(newTags.size() > 0) {
+            for (String tagName: newTags) {
+
+                TagTopicRelation ttr = new TagTopicRelation();
+
+            /* Check whether tag exists */
+                Tag tag = tagRepo.findByTagName(tagName);
+
+            /* Save the tag if does not exists */
+                if (tag == null) {
+                    tag = new Tag();
+                    tag.setTagName(tagName);
+                    tagRepo.save(tag);
+                }
+
+            /* Create tag-topic relation */
+                ttr.setTopicId(id);
+                ttr.setTagId(tag.getId());
+                tagTopicRelationRepo.save(ttr);
+            }
+        }
+
+        /* Delete old tags */
+        if(oldTags.size() > 0){
+            for(String tagName: oldTags){
+
+                int tagId = tagRepo.findByTagName(tagName).getId(); /* Find tag id */
+                tagTopicRelationRepo.deleteByTagId(tagId);          /* Delete tag-topic relation */
+            }
+        }
+
+        return result;
     }
 
 }

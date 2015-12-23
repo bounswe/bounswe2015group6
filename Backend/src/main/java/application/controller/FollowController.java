@@ -16,6 +16,8 @@ public class FollowController {
     @Autowired
     private FollowRepository repo;
 
+    /*
+    * api/follow/create*/
     @RequestMapping(method = RequestMethod.POST, value = "/create")
     public Follow create(@RequestParam("follower")int followerId, @RequestParam("followed")int followedId){
         Follow follow = new Follow();
