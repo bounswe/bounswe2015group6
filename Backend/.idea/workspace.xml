@@ -49,10 +49,8 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/application/controller/PostController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.9417808">
-              <caret line="223" column="56" selection-start-line="223" selection-start-column="56" selection-end-line="223" selection-end-column="56" />
-              <folding>
-                <element signature="e#6381#6389#0" expanded="true" />
-              </folding>
+              <caret line="287" column="38" selection-start-line="287" selection-start-column="38" selection-end-line="287" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1153,10 +1151,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/application/controller/PostController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9417808">
-          <caret line="223" column="56" selection-start-line="223" selection-start-column="56" selection-end-line="223" selection-end-column="56" />
-          <folding>
-            <element signature="e#6381#6389#0" expanded="true" />
-          </folding>
+          <caret line="287" column="38" selection-start-line="287" selection-start-column="38" selection-end-line="287" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -130,8 +130,6 @@ public class PostController {
     }
 
 
-
-    //TODO: yeniden bak
     /* Method changed to accept request body */
     @RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
     public Post createPost(@RequestBody @Valid Post post, @RequestParam("topicId") int topicId){
@@ -193,7 +191,7 @@ public class PostController {
         /* Check whether new tags have been added */
         ArrayList<String> oldTags = this.getById(id).getTagsOfPost();
         ArrayList<String> newTags = post.getTagsOfPost();
-        ArrayList<String> temp = new ArrayList<String>(oldTags);
+        ArrayList<String> temp = new ArrayList<>(oldTags);
 
         oldTags.removeAll(newTags); /* Decide to be deleted tags */
         newTags.removeAll(temp);    /* Remove all occurences of old tags */
@@ -271,5 +269,24 @@ public class PostController {
 
         int i = postRepo.updateDownVote(id);
         return i;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/add_tag")
+    public void addTag(@RequestParam("tag_name") String tagName, @PathVariable("id") int postId){
+
+        Tag tag = tagRepo.findByTagName(tagName);
+        if(tag == null){
+            tag = new Tag();
+            tag.setTagName(tagName);
+            tagRepo.save(tag);
+        }
+
+        int tagId = tagRepo.findByTagName(tagName).getId();
+        TagPostRelation tpr = new TagPostRelation();
+        tpr.setPostId(postId);
+        tpr.setTagId(tagId);
+        tagPostRelationRepo.save(tpr);
+
+
     }
 }
