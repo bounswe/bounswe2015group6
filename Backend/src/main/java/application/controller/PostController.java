@@ -131,7 +131,7 @@ public class PostController {
 
 
 
-    //TODO: yeniden bak
+
     /* Method changed to accept request body */
     @RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
     public Post createPost(@RequestBody @Valid Post post, @RequestParam("topicId") int topicId){
@@ -140,7 +140,7 @@ public class PostController {
         temp.setContent(post.getContent());
         temp.setOwnerId(post.getOwnerId());
         temp.setTagsOfPost(post.getTagsOfPost());
-        temp.setResult(new Result(Result.RESULT_OK,""));
+        temp.setResult(new Result(Result.RESULT_OK,"The Post you want is successfully created."));
         temp.setTopicId(topicId);
         temp.setDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")));
         temp.setEditDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")));
@@ -242,7 +242,7 @@ public class PostController {
 
         if(temp == null){
             temp = new Post();
-            temp.setResult(new Result(Result.RESULT_OK, ""));
+            temp.setResult(new Result(Result.RESULT_OK, "The Topic you tried to find does not exist"));
             return -1;
         }
 
@@ -257,7 +257,7 @@ public class PostController {
 		  temp = postRepo.findById(id);
         if(temp == null){
             temp = new Post();
-            temp.setResult(new Result(Result.RESULT_OK, ""));
+            temp.setResult(new Result(Result.RESULT_OK, "The Topic you tried to find does not exist"));
             return -1;
         }
 
