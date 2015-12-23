@@ -13,6 +13,9 @@ import java.util.*;
 @Table(name = "user")
 public class User {
 
+    /**
+     * It shows if the process is resulted by Success or Failure
+     */
     @Transient
     Result result;
 
@@ -20,6 +23,9 @@ public class User {
     @GeneratedValue
     private int id;
 
+    /**
+     * username: it is minimum 6, maximum 18 characters
+     */
     @NotNull
     @Size(min = 6, max = 18)
     private String username;
@@ -30,6 +36,9 @@ public class User {
     @NotEmpty
     private String email;
 
+    /**
+     * it is 1, if the user is banned
+     */
     @Column(name = "isBanned")
     private int isBanned = 0;
 
