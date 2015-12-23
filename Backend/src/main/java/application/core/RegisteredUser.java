@@ -13,4 +13,7 @@ public class RegisteredUser extends User{
     @Column(name = "logoutDate")
     String logoutDate;
 
+    @Column(name = "registrationDate")
+    String registrationDate;
+
 }
