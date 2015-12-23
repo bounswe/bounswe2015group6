@@ -21,6 +21,12 @@ public class TopicTopicRelation {
     @Column(name = "label")
     private String label;
 
+    @Column(name = "title")
+    private String title;
+
+    @Transient
+    private String arrows = "to";
+
     public TopicTopicRelation(){
         this.from= -1;
         this.to= -1;
@@ -61,4 +67,19 @@ public class TopicTopicRelation {
         this.label = label;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getArrows() {
+        return arrows;
+    }
+
+    public void setArrows(String arrows) {
+        this.arrows = arrows;
+    }
 }

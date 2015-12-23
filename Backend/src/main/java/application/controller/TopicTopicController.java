@@ -10,6 +10,7 @@ import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 @CrossOrigin
@@ -75,6 +76,30 @@ public class TopicTopicController {
         feed.setSubject(edge.getId());
         feedRepo.save(feed);
         return edge;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/create_new")
+    public TopicTopicRelation createNew(@RequestBody @Valid TopicTopicRelation ttr){
+
+        TopicTopicRelation edge = topicTopicRepo.findByFromAndTo(ttr.getFrom(), ttr.getTo());
+        TopicTopicRelation temp = new TopicTopicRelation(ttr.getFrom(), ttr.getTo());
+
+        if(edge != null){
+            return edge;
+        }
+
+        temp.setLabel(ttr.getLabel());
+        temp.setTitle(ttr.getTitle());
+
+        topicTopicRepo.save(temp);
+
+        return temp;
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/get_connections")
+    public ArrayList<TopicTopicRelation> getEdges(){
+        return topicTopicRepo.findAll();
     }
 
 }

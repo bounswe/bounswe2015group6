@@ -3,7 +3,9 @@ package application.controller;
 import application.core.*;
 import application.miscalleneous.PostResponse;
 import application.miscalleneous.Result;
+import application.miscalleneous.TopicResponse;
 import application.repository.*;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +68,7 @@ public class TopicController {
             /* Get tags of the topic */
             ArrayList<TagTopicRelation> tags = tagTopicRelationRepo.findByTopicId(topic.getId());
             ArrayList<String> tagNames = new ArrayList<>();
+
             for(TagTopicRelation ttr: tags){
                 String tagName = tagRepo.findById(ttr.getTagId()).getTagName();
                 tagNames.add(tagName);
@@ -473,6 +476,29 @@ public class TopicController {
         }
 
         return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "get_topics")
+    public ArrayList<TopicResponse> getConnections(){
+
+        ArrayList<Topic> topics = this.getAll();
+
+        ArrayList<TopicResponse> response = new ArrayList<>();
+
+        for(Topic topic: topics){
+
+            TopicResponse tr = new TopicResponse();
+
+            tr.setId(topic.getId());
+            tr.setValue(topic.getValue());
+            tr.setTitle(topic.getTitle());
+            tr.setLabel(topic.getLabel());
+            tr.setGroup(topic.getGroup());
+
+            response.add(tr);
+        }
+
+        return response;
     }
 
 }

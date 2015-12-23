@@ -34,9 +34,8 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Post p SET p.content = :content AND p.ownerId = :ownerId AND p.editDate = :editDate WHERE p.id = :id")
+    @Query("UPDATE Post p SET p.content = :content, p.editDate = :editDate WHERE p.id = :id")
     int updatePost(@Param("id") int id,
                    @Param("content") String content,
-                   @Param("ownerId") int ownerId,
                    @Param("editDate") DateTime dateTime);
 }

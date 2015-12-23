@@ -186,7 +186,7 @@ public class PostController {
         int ownerId = post.getOwnerId();
         int id = post.getId();
         DateTime date = new DateTime(DateTimeZone.forID("Europe/Istanbul"));
-        postRepo.updatePost(id, content, ownerId, date);
+        postRepo.updatePost(id, content, date);
 
         /* Check whether new tags have been added */
         ArrayList<String> oldTags = this.getById(id).getTagsOfPost();

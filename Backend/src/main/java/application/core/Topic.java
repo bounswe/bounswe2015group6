@@ -41,13 +41,17 @@ public class Topic {
     @Transient
     private ArrayList<String> tags;
 
-
     @Transient
     private ArrayList<Post> posts;
 
-
     @Transient
     private ArrayList<Integer> topicRelations;
+
+    @Column(name = "_group")
+    private String group;
+
+    @Column(name = "value")
+    private int value = 20;
 
 
     public int getId() {
@@ -144,5 +148,21 @@ public class Topic {
 
     public void setEditDate(DateTime editDate) {
         this.editDate = editDate;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }
