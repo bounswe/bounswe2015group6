@@ -140,7 +140,7 @@ public class PostController {
         temp.setContent(post.getContent());
         temp.setOwnerId(post.getOwnerId());
         temp.setTagsOfPost(post.getTagsOfPost());
-        temp.setResult(new Result(Result.RESULT_OK,"Succesfully created"));
+        temp.setResult(new Result(Result.RESULT_OK,""));
         temp.setTopicId(topicId);
         temp.setDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")));
         temp.setEditDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")));
@@ -237,10 +237,12 @@ public class PostController {
     @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/up_vote")
     public int upVote(@PathVariable("id") int id){
 
-        Post temp = postRepo.findById(id);
+        Post temp = new Post();
+		  temp = postRepo.findById(id);
+
         if(temp == null){
             temp = new Post();
-            temp.setResult(new Result(Result.RESULT_OK, "Topic does not exist"));
+            temp.setResult(new Result(Result.RESULT_OK, ""));
             return -1;
         }
 
@@ -251,10 +253,11 @@ public class PostController {
     @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/down_vote")
     public int downVote(@PathVariable("id") int id){
 
-        Post temp = postRepo.findById(id);
+        Post temp = new Post();
+		  temp = postRepo.findById(id);
         if(temp == null){
             temp = new Post();
-            temp.setResult(new Result(Result.RESULT_OK, "Topic does not exist"));
+            temp.setResult(new Result(Result.RESULT_OK, ""));
             return -1;
         }
 
