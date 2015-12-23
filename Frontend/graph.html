@@ -85,209 +85,232 @@
 </div>
 
 
-
 <script type="text/javascript">
 
-var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
-// var lastTopicId;
+  var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
+  // var lastTopicId;
 
-$( document ).ready(function() {
-
-
-  var nodesDataset;
-  var edgesDataset
-
-  $.when(
-
-    $.get(api + "/api/topic/topics", function(data) {
+  $( document ).ready(function() {
 
 
-      // var max = 0;                
-      // $.map(data, function (obj) {
-      //   if (obj.id > max)
-      //     max = obj.id;
-      // });
+    var nodesDataset;
+    var edgesDataset
 
-      // lastTopicId = max + 1;
+    $.when(
 
-      nodesDataset = new vis.DataSet(data);
-    }),
+      $.get(api + "/api/topic/topics", function(data) {
 
-    $.get(api + "/api/edge/edges", function(data) {
-      edgesDataset = new vis.DataSet(data);
-    })
 
-  ).then(function() {
-    showGraph(nodesDataset, edgesDataset);
+        // var max = 0;                
+        // $.map(data, function (obj) {
+        //   if (obj.id > max)
+        //     max = obj.id;
+        // });
+
+        // lastTopicId = max + 1;
+
+        nodesDataset = new vis.DataSet(data);
+      }),
+
+      $.get(api + "/api/edge/edges", function(data) {
+        edgesDataset = new vis.DataSet(data);
+      })
+
+    ).then(function() {
+      showGraph(nodesDataset, edgesDataset);
+    });
+
   });
 
-});
+  function showGraph(nodesDataset, edgesDataset) {
 
-function showGraph(nodesDataset, edgesDataset) {
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+      {id: 1, value: 40, label: 'Death of Eric Garner', title: 'Death of Eric Garner', group: 'Black Murders in US'},
+      {id: 2, value: 20, label: 'Daniel Pantaleo', title: 'Daniel Pantaleo', group: 'Police'},
+      {id: 3, value: 10, label: 'Black Lives Matter', title: 'Black Lives Matter', group: 'Protest'},
+      {id: 4, value: 10, label: 'New York City Police Department', title: 'New York City Police Department', group: 'Police'},
+      {id: 5, value: 10, label: 'Out of court settlement', title: 'Out of court settlement', group: 'Judicial System'},
+      {id: 6, value: 10, label: 'Police Brutality', title: 'Police Brutality', group: 'Police'},
+      {id: 7, value: 20, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
+      {id: 8, value: 80, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
+    ]);
 
-  var container = document.getElementById('mynetwork');
+    var edges = new vis.DataSet();
 
-  var data = {
-    nodes: nodesDataset,
-    edges: edgesDataset
-  };
+    // create an array with edges
+    var edges = new vis.DataSet([
+      {from: 2, to: 1, label: 'Murders', title: 'Murders', arrows:'to'},
+      {from: 1, to: 3, label: 'causes', title: 'causes', arrows:'to'},
+      {from: 2, to: 4, label: 'member', title: 'member', arrows:'to'},
+      {from: 1, to: 7, label: 'causes', title: 'causes', arrows:'to'}, 
+      {from: 5, to: 7, label: 'result of', title: 'result of', arrows:'to'}, 
+      {from: 6, to: 1, label: 'causes', title: 'causes', arrows:'to'}, 
+    ]);
 
-  var options = {
-    physics: {
-      enabled: true
-    },
-    nodes: {
-      shape: 'dot',
-      scaling: {
-        customScalingFunction: function (min,max,total,value) {
-          return value/total;
+    // create a network
+    var container = document.getElementById('mynetwork');
+
+    // var data = {
+    //   nodes: nodesDataset,
+    //   edges: edgesDataset
+    // };
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
+    var options = {
+      nodes: {
+          shape: 'dot',
+          shadow:true,
+          font: {
+            size: 12,
+          },
+          // scaling: {
+          //     customScalingFunction: function (min,max,total,value) {
+          //       return value/total;
+          //     },
+          //     min:5,
+          //     max:150
+          //   }
+      },
+      edges: {
+          shadow:true,
+          font: {
+            align: 'top',
+            size: 8,
+          },
+      },
+      interaction: {
+        hover: true,
+        navigationButtons: true,
+        keyboard: true,
+      },
+      physics: {
+        // enabled: true,
+      },
+      layout: {
+        randomSeed: 8
+      },
+          manipulation: {
+        initiallyActive: true,
+        addNode: function (data, callback) {
+          // filling in the popup DOM elements
+          document.getElementById('operation').innerHTML = "Add Topic";
+          document.getElementById('node-id').value = data.id;
+          document.getElementById('node-label').value = data.label;
+          document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
+          document.getElementById('cancelButton').onclick = clearPopUp.bind();
+          document.getElementById('network-popUp').style.display = 'block';
         },
-        min:5,
-        max:150
-      },
-
-      // scaling: {
-      //   min: 10,
-      //   max: 30
-      // },
-      font: {
-        size: 12,
-        face: 'Tahoma'
-      }
-    },
-    edges: {
-      // width: 0.15,
-      smooth: {
-        type: 'continuous'
-      }
-    },
-    interaction: {
-      navigationButtons: true,
-      keyboard: true,
-      hover: true
-      // hideEdgesOnDrag: true
-    },
-    manipulation: {
-      initiallyActive: true,
-      addNode: function (data, callback) {
-        // filling in the popup DOM elements
-        document.getElementById('operation').innerHTML = "Add Topic";
-        document.getElementById('node-id').value = data.id;
-        document.getElementById('node-label').value = data.label;
-        document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
-        document.getElementById('cancelButton').onclick = clearPopUp.bind();
-        document.getElementById('network-popUp').style.display = 'block';
-      },
-      editNode: function (data, callback) {
-        // filling in the popup DOM elements
-        document.getElementById('operation').innerHTML = "Edit Node";
-        document.getElementById('node-id').value = data.id;
-        document.getElementById('node-label').value = data.label;
-        document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
-        document.getElementById('cancelButton').onclick = cancelEdit.bind(this,callback);
-        document.getElementById('network-popUp').style.display = 'block';
-      },
-      addEdge: function (data, callback) {
-        if (data.from == data.to) {
-          // var r = confirm("Do you want to connect the node to itself?");
-          // if (r == true) {
-          //   callback(data);
-          // }
-        }
-        else {
-          callback(data);
-
-          $.ajax({
-            method: "POST",
-            url: api + "/api/edge/create?source=" + data.from + "&dest=" + data.to,
-            contentType: "application/json",
-            dataType: "json"
-            // data: { 
-            //   source: data.from,
-            //   dest: data.to
+        editNode: function (data, callback) {
+          // filling in the popup DOM elements
+          document.getElementById('operation').innerHTML = "Edit Node";
+          document.getElementById('node-id').value = data.id;
+          document.getElementById('node-label').value = data.label;
+          document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
+          document.getElementById('cancelButton').onclick = cancelEdit.bind(this,callback);
+          document.getElementById('network-popUp').style.display = 'block';
+        },
+        addEdge: function (data, callback) {
+          if (data.from == data.to) {
+            // var r = confirm("Do you want to connect the node to itself?");
+            // if (r == true) {
+            //   callback(data);
             // }
-          })
-          .done(function( data ) {
-            
-            console.log(data);
+          }
+          else {
+            callback(data);
+
+            $.ajax({
+              method: "POST",
+              url: api + "/api/edge/create?source=" + data.from + "&dest=" + data.to,
+              contentType: "application/json",
+              dataType: "json"
+              // data: { 
+              //   source: data.from,
+              //   dest: data.to
+              // }
+            })
+            .done(function( data ) {
+              
+              console.log(data);
+
+            })
+            .fail(function( data ) {
+                console.log(data);
+            });
+          }
+        },
+        deleteNode: function (data, callback) {
+          callback(data);
+          var nodeId = data.nodes[0];
+
+          $.get(api + "/api/topic/delete?id=" + nodeId, function(data) {
 
           })
-          .fail(function( data ) {
-              console.log(data);
-          });
         }
       },
-      deleteNode: function (data, callback) {
-        callback(data);
-        var nodeId = data.nodes[0];
+      // autoResize: true,
+      // height: '100%',
+    };
+    var network = new vis.Network(container, data, options);
 
-        $.get(api + "/api/topic/delete?id=" + nodeId, function(data) {
+    network.on("selectNode", function (params) {
+        console.log('selectNode Event:', params);
+        // network.setData(data);
+        // network.clusterByConnection(1);
+    });
+    network.on("selectEdge", function (params) {
+        console.log('selectEdge Event:', params);
+    });
+  }
 
-        })
-      }
-    },
-    autoResize: true,
-    height: '100%',
-    layout:{
-      randomSeed:2
-    }
-  };
+  function clearPopUp() {
+    document.getElementById('saveButton').onclick = null;
+    document.getElementById('cancelButton').onclick = null;
+    document.getElementById('network-popUp').style.display = 'none';
+  }
 
-  var network = new vis.Network(container, data, options);
+  function cancelEdit(callback) {
+    clearPopUp();
+    callback(null);
+  }
 
-  network.on('select', function(params) {
+  function saveData(data,callback) {
+    data.id = document.getElementById('node-id').value;
+    // data.id = lastTopicId;
+    data.label = document.getElementById('node-label').value;
+    var tags = document.getElementById('node-tags').value;
+    clearPopUp();
+    callback(data);
 
-    $('#content').animate({left: 300});
+    var tagsarray = tags.split(',');
 
-    console.log(params.nodes);
-  });
-}
-
-function clearPopUp() {
-  document.getElementById('saveButton').onclick = null;
-  document.getElementById('cancelButton').onclick = null;
-  document.getElementById('network-popUp').style.display = 'none';
-}
-
-function cancelEdit(callback) {
-  clearPopUp();
-  callback(null);
-}
-
-function saveData(data,callback) {
-  data.id = document.getElementById('node-id').value;
-  // data.id = lastTopicId;
-  data.label = document.getElementById('node-label').value;
-  var tags = document.getElementById('node-tags').value;
-  clearPopUp();
-  callback(data);
-
-  var tagsarray = tags.split(',');
-
-  $.ajax({
-    method: "POST",
-    url: api + "/api/topic/create",
-    contentType: "application/json",
-    dataType: "json",
-    data: JSON.stringify({ 
-      ownerId: $.cookie('id'),
-      title: data.label,
-      tags: tagsarray
+    $.ajax({
+      method: "POST",
+      url: api + "/api/topic/create",
+      contentType: "application/json",
+      dataType: "json",
+      data: JSON.stringify({ 
+        ownerId: $.cookie('id'),
+        title: data.label,
+        tags: tagsarray
+      })
     })
-  })
-  .done(function( data ) {
-    
-    console.log(data);
-
-  })
-  .fail(function( data ) {
+    .done(function( data ) {
+      
       console.log(data);
-  });
-}
 
-$( "button" ).click(function() {
-  $('#content').animate({left: 0});
-});
+    })
+    .fail(function( data ) {
+        console.log(data);
+    });
+  }
+
+  $( "button" ).click(function() {
+    $('#content').animate({left: 0});
+  });
 </script>
 
 </body>
