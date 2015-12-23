@@ -131,7 +131,7 @@ public class PostController {
 
 
 
-
+    //TODO: yeniden bak
     /* Method changed to accept request body */
     @RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
     public Post createPost(@RequestBody @Valid Post post, @RequestParam("topicId") int topicId){
@@ -140,7 +140,7 @@ public class PostController {
         temp.setContent(post.getContent());
         temp.setOwnerId(post.getOwnerId());
         temp.setTagsOfPost(post.getTagsOfPost());
-        temp.setResult(new Result(Result.RESULT_OK,"The Post you want is successfully created."));
+        temp.setResult(new Result(Result.RESULT_OK,"Succesfully created"));
         temp.setTopicId(topicId);
         temp.setDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")));
         temp.setEditDate(new DateTime(DateTimeZone.forID("Europe/Istanbul")));
@@ -217,6 +217,14 @@ public class PostController {
             }
         }
 
+        if(oldTags.size() > 0){
+            for(String tagName: oldTags){
+
+                int tagId = tagRepo.findByTagName(tagName).getId();
+                tagPostRelationRepo.deleteByTagId(tagId);
+            }
+        }
+
 
     }
 
@@ -240,12 +248,10 @@ public class PostController {
     @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/up_vote")
     public int upVote(@PathVariable("id") int id){
 
-        Post temp = new Post();
-		  temp = postRepo.findById(id);
-
+        Post temp = postRepo.findById(id);
         if(temp == null){
             temp = new Post();
-            temp.setResult(new Result(Result.RESULT_OK, "The Topic you tried to find does not exist"));
+            temp.setResult(new Result(Result.RESULT_OK, "Topic does not exist"));
             return -1;
         }
 
@@ -256,11 +262,10 @@ public class PostController {
     @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/down_vote")
     public int downVote(@PathVariable("id") int id){
 
-        Post temp = new Post();
-		  temp = postRepo.findById(id);
+        Post temp = postRepo.findById(id);
         if(temp == null){
             temp = new Post();
-            temp.setResult(new Result(Result.RESULT_OK, "The Topic you tried to find does not exist"));
+            temp.setResult(new Result(Result.RESULT_OK, "Topic does not exist"));
             return -1;
         }
 
