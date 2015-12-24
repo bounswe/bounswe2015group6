@@ -41,7 +41,12 @@ public class PostController {
     private FeedRepository feedRepo;
 
     @RequestMapping(method = RequestMethod.GET, value = "/posts")
-    public ArrayList<Post> getAll(){
+    
+     /**
+      * This method gets array list of posts
+      * @return list: list of posts 
+      */	
+	public ArrayList<Post> getAll(){
 
         ArrayList<Post> list =  postRepo.findAll();
 
@@ -68,6 +73,11 @@ public class PostController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/id/{id}")
+     /**
+     	* This method gets post by id 
+	* @param id: id of the post	
+      * @return post: post corresponds particular id
+      */
     public Post getById(@PathVariable("id") int id){
 
         Post post = postRepo.findById(id);
@@ -116,6 +126,10 @@ public class PostController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/owner/{id}/id_s")
+     /**
+      * This method gets array list of posts correspond owner id
+      * @return temp: list of posts 
+      */
     public ArrayList<Post> findPostByOwnerId(@PathVariable("id") int id){
 
         ArrayList<Post> allPosts = getAll();
@@ -132,7 +146,12 @@ public class PostController {
 
     /* Method changed to accept request body */
     @RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
-    public Post createPost(@RequestBody @Valid Post post, @RequestParam("topicId") int topicId){
+    /**
+      * This method creates post desired
+	* @param topicId: id of the topic that post will be created.
+      * @return post: the post created
+      */
+	public Post createPost(@RequestBody @Valid Post post, @RequestParam("topicId") int topicId){
 
         Post temp = new Post();
         temp.setContent(post.getContent());
@@ -180,6 +199,10 @@ public class PostController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "update/id/{id}")
+	/**
+      * This method updated the post desired.
+      * @param post: the post that will be updated
+      */
     public void updatePost(@RequestBody @Valid Post post){
 
         String content = post.getContent();
@@ -227,6 +250,10 @@ public class PostController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
+	/**
+      * This method deletes the post desired
+      * @param id: id of the post that will be deleted.
+      */
     public void deletePost(@RequestParam ("id") int id){
         Post post = postRepo.findById(id);
 
@@ -244,6 +271,12 @@ public class PostController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/up_vote")
+	/**
+      * This method upvotes the desired post
+      * @param id: id of the post that will be upvoted
+	* @return i : integer number of votes
+      */
+
     public int upVote(@PathVariable("id") int id){
 
         Post temp = postRepo.findById(id);
@@ -258,6 +291,11 @@ public class PostController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/down_vote")
+	/**
+      * This method downvotes the desired post
+      * @param id: id of the post that will be downvoted
+	* @return i : integer number of votes
+      */
     public int downVote(@PathVariable("id") int id){
 
         Post temp = postRepo.findById(id);
