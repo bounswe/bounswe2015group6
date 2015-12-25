@@ -4,6 +4,8 @@ import javax.persistence.Column;
 
 /**
  * Created by Baris on 23.12.2015.
+ *
+ * RegisteredUser class extends User class, it will be use for registered users
  */
 public class RegisteredUser extends User{
 
@@ -13,7 +15,10 @@ public class RegisteredUser extends User{
     @Column(name = "logoutDate")
     String logoutDate;
 
-    @Column(name = "registrationDate")
-    String registrationDate;
+    /**
+     * registration date
+     */
+    @Column(name = "regDate")
+    String regDate;
 
 }
