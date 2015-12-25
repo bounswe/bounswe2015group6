@@ -14,18 +14,30 @@ public class Topic {
     @GeneratedValue
     private int id;
 
+    /**
+     * result of the process: success or fail
+     */
     @Transient
     Result result;
 
+    /**
+     * Id of the owner of topic
+     */
     @Column(name = "owner_id")
     private int ownerId;
 
     @Column(name = "title")
     private String title;
 
+    /**
+     * number of positive votes to topic
+     */
     @Column(name = "up_vote")
     private int upVote = 0;
 
+    /**
+     * number of negative votes to topic
+     */
     @Column(name = "down_vote")
     private int downVote = 0;
 
@@ -38,9 +50,15 @@ public class Topic {
     @Transient
     private String label;
 
+    /**
+     * list of tags to topic
+     */
     @Transient
     private ArrayList<String> tags;
 
+    /**
+     * list of post in the topic
+     */
     @Transient
     private ArrayList<Post> posts;
 
