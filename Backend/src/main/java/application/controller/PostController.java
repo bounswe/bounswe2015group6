@@ -309,6 +309,11 @@ public class PostController {
         return i;
     }
 
+    /**
+     * method adds tags to posts
+     * @param tagName
+     * @param postId
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/add_tag")
     public void addTag(@RequestParam("tag_name") String tagName, @PathVariable("id") int postId){
 

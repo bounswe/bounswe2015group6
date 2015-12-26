@@ -10,7 +10,23 @@ import java.util.ArrayList;
  */
 public interface TagRepository extends CrudRepository<Tag, Integer>{
 
+    /**
+     *
+     * @return
+     */
     ArrayList<Tag> findAll();
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     Tag findById(Integer id);
+
+    /**
+     *
+     * @param tagName
+     * @return
+     */
     Tag findByTagName(String tagName);
 }

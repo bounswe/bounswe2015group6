@@ -11,6 +11,9 @@ public class Tag{
     @Transient
     Result result;
 
+    /**
+     * id of the tag
+     */
     @Id
     @GeneratedValue
     int id;

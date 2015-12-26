@@ -160,26 +160,50 @@ public class Topic {
         this.createDate = createDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public DateTime getEditDate() {
         return editDate;
     }
 
+    /**
+     *
+     * @param editDate
+     */
     public void setEditDate(DateTime editDate) {
         this.editDate = editDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGroup() {
         return group;
     }
 
+    /**
+     *
+     * @param group
+     */
     public void setGroup(String group) {
         this.group = group;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getValue() {
         return value;
     }
 
+    /**
+     *
+     * @param value
+     */
     public void setValue(int value) {
         this.value = value;
     }

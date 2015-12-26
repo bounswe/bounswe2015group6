@@ -25,6 +25,10 @@ public class TagController {
     @Autowired
     private TagTopicRelationRepository tagTopicRelationRepository;
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/tags")
     public ArrayList<Tag> getAll(){
         ArrayList<Tag> list =  tagRepo.findAll();
@@ -34,6 +38,11 @@ public class TagController {
         return list;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/tags/id/{id}")
     public Tag getById(@PathVariable("id")int id){
         Tag tag = tagRepo.findById(id);
@@ -47,6 +56,11 @@ public class TagController {
         return tag;
     }
 
+    /**
+     *
+     * @param tagName
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/tags/tagName/{tagName}")
     public Tag getByName(@PathVariable("tagName") String tagName){
         Tag tag = tagRepo.findByTagName(tagName);
@@ -59,6 +73,11 @@ public class TagController {
         return tag;
     }
 
+    /**
+     *
+     * @param tagName
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/create")
     public Tag createTag(@RequestParam("tagName") String tagName){
         Tag tag = tagRepo.findByTagName(tagName);

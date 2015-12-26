@@ -2,6 +2,10 @@ package application.core;
 
 import javax.persistence.*;
 
+/**
+ * Class to set relationship between topic and the follower
+ * It consists an id, follower_id, and topic_id
+ */
 @Entity
 @Table(name = "topic_follow")
 public class TopicFollow {

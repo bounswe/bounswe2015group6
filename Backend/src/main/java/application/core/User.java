@@ -176,22 +176,42 @@ public class User {
         return createdTopics;
     }
 
+    /**
+     *
+     * @param createdTopics
+     */
     public void setCreatedTopics(ArrayList<Topic> createdTopics) {
         this.createdTopics = createdTopics;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Integer> getFollowedTopics() {
         return followedTopics;
     }
 
+    /**
+     *
+     * @param followedTopics
+     */
     public void setFollowedTopics(ArrayList<Integer> followedTopics) {
         this.followedTopics = followedTopics;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<String> getFollowedUsers() {
         return followedUsers;
     }
 
+    /**
+     *
+     * @param followedUsers
+     */
     public void setFollowedUsers(ArrayList<String> followedUsers) {
         this.followedUsers = followedUsers;
     }

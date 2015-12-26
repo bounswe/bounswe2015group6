@@ -31,6 +31,10 @@ public class FeedResponse {
         return subjectName;
     }
 
+    /**
+     * set name of subhect to feed response
+     * @param subjectName
+     */
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
     }

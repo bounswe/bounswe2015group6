@@ -40,6 +40,10 @@ public class RecentController {
     @Autowired
     private PostController postControl;
 
+    /**
+     * method returns topics that are created or edited today
+     * @return topics of today
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/recent")
     public ArrayList<Topic> getRecentTopics(){
 

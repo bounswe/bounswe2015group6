@@ -16,22 +16,40 @@ public class Comment {
     int id;
 
 
+    /**
+     * owner of the comment(registered user)
+     */
     @Column(name="owner")
     RegisteredUser owner = new RegisteredUser();
 
+    /**
+     * topic that includes the comment
+     */
     @Column(name="topic")
     Topic topic = new Topic();
 
+    /**
+     * tag list of the comment
+     */
     @Transient
     ArrayList<Tag> tags = new ArrayList<>();
     @Transient
 
+    /**
+     * number of people who likes
+     */
     @Column(name="positiveRate")
     int positiveRate;
 
+    /**
+     * number of people who dislikes
+     */
     @Column(name="negativeRate")
     int negativeRate;
 
+    /**
+     * content of the comment
+     */
     @Column(name="content")
     String content;
 
@@ -39,6 +57,8 @@ public class Comment {
 
     @Column(name="date")
     String date;
+
+    //getters and setters
 
     public int getId() {
         return id;

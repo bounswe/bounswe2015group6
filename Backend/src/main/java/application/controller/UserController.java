@@ -32,15 +32,27 @@ public class UserController {
     @Autowired
     private FollowController follow;
 
+    /**
+     *repo. of topics
+     */
     @Autowired
     private TopicRepository topicRepo;
 
+    /**
+     * post control class
+     */
     @Autowired
     private PostController postControl;
 
+    /**
+     * repo of topic follow
+     */
     @Autowired
     private TopicFollowRepository topicFollowRepo;
 
+    /**
+     * follow repo
+     */
     @Autowired
     private FollowRepository followRepo;
 
@@ -64,11 +76,13 @@ public class UserController {
     }
 
     /**
+     *
      * Method to find users by id
      * @param id if of wanted user
      * @return if user is found, returns user with all its features
      * such as Followers, Topics, Posts etc.
      * If user couldn't be found, it returns "User not found" message
+     *
      */
     @RequestMapping(method = RequestMethod.GET, value = "/id/{id}")
     public User findById(@PathVariable("id") int id){
@@ -92,11 +106,13 @@ public class UserController {
     }
 
     /**
+     *
      * Method to find user by their username
      * @param username
      * @return if user is found, returns user with all its features
      * such as Followers, Topics, Posts etc.
      * If user couldn't be found, it returns "User not found" message
+     *
      */
     @RequestMapping(method = RequestMethod.GET, value = "/username/{username}")
     public User findByUsername(@PathVariable("username") String username){
@@ -119,8 +135,14 @@ public class UserController {
         return user;
     }
 
-    /*
-    to set new variables of user
+
+    /**
+     *
+     *
+     * to set new variables of user
+     *
+     * @param user
+     * @return
      */
     @RequestMapping(method = RequestMethod.POST, value = "/signup", headers = "Accept=application/json")
     public User save(
@@ -157,7 +179,15 @@ public class UserController {
         repo.save(temp);
         return temp;
     }
-    /* Controller returns all available information even though password authentication fails*/
+
+    /**
+     *
+     * Controller returns all available information even though password authentication fails
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/login")
     public User login(
             @RequestParam("username") String username, @RequestParam("password") String password) {
