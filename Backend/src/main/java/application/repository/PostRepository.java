@@ -17,21 +17,44 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
     Post findById(int id);
     ArrayList<Post> findAll();
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.upVote = p.upVote + 1 WHERE p.id = :id")
     int updateUpVote(@Param("id") int id);
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.downVote = p.downVote - 1 WHERE p.id = :id")
     int updateDownVote(@Param("id") int id);
 
+    /**
+     *
+     * @param editDate
+     * @param id
+     * @return
+     */
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.editDate = :editDate WHERE p.id = :id")
     int updateEditDate(@Param("editDate") DateTime editDate, @Param("id") int id);
 
+    /**
+     *
+     * @param id
+     * @param content
+     * @param dateTime
+     * @return
+     */
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.content = :content, p.editDate = :editDate WHERE p.id = :id")

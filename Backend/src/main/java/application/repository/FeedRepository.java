@@ -16,8 +16,19 @@ public interface FeedRepository extends CrudRepository <Feed, Integer>{
     ArrayList<Feed> getAll();
 
     Feed findById(int id);
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
     ArrayList<Feed> findByUserId(int userId);
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Query("SELECT f FROM Feed f, Follow fo WHERE fo.followerId = :id AND f.userId = fo.followedId ORDER BY f.date")
     ArrayList<Feed> findFollowedFeed(@Param("id") int id);
 
