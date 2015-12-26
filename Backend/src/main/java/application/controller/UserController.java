@@ -20,9 +20,15 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
+    /**
+     * repo is user repository
+     */
     @Autowired
     private UserRepository repo;
 
+    /**
+     * controller for follewers
+     */
     @Autowired
     private FollowController follow;
 
@@ -38,6 +44,10 @@ public class UserController {
     @Autowired
     private FollowRepository followRepo;
 
+    /**
+     * Method to get all users in the system
+     * @return list of all users
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ArrayList<User> findAll(){
         ArrayList<User> list =  repo.findAll();
@@ -53,6 +63,13 @@ public class UserController {
         return list;
     }
 
+    /**
+     * Method to find users by id
+     * @param id if of wanted user
+     * @return if user is found, returns user with all its features
+     * such as Followers, Topics, Posts etc.
+     * If user couldn't be found, it returns "User not found" message
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/id/{id}")
     public User findById(@PathVariable("id") int id){
         User user = repo.findById(id);
@@ -74,6 +91,13 @@ public class UserController {
         return user;
     }
 
+    /**
+     * Method to find user by their username
+     * @param username
+     * @return if user is found, returns user with all its features
+     * such as Followers, Topics, Posts etc.
+     * If user couldn't be found, it returns "User not found" message
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/username/{username}")
     public User findByUsername(@PathVariable("username") String username){
         User user = repo.findByUsername(username);
@@ -95,6 +119,9 @@ public class UserController {
         return user;
     }
 
+    /*
+    to set new variables of user
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/signup", headers = "Accept=application/json")
     public User save(
           @Valid @RequestBody User user)
