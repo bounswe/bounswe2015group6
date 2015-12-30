@@ -12,9 +12,19 @@ import java.util.ArrayList;
  */
 public interface TopicFollowRepository extends CrudRepository<TopicFollow, Integer> {
 
+    /**
+     *
+     * @param followerId
+     * @return
+     */
     @Query("SELECT tf.topicId FROM TopicFollow tf WHERE tf.followerId = :followerId")
-    ArrayList<Integer> getByTopicId(@Param("followerId") int followerId);
+    ArrayList<Integer> getByFollowerId(@Param("followerId") int followerId);
 
+    /**
+     *
+     * @param topicId
+     * @return
+     */
     @Query("SELECT tf.followerId FROM TopicFollow tf WHERE tf.topicId = :topicId")
-    ArrayList<Integer> getByFollowerId(@Param("topicId") int topicId);
+    ArrayList<Integer> getByTopicId(@Param("topicId") int topicId);
 }

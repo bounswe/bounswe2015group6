@@ -54,6 +54,13 @@ public class User {
     @Column(name = "google_id")
     private String googleId = "";
 
+    /**
+     *
+     * keeps interests of the user
+     */
+    @Transient
+    private ArrayList<String> interests;
+
     @Transient
     private ArrayList<Topic> createdTopics;
 
@@ -63,29 +70,62 @@ public class User {
     @Transient
     private ArrayList<Post> createdPosts;
 
+    /**
+     * followed users
+     */
     @Transient
     private ArrayList<String> followedUsers;
 
+    /**
+     * followers of the user
+     */
+    @Transient
+    private ArrayList<String> followers;
+
+    /**
+     *
+     * @return
+     */
     public int getIsBanned() {
         return isBanned;
     }
 
+    /**
+     *
+     * @param isBanned
+     */
     public void setIsBanned(int isBanned) {
         this.isBanned = isBanned;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getRating() {
         return rating;
     }
 
+    /**
+     *
+     * @param rating
+     */
     public void setRating(int rating) {
         this.rating = rating;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
@@ -104,6 +144,10 @@ public class User {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
@@ -122,6 +166,10 @@ public class User {
         return facebookId;
     }
 
+    /**
+     *
+     * @param facebookId
+     */
     public void setFacebookId(String facebookId) {
         this.facebookId = facebookId;
     }
@@ -131,68 +179,164 @@ public class User {
         return twitterId;
     }
 
+    /**
+     *
+     * @param twitterId
+     */
     public void setTwitterId(String twitterId) {
         this.twitterId = twitterId;
     }
 
     /*Getter - setter : googleId*/
 
+    /**
+     *
+     * @return
+     */
     public String getGoogleId() {
         return googleId;
     }
 
+    /**
+     *
+     * @param googleId
+     */
     public void setGoogleId(String googleId) {
         this.googleId = googleId;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getFollowList() {
         return followList;
     }
 
+    /**
+     *
+     * @param followList
+     */
     public void setFollowList(List<String> followList){
         this.followList = followList;
     }
 
+    /**
+     *
+     */
     @Transient
     private List<String> followList;
 
+    /**
+     *
+     * @param result
+     */
     public void setResult(Result result) {
         this.result = result;
     }
 
+    /**
+     *
+     * @return
+     */
     public Result getResult() {
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Post> getCreatedPosts() {
         return createdPosts;
     }
 
+    /**
+     *
+     * @param createdPosts
+     */
     public void setCreatedPosts(ArrayList<Post> createdPosts) {
         this.createdPosts = createdPosts;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Topic> getCreatedTopics() {
         return createdTopics;
     }
 
+    /**
+     *
+     * @param createdTopics
+     */
     public void setCreatedTopics(ArrayList<Topic> createdTopics) {
         this.createdTopics = createdTopics;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Integer> getFollowedTopics() {
         return followedTopics;
     }
 
+    /**
+     *
+     * @param followedTopics
+     */
     public void setFollowedTopics(ArrayList<Integer> followedTopics) {
         this.followedTopics = followedTopics;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<String> getFollowedUsers() {
         return followedUsers;
     }
 
+    /**
+     *
+     * @param followedUsers
+     */
     public void setFollowedUsers(ArrayList<String> followedUsers) {
         this.followedUsers = followedUsers;
     }
+
+    /**
+     *
+     * @param followers
+     */
+    public void setFollowers(ArrayList<String> followers) {
+        this.followers = followers;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<String> getFollowers() {
+        return followers;
+    }
+
+    /**
+     *
+     * @param interests
+     */
+    public void setInterests(ArrayList<String> interests) {
+        this.interests = interests;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<String> getInterests() {
+        return interests;
+    }
+
 }

@@ -18,31 +18,64 @@ import java.util.ArrayList;
 public interface PostRepository extends CrudRepository<Post, Integer> {
     Post findById(int id);
     ArrayList<Post> findAll();
+<<<<<<< HEAD
  // here, update function updates the upVote
  // and sends it to database. 
+=======
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+>>>>>>> origin/master
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.upVote = p.upVote + 1 WHERE p.id = :id")
     int updateUpVote(@Param("id") int id);
 
+<<<<<<< HEAD
 
  // here, update function updates the downVote
  // and sends it to database. 
 
+=======
+    /**
+     *
+     * @param id
+     * @return
+     */
+>>>>>>> origin/master
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.downVote = p.downVote - 1 WHERE p.id = :id")
     int updateDownVote(@Param("id") int id);
 
+<<<<<<< HEAD
 
 //here, update function updates or edits the date
 // and sends it to database
 
+=======
+    /**
+     *
+     * @param editDate
+     * @param id
+     * @return
+     */
+>>>>>>> origin/master
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.editDate = :editDate WHERE p.id = :id")
     int updateEditDate(@Param("editDate") DateTime editDate, @Param("id") int id);
 
+    /**
+     *
+     * @param id
+     * @param content
+     * @param dateTime
+     * @return
+     */
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.content = :content AND p.ownerId = :ownerId AND p.editDate = :editDate WHERE p.id = :id")

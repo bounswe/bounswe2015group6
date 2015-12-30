@@ -98,7 +98,7 @@
 
     $.when(
 
-      $.get(api + "/api/topic/topics", function(data) {
+      $.get(api + "/api/topic/get_topics", function(data) {
 
 
         // var max = 0;                
@@ -112,7 +112,7 @@
         nodesDataset = new vis.DataSet(data);
       }),
 
-      $.get(api + "/api/edge/edges", function(data) {
+      $.get(api + "/api/edge/get_connections", function(data) {
         edgesDataset = new vis.DataSet(data);
       })
 
@@ -124,41 +124,41 @@
 
   function showGraph(nodesDataset, edgesDataset) {
 
-    // create an array with nodes
-    var nodes = new vis.DataSet([
-      {id: 1, value: 40, label: 'Death of Eric Garner', title: 'Death of Eric Garner', group: 'Black Murders in US'},
-      {id: 2, value: 20, label: 'Daniel Pantaleo', title: 'Daniel Pantaleo', group: 'Police'},
-      {id: 3, value: 10, label: 'Black Lives Matter', title: 'Black Lives Matter', group: 'Protest'},
-      {id: 4, value: 10, label: 'New York City Police Department', title: 'New York City Police Department', group: 'Police'},
-      {id: 5, value: 10, label: 'Out of court settlement', title: 'Out of court settlement', group: 'Judicial System'},
-      {id: 6, value: 10, label: 'Police Brutality', title: 'Police Brutality', group: 'Police'},
-      {id: 7, value: 20, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
-      {id: 8, value: 80, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
-    ]);
+    // // create an array with nodes
+    // var nodes = new vis.DataSet([
+    //   {id: 1, value: 40, label: 'Death of Eric Garner', title: 'Death of Eric Garner', group: 'Black Murders in US'},
+    //   {id: 2, value: 20, label: 'Daniel Pantaleo', title: 'Daniel Pantaleo', group: 'Police'},
+    //   {id: 3, value: 10, label: 'Black Lives Matter', title: 'Black Lives Matter', group: 'Protest'},
+    //   {id: 4, value: 10, label: 'New York City Police Department', title: 'New York City Police Department', group: 'Police'},
+    //   {id: 5, value: 10, label: 'Out of court settlement', title: 'Out of court settlement', group: 'Judicial System'},
+    //   {id: 6, value: 10, label: 'Police Brutality', title: 'Police Brutality', group: 'Police'},
+    //   {id: 7, value: 20, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
+    //   {id: 8, value: 80, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
+    // ]);
 
-    var edges = new vis.DataSet();
+    // var edges = new vis.DataSet();
 
-    // create an array with edges
-    var edges = new vis.DataSet([
-      {from: 2, to: 1, label: 'Murders', title: 'Murders', arrows:'to'},
-      {from: 1, to: 3, label: 'causes', title: 'causes', arrows:'to'},
-      {from: 2, to: 4, label: 'member', title: 'member', arrows:'to'},
-      {from: 1, to: 7, label: 'causes', title: 'causes', arrows:'to'}, 
-      {from: 5, to: 7, label: 'result of', title: 'result of', arrows:'to'}, 
-      {from: 6, to: 1, label: 'causes', title: 'causes', arrows:'to'}, 
-    ]);
+    // // create an array with edges
+    // var edges = new vis.DataSet([
+    //   {from: 2, to: 1, label: 'Murders', title: 'Murders', arrows:'to'},
+    //   {from: 1, to: 3, label: 'causes', title: 'causes', arrows:'to'},
+    //   {from: 2, to: 4, label: 'member', title: 'member', arrows:'to'},
+    //   {from: 1, to: 7, label: 'causes', title: 'causes', arrows:'to'}, 
+    //   {from: 5, to: 7, label: 'result of', title: 'result of', arrows:'to'}, 
+    //   {from: 6, to: 1, label: 'causes', title: 'causes', arrows:'to'}, 
+    // ]);
 
     // create a network
     var container = document.getElementById('mynetwork');
 
-    // var data = {
-    //   nodes: nodesDataset,
-    //   edges: edgesDataset
-    // };
     var data = {
-      nodes: nodes,
-      edges: edges
+      nodes: nodesDataset,
+      edges: edgesDataset
     };
+    // var data = {
+    //   nodes: nodes,
+    //   edges: edges
+    // };
     var options = {
       nodes: {
           shape: 'dot',

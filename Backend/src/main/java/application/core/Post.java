@@ -14,6 +14,9 @@ public class Post {
     @Transient
     Result result;
 
+    /**
+     * id of the post
+     */
     @Id
     @GeneratedValue
     private int id;
@@ -31,6 +34,9 @@ public class Post {
     @Column(name = "down_vote")
     private int downVote = 0;
 
+    /**
+     * content of the post
+     */
     @Column(name = "content")
     private String content;
 

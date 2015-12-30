@@ -140,6 +140,11 @@ public class TopicController {
         return topic;
     }
 
+    /**
+     *
+     * @param title
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/title/{title:.+}")
     public Topic getByTitle(@PathVariable("title") String title){
 
@@ -187,6 +192,12 @@ public class TopicController {
         return topic;
     }
 
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/owner/{id}")
     public ArrayList<Topic> getByOwnerId(@PathVariable("id") int id){
 
@@ -236,6 +247,12 @@ public class TopicController {
         return temp;
     }
 
+
+    /**
+     *
+     * @param topic
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/create", headers = "Accept=application/json")
     public Topic create(@Valid @RequestBody Topic topic){
 
@@ -302,6 +319,11 @@ public class TopicController {
     }
 
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/delete")
     public Topic delete(@RequestParam("id") int id){
 
@@ -329,6 +351,12 @@ public class TopicController {
         return temp;
     }
 
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     /* !! Attenttion --> URL has changed */
     @RequestMapping(method = RequestMethod.GET, value  = "/id/{id}/get_posts")
     public PostResponse getPosts(@PathVariable("id") int id){
@@ -362,6 +390,11 @@ public class TopicController {
         return i;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/down_vote")
     public int downVote(@PathVariable("id") int id){
 
@@ -376,6 +409,12 @@ public class TopicController {
         return i;
     }
 
+    /**
+     *
+     * @param tag
+     * @param id
+     * @return
+     */
     /* Add new tag to the topic */
     @RequestMapping(method = RequestMethod.POST, value = "/add_tag/id/{id}", headers = "Accept=application/json")
     public Topic addNewtag(@RequestBody Tag tag, @PathVariable("id") int id){
@@ -478,6 +517,10 @@ public class TopicController {
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(method = RequestMethod.GET, value = "get_topics")
     public ArrayList<TopicResponse> getConnections(){
 
