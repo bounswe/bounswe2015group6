@@ -11,21 +11,32 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 
 /**
- * Created by Oguzhan on 18.11.2015.
+ * @author: Evren Civelek
+ * it is for update functionality of the class
+ * and also for voting system. 
  */
 public interface PostRepository extends CrudRepository<Post, Integer> {
     Post findById(int id);
     ArrayList<Post> findAll();
-
+ // here, update function updates the upVote
+ // and sends it to database. 
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.upVote = p.upVote + 1 WHERE p.id = :id")
     int updateUpVote(@Param("id") int id);
 
+
+ // here, update function updates the downVote
+ // and sends it to database. 
+
     @Modifying
     @Transactional
     @Query("UPDATE Post p SET p.downVote = p.downVote - 1 WHERE p.id = :id")
     int updateDownVote(@Param("id") int id);
+
+
+//here, update function updates or edits the date
+// and sends it to database
 
     @Modifying
     @Transactional
@@ -34,8 +45,9 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Post p SET p.content = :content, p.editDate = :editDate WHERE p.id = :id")
+    @Query("UPDATE Post p SET p.content = :content AND p.ownerId = :ownerId AND p.editDate = :editDate WHERE p.id = :id")
     int updatePost(@Param("id") int id,
                    @Param("content") String content,
+                   @Param("ownerId") int ownerId,
                    @Param("editDate") DateTime dateTime);
 }
