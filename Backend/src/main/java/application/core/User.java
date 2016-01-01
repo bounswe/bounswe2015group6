@@ -61,12 +61,19 @@ public class User {
     @Transient
     private ArrayList<String> interests;
 
+    /**
+     *keeps topics created by user
+     */
     @Transient
     private ArrayList<Topic> createdTopics;
-
+    /**
+     *keeps topics followed by user
+     */
     @Transient
     private ArrayList<Integer> followedTopics;
-
+    /**
+     *keeps posts created by user
+     */
     @Transient
     private ArrayList<Post> createdPosts;
 
@@ -81,6 +88,30 @@ public class User {
      */
     @Transient
     private ArrayList<String> followers;
+
+    /**
+     *keeps location of user
+     */
+    @Transient
+    private String location;
+
+    /**
+     *keeps school of user
+     */
+    @Transient
+    private String school;
+
+    /**
+     *keeps profession of user
+     */
+    @Transient
+    private String job;
+
+    /**
+     *keeps birthday of user
+     */
+    @Transient
+    private Date birthday;
 
     /**
      *
@@ -339,4 +370,19 @@ public class User {
         return interests;
     }
 
+    public String getLocation(){return location;}
+
+    public void setLocation(String location){this.location=location;}
+
+    public Date getBirthday(){return birthday;}
+
+    public void setBirthday(Date birthday){this.birthday = birthday;}
+
+    public String getSchool(){return school;}
+
+    public void setSchool(String school){this.school = school;}
+
+    public String getJob(){return job;}
+
+    public void setJob(String job){this.job = job;}
 }
