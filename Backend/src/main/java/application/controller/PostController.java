@@ -174,7 +174,9 @@ public class PostController {
 
         /* Add tag-post relations */
         for (String tagName :temp.getTagsOfPost()) {
-            
+	    
+ 	    Tag tag = tagRepo.findByTagName(tagName); 	            
+
             /* Check if tag exists */
             if(tag == null){
                 tag = new Tag();
