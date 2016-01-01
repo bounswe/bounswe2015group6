@@ -174,6 +174,14 @@ public class PostController {
 
         /* Add tag-post relations */
         for (String tagName :temp.getTagsOfPost()) {
+            
+            /* Check if tag exists */
+            if(tag == null){
+                tag = new Tag();
+                tag.setTagName(tagName);
+                tagRepo.save(tag);
+            }
+
             TagPostRelation tpg = new TagPostRelation();
             tpg.setPostId(temp.getId());
             int tagID = tagRepo.findByTagName(tagName).getId();
