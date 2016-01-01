@@ -60,9 +60,9 @@ public class RecentController {
             ArrayList<TopicTopicRelation> edges = topicTopicRepo.findByFrom(topic.getId());
 
             /* Store their target ids */
-            ArrayList<Integer> nodeNumbers  = new ArrayList<Integer>();
+            ArrayList<Topic> nodeNumbers  = new ArrayList<Topic>();
             for(TopicTopicRelation t: edges){
-                nodeNumbers.add(t.getTo());
+                nodeNumbers.add(topicRepo.findById(t.getTo()));
             }
 
             /* Finally set relations */
@@ -109,9 +109,9 @@ public class RecentController {
             ArrayList<TopicTopicRelation> edges = topicTopicRepo.findByFrom(topic.getId());
 
             /* Store their target ids */
-            ArrayList<Integer> nodeNumbers  = new ArrayList<Integer>();
+            ArrayList<Topic> nodeNumbers  = new ArrayList<Topic>();
             for(TopicTopicRelation t: edges){
-                nodeNumbers.add(t.getTo());
+                nodeNumbers.add(topicRepo.findById(t.getTo()));
             }
 
             /* Finally set relations */

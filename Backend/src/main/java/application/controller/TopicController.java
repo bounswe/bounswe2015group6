@@ -57,9 +57,9 @@ public class TopicController {
             ArrayList<TopicTopicRelation> edges = topicTopicRepo.findByFrom(topic.getId());
 
             /* Store their target ids */
-            ArrayList<Integer> nodeNumbers  = new ArrayList<Integer>();
+            ArrayList<Topic> nodeNumbers  = new ArrayList<Topic>();
             for(TopicTopicRelation t: edges){
-                nodeNumbers.add(t.getTo());
+                nodeNumbers.add(topicRepo.findById(t.getTo()));
             }
 
             /* Finally set relations */
@@ -117,9 +117,10 @@ public class TopicController {
 
         /* Set the topic and post relations */
         ArrayList<TopicTopicRelation> edges = topicTopicRepo.findByFrom(topic.getId());
-        ArrayList<Integer> nodeNumbers  = new ArrayList<Integer>();
+
+        ArrayList<Topic> nodeNumbers  = new ArrayList<Topic>();
         for(TopicTopicRelation t: edges){
-            nodeNumbers.add(t.getTo());
+            nodeNumbers.add(topicRepo.findById(t.getTo()));
         }
 
         topic.setTopicRelations(nodeNumbers);
@@ -181,9 +182,9 @@ public class TopicController {
 
         /* Set topic relations */
         ArrayList<TopicTopicRelation> edges = topicTopicRepo.findByFrom(topic.getId());
-        ArrayList<Integer> nodeNumbers  = new ArrayList<Integer>();
+        ArrayList<Topic> nodeNumbers  = new ArrayList<Topic>();
         for(TopicTopicRelation t: edges){
-            nodeNumbers.add(t.getTo());
+            nodeNumbers.add(topicRepo.findById(t.getTo()));
         }
 
         topic.setTopicRelations(nodeNumbers);
@@ -213,9 +214,9 @@ public class TopicController {
             ArrayList<TopicTopicRelation> edges = topicTopicRepo.findByFrom(topic.getId());
 
             /* Store their target ids */
-            ArrayList<Integer> nodeNumbers  = new ArrayList<Integer>();
+            ArrayList<Topic> nodeNumbers  = new ArrayList<Topic>();
             for(TopicTopicRelation t: edges){
-                nodeNumbers.add(t.getTo());
+                nodeNumbers.add(topicRepo.findById(t.getTo()));
             }
 
             /* Finally set relations */

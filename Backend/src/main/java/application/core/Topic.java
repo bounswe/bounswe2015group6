@@ -63,7 +63,7 @@ public class Topic {
     private ArrayList<Post> posts;
 
     @Transient
-    private ArrayList<Integer> topicRelations;
+    private ArrayList<Topic> topicRelations;
 
     @Column(name = "_group")
     private String group;
@@ -104,11 +104,11 @@ public class Topic {
         this.posts = posts;
     }
 
-    public ArrayList<Integer> getTopicRelations() {
+    public ArrayList<Topic> getTopicRelations() {
         return topicRelations;
     }
 
-    public void setTopicRelations(ArrayList<Integer> topicRelations) {
+    public void setTopicRelations(ArrayList<Topic> topicRelations) {
         this.topicRelations = topicRelations;
     }
 
