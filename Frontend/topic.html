@@ -118,11 +118,19 @@
     <div class="container theme-showcase" role="main">
 
       <div class="row">
-        <div class="col-sm-4" id="title"></div>
-        <div style="float:right" class="col-sm-offset-4 col-sm-2" id="rating"></div>
-        <div class="col-sm-offset-10 col-sm-2">
-          <a href='#' id="upVote">UpVote</a>
-          <a href='#' id="downVote">DownVote</a>
+        <div style="display:none;" id="createPostMessages"></div>
+        <div class="col-sm-12" id="titleAndRating">
+          <div class="col-sm-10" id="title"></div>
+          <div class="col-sm-2" style="border-left: solid #000000;">
+            <div style="float:right" class="col-sm-12"><h3 style="text-align:center">Rating</h3></div>
+            <div style="float:right; display:none" class="col-sm-12" id="upVoteTopic">
+              <p style="text-align:center"><a href='#' id="upVote"><span class="glyphicon glyphicon-menu-up" style="font-size:2em"></span></a><p>
+            </div>
+            <div style="float:right" class="col-sm-12" id="rating"></div>
+            <div style="float:right; display:none" class="col-sm-12" id="downVoteTopic">
+              <p style="text-align:center"><a href='#' id="downVote"><span class="glyphicon glyphicon-menu-down" style="font-size:2em"></span></a><p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -137,12 +145,13 @@
           <div id="Posts" class="tab-pane fade in active">
 
           <div style="display:none; margin-top:10px" id="messages"></div>
-            <div class="col-sm-12" style="margin-top:20px">
-              <button type="button" data-toggle="collapse" data-target="#postScreen" class="btn btn-primary">Wanna Post?</button>
+            <div class="col-sm-12" style="margin-top:20px; margin-bottom:20px">
+              <button type="button" data-toggle="collapse" data-target="#postScreen" class="btn btn-primary" id="wannaPost" style="display:none">Wanna Post?</button>
             </div>
-            <div id="postScreen" class="col-sm-12 collapse" style="height:100px;border:1px solid #eee; background-color:#F3F3F3; border-radius:20px; margin-top:20px; padding-top:10px">
-              <div style="display:none;" id="createPostMessages"></div>
-              <div class="col-sm-7" style="margin-bottom:10px">
+            <div id="postScreen" class="panel panel-primary collapse" style="margin-top:20px; padding-top:10px; clear:both">
+              <div class="panel panel-body">
+              <div class="col-sm-12">
+              <div class="col-sm-7" style="margin-bottom:0px">
                   <textarea id="postText" rows="3" cols="80" class="form-control" placeholder="Post something!" data-minlength="2" required></textarea>
               </div> 
               <div class="col-sm-4">
@@ -153,8 +162,10 @@
                   <input type="text" id="tag4" placeholder="Please enter a tag." data-minlength='2'>
               </div>
               <div class="col-sm-1" style="margin-top:20px">
-                <button id="sendPostButton" type="submit" class="btn btn-success">Send</button>
+                <button id="sendPostButton" type="submit" class="btn btn-primary">Send</button>
               </div>
+              </div>
+            </div>
             </div>
           </div>
           <div id="Tags" class="tab-pane fade">
@@ -196,34 +207,60 @@ $(function(){
     $('#profile').html($.cookie('username'));
     $('#logindetails').show();
     $('#loginform').hide();
+    $('#upVoteTopic').show();
+    $('#downVoteTopic').show();
+    $('#wannaPost').show();
+    $(".upVote1").show();
   } else {
     $('#logindetails').hide();
     $('#loginform').show();
+    $('#upVoteTopic').hide();
+    $('#downVoteTopic').hide();
+    $('#wannaPost').hide();
+    $('.upVote1').hide();
   }
 
   $.ajax({
     url: api + "/api/topic/id/" + id,
     success: function(data){
       if (data.result.result === "OK") {
+        console.log(data);
         var tagsOfTopic = [];
         var tt = 'Tags: ';
-        console.log(data);
-        var url = '<h2>' + data.title + '</h2>';
+        var html_1 = '<h2>' + data.title + '</h2>';
         rating = Number(data.upVote) + Number(data.downVote);
-        var ratingUrl = "<h3>Rating:" + rating + '</h3>';
-        $('#title').html(url);
-        $('#rating').html(ratingUrl);
-        url = "";
-        for (var i = 0; i < data.posts.length; i++) {
-          url = "<div id='" + id + "-" + data.posts[i].id + "' class='col-sm-12' style='height:150px;border:1px solid #eee; background-color:#F3F3F3; border-radius:20px; margin-top:20px; padding-top:10px'><div class='col-sm-10'><div class='col-sm-12' style='margin-bottom:10px'>" + data.posts[i].content + "</div><div class='col-sm-12' style='margin-bottom:10px'>Tags:" +  data.posts[i].tagsOfPost +"</div><div class='col-sm-12' style='margin-bottom:10px'>CreatedBy:" + data.posts[i].ownerId + "</div></div><div class='col-sm-2'><div class='col-sm-12'>Rating:" + (Number(data.posts[i].upVote) + Number(data.posts[i].downVote)) + "</div><div class='col-sm-12><a href='#' id='upVote1'>UpVote</a> <a href='#' id='downVote'>DownVote</a></div></div>";
-          $("#Posts").append(url);
-        };
+        var html_2 = "<h3 style='text-align:center; margin-top:0px' >" + rating + "</h3>";
+        $('#title').html(html_1);
+        $('#rating').html(html_2);
+        html_1 = "";
 
+        for (var i = 0; i < data.posts.length; i++) {
+          tt = 'Tags: ';
+          for(var j = 0; j < data.posts[i].tagsOfPost.length; j++){
+            if((j+1)==data.posts[i].tagsOfPost.length){
+              tt += data.posts[i].tagsOfPost[j] + ' ';
+            }
+            else{
+              tt += data.posts[i].tagsOfPost[j] + ', ';
+            }
+          }
+          console.log(tt);
+          html_1 = "<div id='" + id + "-" + data.posts[i].id + "' class='panel panel-primary' style='padding-top:0px; clear:both; height:250px'><div class='panel panel-heading' style='margin-top:0px; margin-bottom:0px'><div class='row'><div class='col-sm-9'>Post Id: "+ data.posts[i].id +"</div><div class='col-sm-2'><p style='text-align:right'>CreatedBy: " + data.posts[i].ownerId + "</p></div></div></div><div class='panel-body'><div class='col-sm-10' style='padding-left:0px'><div class='col-sm-12' style='margin-bottom:10px; height:90px'>" + data.posts[i].content + "</div></div><div class='col-sm-2' style='border-left: solid #000000;'><div class='col-sm-12'><h4 style='text-align:center'>Rating</h4></div><div class='upVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#' id='upVote'><span class='glyphicon glyphicon-menu-up' style='font-size:1em'></span></a><p></div></div><div class='col-sm-12' id='ratingPost" + data.posts[i].id + "'><h4 style='text-align:center; margin-top:0px' >" + (Number(data.posts[i].upVote) + Number(data.posts[i].downVote)) + "</h4></div><div class='downVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#' id='downVote'><span class='glyphicon glyphicon-menu-down' style='font-size:1em'></span></a><p></div></div></div><div class='col-sm-12' style='margin-bottom:10px'>" + tt +"</div></div></div></div>";
+          $("#Posts").append(html_1);
+        };
+        tt = 'Tags: '
         for(var i=0;i<data.tags.length;i++){
           tt += data.tags[i] + ", ";
         }
         $('#tt').append(tt);
 
+        if($.cookie('username')) {
+          $(".upVotePost").show();
+          $(".downVotePost").show();
+        } else {
+          $('.upVotePost').hide();
+          $('.downVotePost').hide();
+        }
       } else {
         alert('Ooops! We couldn\'t find that topic :( You\'re being redirected to HomePage');
         window.location.href = "./index.html";
@@ -266,7 +303,7 @@ $('#upVote').on('click', function(){
   })
   .done(function( data ) {
     rating += 1;
-    $('#rating').html("<h3>Rating:" + rating + '</h3>');
+    $('#rating').html("<h3 style='text-align:center; margin-top:0px' >" + rating + "</h3>");
   })
   .fail(function( data ) {
 
@@ -283,7 +320,7 @@ $('#downVote').on('click', function(){
   })
   .done(function( data ) {
     rating -= 1;
-    $('#rating').html("<h3>Rating:" + rating + '</h3>');
+    $('#rating').html("<h3 style='text-align:center; margin-top:0px' >" + rating + "</h3>");
   })
   .fail(function( data ) {
 
@@ -294,19 +331,19 @@ $('#downVote').on('click', function(){
 $('#sendPostButton').on('click', function () {
   var tags = [];
   if($('#postText').val().length>2){
-    if($('#tag1').val()>2){
+    if($('#tag1').val().length>2){
       tags.push($('#tag1').val());
     }
-    if($('#tag2').val()>2){
+    if($('#tag2').val().length>2){
       tags.push($('#tag2').val());
     }
-    if($('#tag3').val()>2){
-      tags.push($('#tag1').val());
+    if($('#tag3').val().length>2){
+      tags.push($('#tag3').val());
     }
-    if($('#tag4').val()>2){
-      tags.push($('#tag1').val());
+    if($('#tag4').val().length>2){
+      tags.push($('#tag4').val());
     }
-
+    console.log(tags);
     $.ajax({
       method: "POST",
       url: api + "/api/post/create?topicId=" + id,
@@ -315,12 +352,10 @@ $('#sendPostButton').on('click', function () {
       data: JSON.stringify({
         content: $('#postText').val(),
         ownerId: Number($.cookie('id')),
-        tagsOfPost: tags,
-      }),
+        tagsOfPost: tags
       })
+    })
       .done(function( data ) {
-        console.log(data);
-        console.log("ttuy");
         $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
         $('#messages').show('slow');
 
@@ -328,14 +363,15 @@ $('#sendPostButton').on('click', function () {
           $('#messages').hide('slow');
           var urlReload = './topic.html?id=' + id;
           window.location.href = urlReload; 
-        }, 3000);
+        }, 1500);
       })
       .fail(function( data ) {
+        console.log(data);
         $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
         $('#messages').show('slow');
         setTimeout(function () {
           $('#messages').hide('slow');
-        }, 3000);
+        }, 1500);
       });
   }
   else{
@@ -344,7 +380,7 @@ $('#sendPostButton').on('click', function () {
     $('#messages').show('slow');
     setTimeout(function () {
       $('#messages').hide('slow');
-    }, 3000);
+    }, 1000);
   }
 });
 
@@ -380,14 +416,15 @@ $('#loginform').validator().on('submit', function (e) {
 
             setTimeout(function () {
               $('#messages').hide('slow');
-            }, 3000);
+                window.location.reload();
+            }, 1000);
           } else {
             $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
             $('#messages').show('slow');
 
             setTimeout(function () {
                 $('#messages').hide('slow');
-            }, 3000);
+            }, 1000);
           }  
         })
         .fail(function( data ) {
@@ -395,7 +432,7 @@ $('#loginform').validator().on('submit', function (e) {
             $('#messages').show('slow');
             setTimeout(function () {
               $('#messages').hide('slow');
-            }, 3000);
+            }, 1000);
             btn.button('reset');
           });
   }
@@ -464,7 +501,7 @@ $('#logoutbtn').on('click', function(e){
     setTimeout(function () {
       $('#messages').hide('slow');
       window.location.reload();
-    }, 2000);
+    }, 1500);
   }
 });
 </script>
