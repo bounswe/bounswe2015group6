@@ -28,6 +28,9 @@ public class Post {
     @Transient
     private int ownerId;
 
+    @Transient
+    private String userName;
+
     @Column(name = "up_vote")
     private int upVote = 0;
 
@@ -56,6 +59,10 @@ public class Post {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getUserName(){return userName;}
+
+    public void setUserName(String userName){this.userName = userName;}
 
     public int getOwnerId() {
         return ownerId;

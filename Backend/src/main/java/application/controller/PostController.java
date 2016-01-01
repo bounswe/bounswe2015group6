@@ -156,6 +156,7 @@ public class PostController {
         Post temp = new Post();
         temp.setContent(post.getContent());
         temp.setOwnerId(post.getOwnerId());
+        temp.setUserName(post.getUserName());
         temp.setTagsOfPost(post.getTagsOfPost());
         temp.setResult(new Result(Result.RESULT_OK,"Succesfully created"));
         temp.setTopicId(topicId);
@@ -174,7 +175,7 @@ public class PostController {
 
         /* Add tag-post relations */
         for (String tagName :temp.getTagsOfPost()) {
-            
+            Tag tag = tagRepo.findByTagName(tagName);
             /* Check if tag exists */
             if(tag == null){
                 tag = new Tag();
@@ -217,7 +218,7 @@ public class PostController {
         int ownerId = post.getOwnerId();
         int id = post.getId();
         DateTime date = new DateTime(DateTimeZone.forID("Europe/Istanbul"));
-        postRepo.updatePost(id, content, date);
+        postRepo.updatePost(id, content, ownerId, date);
 
         /* Check whether new tags have been added */
         ArrayList<String> oldTags = this.getById(id).getTagsOfPost();
