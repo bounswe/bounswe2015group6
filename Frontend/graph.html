@@ -99,16 +99,6 @@
     $.when(
 
       $.get(api + "/api/topic/get_topics", function(data) {
-
-
-        // var max = 0;                
-        // $.map(data, function (obj) {
-        //   if (obj.id > max)
-        //     max = obj.id;
-        // });
-
-        // lastTopicId = max + 1;
-
         nodesDataset = new vis.DataSet(data);
       }),
 
@@ -224,13 +214,13 @@
 
             $.ajax({
               method: "POST",
-              url: api + "/api/edge/create?source=" + data.from + "&dest=" + data.to,
+              url: api + "/api/edge/create_new",
               contentType: "application/json",
-              dataType: "json"
-              // data: { 
-              //   source: data.from,
-              //   dest: data.to
-              // }
+              dataType: "json",
+              data: { 
+                source: data.from,
+                dest: data.to
+              }
             })
             .done(function( data ) {
               
@@ -278,12 +268,11 @@
   }
 
   function saveData(data,callback) {
-    data.id = document.getElementById('node-id').value;
+    console.log(data);
     // data.id = lastTopicId;
     data.label = document.getElementById('node-label').value;
     var tags = document.getElementById('node-tags').value;
     clearPopUp();
-    callback(data);
 
     var tagsarray = tags.split(',');
 
@@ -298,13 +287,25 @@
         tags: tagsarray
       })
     })
-    .done(function( data ) {
+    .done(function( response ) {
+
+      if (response.result.result === "OK") {
+
+          data.id = response.id;
+
+          callback(data);
+
+      } else {
+        alert(response.result.resultMessage);
+      }
       
-      console.log(data);
+      console.log(response);
+
+
 
     })
-    .fail(function( data ) {
-        console.log(data);
+    .fail(function( error ) {
+        console.log(error);
     });
   }
 
