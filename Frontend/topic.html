@@ -62,7 +62,7 @@
           </form>
           <div id="logindetails">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
+              <li><a href="./myprofile.html"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
               <li><a href="#" id="logoutbtn"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
             </ul>
           </div>
@@ -168,17 +168,51 @@
             </div>
             </div>
           </div>
+
           <div id="Tags" class="tab-pane fade">
-              <h2><span id="tt"></span></h2>
+              <div style="display:none; clear:both; margin-top:20px" id="addTagMessages"></div>
+              <h2><span id="tagsName"></span></h2>
+              <div class="input-group col-sm-4" style='margin-top:20px'>
+                <input type="text" class="form-control" placeholder="New tag" id="newTag">
+                <div class="input-group-btn">
+                  <button class="btn btn-success" onClick="addNewTag('')"><i class="glyphicon glyphicon-plus" style='color:white'></i></button>
+                </div>
+              </div>
+              <div class="col-sm-5" style='margin-top:10px; padding-left:0px'>
+                <div class="well well-lg" style='padding-top:5px'>
+                  <h3>Recommendations</h3>
+                  <div class = "col-sm-12" id = "recommendationsTag"></div>
+                </div>
+              </div>
           </div>
           <div id="Relations" class="tab-pane fade">
-
+              <div style="display:none; clear:both; margin-top:20px" id="addRelationMessages"></div>
+              <div class="col-sm-12" id="relationsName"></div>
+              <div class="col-sm-12" style='margin-top:20px; padding-left:0px'>
+                    <div class="col-sm-5" style="padding-left:0px">
+                      <input class="form-control" type="text" id="topic1" placeholder="Please enter a topic name" data-minlength="3" required>
+                      <input style="display:none" type="text" id="topicId1" value="0">
+                    </div>
+                    <div class="col-sm-1" id="checkTopic"></div>
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control" id="relation1" placeholder="Please enter a reason for the relation" data-minlength="3" required>
+                    </div>
+                    <div class="col-sm-1">
+                      <button class="btn btn-success" id="createRelationButton" onClick="addNewRelation(1)"><i class="glyphicon glyphicon-plus" style='color:white'></i></button>
+                    </div>
+              </div> 
+              <div class="col-sm-5" style='margin-top:10px; margin-left:0px; padding-left:0px'>
+                <div class="well well-lg" style='padding-top:5px'>
+                  <h3>Recommendations</h3>
+                  <div class = "col-sm-12" id = "recommendationsTag"></div>
+                </div>
+              </div>
           </div>
 
         </div>
       </div>
 
-      <footer id='f'>
+      <footer>
         <p>&copy; HodgePodge 2015</p>
       </footer>
     </div> <!-- /container -->
@@ -226,7 +260,7 @@ $(function(){
       if (data.result.result === "OK") {
         console.log(data);
         var tagsOfTopic = [];
-        var tt = 'Tags: ';
+        var tagsTab = 'Tags: ';
         var html_1 = '<h2>' + data.title + '</h2>';
         rating = Number(data.upVote) + Number(data.downVote);
         var html_2 = "<h3 style='text-align:center; margin-top:0px' >" + rating + "</h3>";
@@ -235,25 +269,40 @@ $(function(){
         html_1 = "";
 
         for (var i = 0; i < data.posts.length; i++) {
-          tt = 'Tags: ';
+          tagsTab = 'Tags: ';
           for(var j = 0; j < data.posts[i].tagsOfPost.length; j++){
             if((j+1)==data.posts[i].tagsOfPost.length){
-              tt += data.posts[i].tagsOfPost[j] + ' ';
+              tagsTab += "<a href='./search.html?query=" + data.posts[i].tagsOfPost[j] + "' style='color:black'>" + data.posts[i].tagsOfPost[j] + "</a> ";
             }
             else{
-              tt += data.posts[i].tagsOfPost[j] + ', ';
+              tagsTab += "<a href='./search.html?query=" + data.posts[i].tagsOfPost[j] + "' style='color:black'>" + data.posts[i].tagsOfPost[j] + "</a>, ";
             }
           }
           var deleteCheck = Number(data.posts[i].ownerId) == Number($.cookie('id')) ? "block" : "none";
 
-          html_1 = "<div style='display:none;'' id='deleteMessage" + data.posts[i].id + "'></div><div id='" + id + "-" + data.posts[i].id + "' class='panel panel-primary' style='padding-top:0px; clear:both; height:250px'><div class='panel panel-heading' style='margin-top:0px; margin-bottom:0px'><div class='row'><div class='col-sm-9'>Post Id: "+ data.posts[i].id +"</div><div class='col-sm-2'><p style='text-align:right'>CreatedBy: " + data.posts[i].ownerId + "</p></div><div class='deletePosts'><div class='col-sm-1' style='display:" + deleteCheck + "'><p style='text-align:right'><a href='#" + id + "-" + data.posts[i].id + "' id='deleePosts' onClick='deletePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-remove' style='font-size:1.2em; color:red'></span></a><p></div></div></div></div><div class='panel-body'><div class='col-sm-10' style='padding-left:0px'><div class='col-sm-12' style='margin-bottom:10px; height:90px'>" + data.posts[i].content + "</div></div><div class='col-sm-2' style='border-left: solid #000000;'><div class='col-sm-12'><h4 style='text-align:center'>Rating</h4></div><div class='upVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='upVote' onClick='upVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-up' style='font-size:1em'></span></a><p></div></div><div class='col-sm-12' id='ratingPost" + data.posts[i].id + "'><h4 style='text-align:center; margin-top:0px' id='r" + data.posts[i].id + "'>" + (Number(data.posts[i].upVote) + Number(data.posts[i].downVote)) + "</h4></div><div class='downVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='downVote' onClick='downVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-down' style='font-size:1em'></span></a><p></div></div></div><div class='col-sm-12' style='margin-bottom:10px'>" + tt +"</div></div></div></div>";
+          html_1 = "<div style='display:none;'' id='deleteMessage" + data.posts[i].id + "'></div><div id='" + id + "-" + data.posts[i].id + "' class='panel panel-primary' style='padding-top:0px; clear:both; height:250px'><div class='panel panel-heading' style='margin-top:0px; margin-bottom:0px'><div class='row'><div class='col-sm-9'>Post Id: "+ data.posts[i].id +"</div><div class='col-sm-2'><p style='text-align:right'>CreatedBy: <a href='./profile.html?id=" + data.posts[i].ownerId + "' style='color:white'>" + data.posts[i].userName + "</a></p></div><div class='deletePosts'><div class='col-sm-1' style='display:" + deleteCheck + "'><p style='text-align:right'><a href='#" + id + "-" + data.posts[i].id + "' id='deleePosts' onClick='deletePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-remove' style='font-size:1.2em; color:red'></span></a><p></div></div></div></div><div class='panel-body'><div class='col-sm-10' style='padding-left:0px'><div class='col-sm-12' style='margin-bottom:10px; height:90px'>" + data.posts[i].content + "</div></div><div class='col-sm-2' style='border-left: solid #000000;'><div class='col-sm-12'><h4 style='text-align:center'>Rating</h4></div><div class='upVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='upVote' onClick='upVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-up' style='font-size:1em'></span></a><p></div></div><div class='col-sm-12' id='ratingPost" + data.posts[i].id + "'><h4 style='text-align:center; margin-top:0px' id='r" + data.posts[i].id + "'>" + (Number(data.posts[i].upVote) + Number(data.posts[i].downVote)) + "</h4></div><div class='downVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='downVote' onClick='downVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-down' style='font-size:1em'></span></a><p></div></div></div><div class='col-sm-12' style='margin-bottom:10px'>" + tagsTab +"</div></div></div></div>";
           $("#Posts").append(html_1);
         };
-        tt = '';
+        tagsTab = '';
         for(var i=0;i<data.tags.length;i++){
-          tt += data.tags[i] + ", ";
+          if((i+1) == data.tags.length){
+            tagsTab += "<a href='./search.html?query=" + data.tags[i] + "' style='color:black'>" + data.tags[i] + "</a> ";
+          }
+          else{
+            tagsTab += "<a href='./search.html?query=" + data.tags[i] + "' style='color:black'>" + data.tags[i] + "</a>, ";
+          }
         }
-        $('#tt').append(tt);
+        $('#tagsName').append(tagsTab);
+
+        var html_2 = '';
+
+        for(var i=0; i<data.toRelated.length; i++){
+          html_2 += "<h4><div class='col-sm-12' style='margin-bottom:20px'><div class='col-sm-2'>Topic Name: </div><div class='col-sm-4'>" + data.toRelated[i].topicName + "</div><div class='col-sm-2'>Relation: </div><div class='col-sm-4'>" + data.toRelated[i].label + "</div></div></h4>";
+        }
+        for(var i=0; i<data.fromRelated.length; i++){
+          html_2 += "<h4><div class='col-sm-12' style='margin-bottom:20px'><div class='col-sm-2'>Topic Name: </div><div class='col-sm-4'>" + data.fromRelated[i].topicName + "</div><div class='col-sm-2'>Relation: </div><div class='col-sm-4'>" + data.fromRelated[i].label + "</div></div></h4>";
+        }  
+        $('#relationsName').append(html_2); 
 
         if($.cookie('username')) {
           $(".upVotePost").show();
@@ -276,6 +325,151 @@ $(function(){
   });
 });
 
+//CREATE A RELATION -  TOPIC INPUT VALIDATION
+$('#topic1').change(function(){
+  var topicName = $('#topic1').val();
+
+  $.ajax({
+    url: api + "/api/topic/title/" + topicName,
+    success: function(data){
+      if (data.result.result === "OK") {
+        $('#checkTopic').html('<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;margin-top:10px"></span>');
+        $('#topic1').css('border','3px solid green');
+        $('#createRelationButton').prop('disabled',false);
+        $('#topicId1').val(data.id);
+      } else {
+        $('#checkTopic').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+        $('#topic1').css('border','3px solid red');
+        $('#createRelationButton').prop('disabled',true);
+      }
+    },
+    error: function(){
+      $('#checkTopic').html('<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;margin-top:10px"></span>');
+      $('#topic1').css('border','3px solid red');
+      $('#createRelationButton').prop('disabled',true);
+    }, 
+  });
+});
+//END OF CREATE A RELATION -  TOPIC INPUT VALIDATION
+
+//FUNCTION FOR ADDING A NEW TAG TO AN EXISTING TOPIC
+function addNewTag(TagName){
+  var newTagName = TagName.length>0 ? TagName : $('#newTag').val();
+  console.log(newTagName);
+  $.ajax({
+    method: "POST",
+    url: api + "/api/topic/add_tag/id/" + id,
+      contentType: "application/json",
+      dataType: "json",
+      data: JSON.stringify({
+        tagName: newTagName
+      })
+    })
+      .done(function( data ) {
+        $('#tagsName').append(', ' + newTagName + ' '); 
+        $('#addTagMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Tag is successfully added!</strong> </div>');
+        $('#addTagMessages').show('slow');
+
+        setTimeout(function () {
+          $('#addTagMessages').hide('slow');
+        }, 1500);
+      })
+      .fail(function( data ) {
+        $('#addTagMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Something went wrong! Tag could\'nt be added!</strong></div>');
+        $('#addTagMessages').show('slow');
+
+        setTimeout(function () {
+          $('#addTagMessages').hide('slow');
+        }, 1500);
+      });
+};
+//END OF FUNCTION FOR ADDING A NEW TAG TO AN EXISTING TOPIC
+
+//FUNCTION FOR ADDING A NEW RELATION TO AN EXISTING TOPIC
+function addNewRelation(rID){
+  if($('#relation' + rID).val().length>=3 && $('#topicId' + rID).val()!=0){
+    $('#relation' + rID).css('border','1px solid #ccc');
+    $('#topic' + rID).css('border','1px solid #ccc');
+
+    $.ajax({
+        method: "POST",
+        url: api + "/api/edge/create",
+        data: {
+          source: id,
+          dest: $('#topicId' + rID).val(),
+          label: $('#relation' + rID).val(),
+          user: Number($.cookie('id'))
+        },
+      })
+        .done(function( data ) {
+          if (data.id) {
+            $('#addRelationMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Relation is created</div>');
+            $('#addRelationMessages').show('slow');
+            
+            setTimeout(function () {
+              $('#addRelationMessages').hide('slow');
+              $('#addRelationPage').modal('hide');
+            }, 1500);
+            $('#relationsName').append("<h4><div class='col-sm-12' style='margin-bottom:20px'><div class='col-sm-2'>Topic Name: </div><div class='col-sm-4'>" + $('#topic' + rID).val() + "</div><div class='col-sm-2'>Relation: </div><div class='col-sm-4'>" + $('#relation' + rID).val() + "</div></div></h4>");
+            $('#relation' + rID).val('');
+            $('#topic' + rID).val('');
+            $('#checkTopic').html('');
+          }
+        })
+        .fail(function( data ) {
+            $('#addRelationMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#addRelationMessages').show('slow');
+
+            setTimeout(function () {
+                $('#addMessages').hide('slow');
+            }, 1500);
+              btn.button('reset');
+          });
+  }
+  else{
+    if($('#relation' + rID).val().length<3){
+      $('#relation' + rID).css('border','3px solid red');
+    }
+    else{
+      $('#relation' + rID).css('border','1px solid #ccc');
+    }
+    if($('#topicId' + rID).val()==0){
+      $('#topic' + rID).css('border','3px solid red');
+    }
+    else{
+      $('#topic' + rID).css('border','3px solid red');
+    }
+  }
+  /*var newTagName = TagName.length>0 ? TagName : $('#newTag').val();
+  console.log(newTagName);
+  $.ajax({
+    method: "POST",
+    url: api + "/api/topic/add_tag/id/" + id,
+      contentType: "application/json",
+      dataType: "json",
+      data: JSON.stringify({
+        tagName: newTagName
+      })
+    })
+      .done(function( data ) {
+        $('#tagsName').append(', ' + newTagName + ' '); 
+        $('#addTagMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Tag is successfully added!</strong> </div>');
+        $('#addTagMessages').show('slow');
+
+        setTimeout(function () {
+          $('#addTagMessages').hide('slow');
+        }, 1500);
+      })
+      .fail(function( data ) {
+        $('#addTagMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Something went wrong! Tag could\'nt be added!</strong></div>');
+        $('#addTagMessages').show('slow');
+
+        setTimeout(function () {
+          $('#addTagMessages').hide('slow');
+        }, 1500);
+      });*/
+};
+//END OF FUNCTION FOR ADDING A NEW TAG TO AN EXISTING TOPIC
 
 //FUNCTION FOR GETTING THE ID OF THE TOPIC FROM URL
 function GetURLParameter(sParam)
@@ -455,10 +649,6 @@ $('#sendPostButton').on('click', function () {
       $('#createPostMessages').hide('slow');
     }, 1000);
   }
-});
-
-$('#profile').on('click', function(){
-  window.location.href = './myprofile.html';
 });
 
 $('#loginform').validator().on('submit', function (e) {

@@ -69,7 +69,7 @@
           </form>
           <div style="display:none;" id="logindetails">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="profile.html"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
+              <li><a href="./myprofile.html"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
               <li><a href="#" id="logoutbtn"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
             </ul>
           </div>
@@ -347,8 +347,9 @@
 var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
 
 $(function(){
+
   //GETTING DATA FOR THE MOST RECENTLY ACTIVE TOPICS
-  $.ajax({
+ $.ajax({
     url: api + "/api/recent_popular/recent/",
     success: function(data){
       var recentOrPopular = "<div class='list-group'>";
@@ -376,9 +377,10 @@ $(function(){
     url: api + "/api/recent_popular/popular/",
     success: function(data){
       if (data) {
+        console.log(12);
         var recent = "<div class='list-group'>";
         for(var i = 0; i<(data.length>=10 ? 10 : data.length); i++){
-          //var postLength = data[i].posts ? data[i].posts.length : 0 ;
+          var postLength = data[i].posts ? data[i].posts.length : 0 ;
           var rating = Number(data[i].upVote) + Number(data[i].downVote);
           recent += "<a href='topic.html?id=" + data[i].id + "' class='list-group-item'><span class='badge'>" + rating + "</span>" + data[i].title + "</a>";
           $('#popular').html(recent);
@@ -820,7 +822,7 @@ $( document ).ready(function() {
 
   });
 
-}); 
+});
 
 </script>
 

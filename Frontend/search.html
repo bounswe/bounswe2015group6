@@ -42,10 +42,6 @@
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="index.html">HodgePodge</a>
         </div>
@@ -65,7 +61,7 @@
       <div style="display:none;" id="messages"></div>
 
       <div class="row">
-        <span id="ro">Profile Page of </span>
+        <span id="ro">Search Query Results for </span>
       </div>
       <footer>
         <p>&copy; HodgePodge 2015</p>
@@ -81,20 +77,19 @@
     <script src="assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
-
     <script src="js/validator.js"></script>
     <script src="js/jquery.cookie.js"></script>
 
 <script>
 
 var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
-var userID = Number(GetURLParameter('id'));
+var searchQuery = GetURLParameter('query');
 
 $(function(){
   if($.cookie('username')) {
     $('#profile').html($.cookie('username'));
-    $('#ro').append(userID);
-    console.log(userID);
+    $('#ro').append(searchQuery);
+    console.log(searchQuery);
   } else {
     window.location.href = "./index.html"
   }
@@ -121,14 +116,13 @@ function GetURLParameter(sParam)
 $('#logoutbtn').on('click', function(e){
     e.preventDefault();
     if($.removeCookie('username')) {
-
       $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Successfully logged out! Refreshing the page now...</div>');
       $('#messages').show('slow');
 
       setTimeout(function () {
         $('#messages').hide('slow');
         window.location.href = './index.html';
-      }, 2000);
+      }, 1500);
     }
   });
 </script>
