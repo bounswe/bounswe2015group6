@@ -118,7 +118,7 @@
     <div class="container theme-showcase" role="main">
 
       <div class="row">
-        <div style="display:none;" id="createPostMessages"></div>
+        <div style="display:none;" id="loginMessages"></div>
         <div class="col-sm-12" id="titleAndRating">
           <div class="col-sm-10" id="title"></div>
           <div class="col-sm-2" style="border-left: solid #000000;">
@@ -144,10 +144,10 @@
         <div class="tab-content">
           <div id="Posts" class="tab-pane fade in active">
 
-          <div style="display:none; margin-top:10px" id="messages"></div>
             <div class="col-sm-12" style="margin-top:20px; margin-bottom:20px">
-              <button type="button" data-toggle="collapse" data-target="#postScreen" class="btn btn-primary" id="wannaPost" style="display:none">Wanna Post?</button>
-            </div>
+            <button type="button" data-toggle="collapse" data-target="#postScreen" class="btn btn-primary" id="wannaPost" style="display:none">Wanna Post?</button>
+            </div> 
+            <div style="display:none; clear:both" id="createPostMessages"></div>
             <div id="postScreen" class="panel panel-primary collapse" style="margin-top:20px; padding-top:10px; clear:both">
               <div class="panel panel-body">
               <div class="col-sm-12">
@@ -178,7 +178,7 @@
         </div>
       </div>
 
-      <footer>
+      <footer id='f'>
         <p>&copy; HodgePodge 2015</p>
       </footer>
     </div> <!-- /container -->
@@ -244,11 +244,12 @@ $(function(){
               tt += data.posts[i].tagsOfPost[j] + ', ';
             }
           }
-          console.log(tt);
-          html_1 = "<div id='" + id + "-" + data.posts[i].id + "' class='panel panel-primary' style='padding-top:0px; clear:both; height:250px'><div class='panel panel-heading' style='margin-top:0px; margin-bottom:0px'><div class='row'><div class='col-sm-9'>Post Id: "+ data.posts[i].id +"</div><div class='col-sm-2'><p style='text-align:right'>CreatedBy: " + data.posts[i].ownerId + "</p></div></div></div><div class='panel-body'><div class='col-sm-10' style='padding-left:0px'><div class='col-sm-12' style='margin-bottom:10px; height:90px'>" + data.posts[i].content + "</div></div><div class='col-sm-2' style='border-left: solid #000000;'><div class='col-sm-12'><h4 style='text-align:center'>Rating</h4></div><div class='upVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#' id='upVote'><span class='glyphicon glyphicon-menu-up' style='font-size:1em'></span></a><p></div></div><div class='col-sm-12' id='ratingPost" + data.posts[i].id + "'><h4 style='text-align:center; margin-top:0px' >" + (Number(data.posts[i].upVote) + Number(data.posts[i].downVote)) + "</h4></div><div class='downVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#' id='downVote'><span class='glyphicon glyphicon-menu-down' style='font-size:1em'></span></a><p></div></div></div><div class='col-sm-12' style='margin-bottom:10px'>" + tt +"</div></div></div></div>";
+          var deleteCheck = Number(data.posts[i].ownerId) == Number($.cookie('id')) ? "block" : "none";
+
+          html_1 = "<div style='display:none;'' id='deleteMessage" + data.posts[i].id + "'></div><div id='" + id + "-" + data.posts[i].id + "' class='panel panel-primary' style='padding-top:0px; clear:both; height:250px'><div class='panel panel-heading' style='margin-top:0px; margin-bottom:0px'><div class='row'><div class='col-sm-9'>Post Id: "+ data.posts[i].id +"</div><div class='col-sm-2'><p style='text-align:right'>CreatedBy: " + data.posts[i].ownerId + "</p></div><div class='deletePosts'><div class='col-sm-1' style='display:" + deleteCheck + "'><p style='text-align:right'><a href='#" + id + "-" + data.posts[i].id + "' id='deleePosts' onClick='deletePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-remove' style='font-size:1.2em; color:red'></span></a><p></div></div></div></div><div class='panel-body'><div class='col-sm-10' style='padding-left:0px'><div class='col-sm-12' style='margin-bottom:10px; height:90px'>" + data.posts[i].content + "</div></div><div class='col-sm-2' style='border-left: solid #000000;'><div class='col-sm-12'><h4 style='text-align:center'>Rating</h4></div><div class='upVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='upVote' onClick='upVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-up' style='font-size:1em'></span></a><p></div></div><div class='col-sm-12' id='ratingPost" + data.posts[i].id + "'><h4 style='text-align:center; margin-top:0px' id='r" + data.posts[i].id + "'>" + (Number(data.posts[i].upVote) + Number(data.posts[i].downVote)) + "</h4></div><div class='downVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='downVote' onClick='downVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-down' style='font-size:1em'></span></a><p></div></div></div><div class='col-sm-12' style='margin-bottom:10px'>" + tt +"</div></div></div></div>";
           $("#Posts").append(html_1);
         };
-        tt = 'Tags: '
+        tt = '';
         for(var i=0;i<data.tags.length;i++){
           tt += data.tags[i] + ", ";
         }
@@ -257,9 +258,11 @@ $(function(){
         if($.cookie('username')) {
           $(".upVotePost").show();
           $(".downVotePost").show();
+          $(".deletePosts").show();
         } else {
           $('.upVotePost').hide();
           $('.downVotePost').hide();
+          $(".deletePosts").hide();
         }
       } else {
         alert('Ooops! We couldn\'t find that topic :( You\'re being redirected to HomePage');
@@ -293,6 +296,75 @@ function GetURLParameter(sParam)
   return title;
 };
 //END OF FUNCTION FOR GETTING THE ID OF THE TOPIC FROM URL
+
+//FUNCTION FOR DELETING THE POST WITH THE ID PARAMETER
+function deletePosts(postId)
+{
+  var conf = confirm('Are you sure?');
+  if(conf){
+    $.ajax({
+      method: "DELETE",
+      url: api + "/api/post/delete?id=" + Number(postId),
+    })
+     .done(function( data ) {
+        $('#deleteMessage' + postId).html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Post is succesfully deleted!</strong></div>');
+        $('#deleteMessage' + postId).show('slow');
+
+        setTimeout(function () {
+          $('#deleteMessage' + postId).hide('slow');
+          $('#' + id + '-' + postId).hide('slow');
+        }, 1500);
+      })
+     .fail(function( data ) {
+        $('#createPostMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong>Something went wrong! Post cannot be deleted!</div>');
+        $('#createPostMessages').show('slow');
+
+        setTimeout(function () {
+          $('#createPostMessages').hide('slow');
+          var urlReload = './topic.html?id=' + id;
+          window.location.href = urlReload; 
+        }, 1500);      
+      });
+  }
+  else{
+
+  }
+};
+//END OF FUNCTION FOR DELETING THE POST WITH THE ID PARAMETER
+
+//FUNCTION FOR UPVOTING A POST WITH THE POSTID
+function upVotePosts(postId){
+  var Url = api + "/api/post/id/" + Number(postId) +"/";
+  $.ajax({
+    method: "POST",
+    url: Url + "up_vote",
+  })
+  .done(function( data ) {
+    var upVoteCurrent = Number($('#r' + Number(postId)).html());
+    $('#r' + Number(postId)).html(upVoteCurrent+1);
+  })
+  .fail(function( data ) {
+
+  });
+};
+//END OF FUNCTION FOR UPVOTING A POST WITH THE POSTID
+
+//FUNCTION FOR UPVOTING A POST WITH THE POSTID
+function downVotePosts(postId){
+  var Url = api + "/api/post/id/" + Number(postId) +"/";
+  $.ajax({
+    method: "POST",
+    url: Url + "down_vote",
+  })
+  .done(function( data ) {
+    var downVoteCurrent = Number($('#r' + Number(postId)).html());
+    $('#r' + Number(postId)).html(downVoteCurrent-1);
+  })
+  .fail(function( data ) {
+
+  });
+};
+//END OF FUNCTION FOR UPVOTING A POST WITH THE POSTID
 
 //upVote Click Event
 $('#upVote').on('click', function(){
@@ -356,32 +428,37 @@ $('#sendPostButton').on('click', function () {
       })
     })
       .done(function( data ) {
-        $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
-        $('#messages').show('slow');
+        console.log(data);
+        $('#createPostMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Post is successfully created!</strong> </div>');
+        $('#createPostMessages').show('slow');
 
         setTimeout(function () {
-          $('#messages').hide('slow');
+          $('#createPostMessages').hide('slow');
           var urlReload = './topic.html?id=' + id;
           window.location.href = urlReload; 
         }, 1500);
       })
       .fail(function( data ) {
         console.log(data);
-        $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
-        $('#messages').show('slow');
+        $('#createPostMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+        $('#createPostMessages').show('slow');
         setTimeout(function () {
-          $('#messages').hide('slow');
+          $('#createPostMessages').hide('slow');
         }, 1500);
       });
   }
   else{
     $('#postText').css('border','3px solid red');
-    $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Please enter a longer post!</div>');
-    $('#messages').show('slow');
+    $('#createPostMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Please enter a longer post!</div>');
+    $('#createPostMessages').show('slow');
     setTimeout(function () {
-      $('#messages').hide('slow');
+      $('#createPostMessages').hide('slow');
     }, 1000);
   }
+});
+
+$('#profile').on('click', function(){
+  window.location.href = './myprofile.html';
 });
 
 $('#loginform').validator().on('submit', function (e) {
@@ -411,27 +488,27 @@ $('#loginform').validator().on('submit', function (e) {
             $('#profile').html(data.username);
             $('#logindetails').show('slow');
 
-            $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
-            $('#messages').show('slow');
+            $('#loginMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#loginMessages').show('slow');
 
             setTimeout(function () {
-              $('#messages').hide('slow');
+              $('#loginMessages').hide('slow');
                 window.location.reload();
             }, 1000);
           } else {
-            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
-            $('#messages').show('slow');
+            $('#loginMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#loginMessages').show('slow');
 
             setTimeout(function () {
-                $('#messages').hide('slow');
+                $('#loginMessages').hide('slow');
             }, 1000);
           }  
         })
         .fail(function( data ) {
-            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
-            $('#messages').show('slow');
+            $('#loginMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#loginMessages').show('slow');
             setTimeout(function () {
-              $('#messages').hide('slow');
+              $('#loginMessages').hide('slow');
             }, 1000);
             btn.button('reset');
           });
@@ -495,11 +572,11 @@ $('#logoutbtn').on('click', function(e){
   e.preventDefault();
   if($.removeCookie('username')) {
 
-    $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Successfully logged out! Refreshing the page now...</div>');
-    $('#messages').show('slow');
+    $('#loginMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Successfully logged out! Refreshing the page now...</div>');
+    $('#loginMessages').show('slow');
 
     setTimeout(function () {
-      $('#messages').hide('slow');
+      $('#loginMessages').hide('slow');
       window.location.reload();
     }, 1500);
   }
