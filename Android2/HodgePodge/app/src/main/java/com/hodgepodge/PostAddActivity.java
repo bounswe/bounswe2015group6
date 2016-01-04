@@ -44,7 +44,7 @@ public class PostAddActivity extends AppCompatActivity {
                     JSONObject jsonParams = new JSONObject();
                     jsonParams.put("ownerId", user.getString("ID", ""));
                     jsonParams.put("content", contentEditText.getText().toString());
-                    jsonParams.put("tagsOfPost", null);
+                    jsonParams.put("tagsOfPost", tagsEditText.getText());
 
                     StringEntity entity = null;
                     try {

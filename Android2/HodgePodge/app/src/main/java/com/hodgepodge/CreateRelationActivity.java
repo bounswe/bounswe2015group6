@@ -3,6 +3,7 @@ package com.hodgepodge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,6 +22,7 @@ public class CreateRelationActivity extends AppCompatActivity {
     String URL = "edge/create?source=";
     private int source;
     private int dest;
+    private SharedPreferences user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,15 +32,18 @@ public class CreateRelationActivity extends AppCompatActivity {
     public void createRelation(View view) throws JSONException {
         final EditText topic1Text = (EditText) findViewById(R.id.editTxtTopic1);
         final EditText topic2Text = (EditText) findViewById(R.id.editTxtTopic2);
+        final EditText label = (EditText) findViewById(R.id.editTxtLabel);
         final TextView errorText =  (TextView) findViewById(R.id.errorTextViewRelation);
         final Context context = this;
+        user = getSharedPreferences("UserInfo", 0);
+
+
         ServiceClient.get("topic/title/" + topic1Text.getText(), null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     if(response.getInt("id") != 0){
                         source = response.getInt("id");
-                        // URL = URL + Integer.toString(response.getInt("id")) + "&dest=";
                         ServiceClient.get("topic/title/" + topic2Text.getText(), null, new JsonHttpResponseHandler() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -46,7 +51,7 @@ public class CreateRelationActivity extends AppCompatActivity {
                                     if(response.getInt("id") != 0){
                                         dest = response.getInt("id");
 
-                                        ServiceClient.post(getApplicationContext(), URL + source + "&dest=" + dest, null, "application/json",
+                                        ServiceClient.post(getApplicationContext(), URL + source + "&dest=" + dest+"&label="+label.getText()+"&user="+user.getString("ID", ""), null, "application/json",
                                                 new AsyncHttpResponseHandler() {
                                                     @Override
                                                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

@@ -4,4 +4,4 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
-<!-- From: file:/Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/res/menu/home_page.xml -->
+<!-- From: file:/C:/Users/samsung/Documents/GitHub/bounswe2015group6/Android2/HodgePodge/app/src/main/res/menu/home_page.xml -->

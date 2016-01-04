@@ -1,5 +1,7 @@
 package com.hodgepodge;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +34,7 @@ public class CreateTopicActivity extends AppCompatActivity {
         final EditText titleEditText = (EditText) findViewById(R.id.titleEditText);
         final EditText tagsEditText = (EditText) findViewById(R.id.tagsEditText);
         final TextView errorCreateTopicTextView = (TextView) findViewById(R.id.errorCreateTopicTextView);
+        final Context context = this;
         SharedPreferences user = getSharedPreferences("UserInfo", 0);
 
         String convertedTitle = titleEditText.getText().toString().replaceAll("\\s+", " ");
@@ -64,6 +67,8 @@ public class CreateTopicActivity extends AppCompatActivity {
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                             System.out.println("Create Topic Sucess");
                             errorCreateTopicTextView.setText("The topic was created");
+                            Intent intent = new Intent(context, HomePageActivity.class);
+                            startActivity(intent);
                             //Send user to homepage
                         }
 
