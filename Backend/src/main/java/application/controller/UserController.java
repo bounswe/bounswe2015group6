@@ -9,7 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -43,6 +45,8 @@ public class UserController {
     @Autowired
     private TagTopicRelationRepository tagTopicRelationRepo;
 
+    @Autowired
+    private FeedRepository feedRepo;
 
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ArrayList<User> findAll(){
@@ -201,6 +205,29 @@ public class UserController {
 
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/profile/{id}")
+    public Map<String,ArrayList<String>> getProfile(@PathVariable("id") int userId){
+
+        Map<String,ArrayList<String>> profile = new HashMap<>();
+
+        ArrayList<String> username = new ArrayList<>();
+        ArrayList<String> feeds = new ArrayList<>();
+        ArrayList<String> following = new ArrayList<>();
+        ArrayList<String> followers = new ArrayList<>();
+
+        username.add(repo.findById(userId).getUsername());
+        for (Feed f: feedRepo.findByUserId(userId)) {
+            feeds.add(f.getMessage());
+        }
+
+        profile.put("User", username);
+        profile.put("Feed",feeds );
+        profile.put("Following", followRepo.getFollowedNames(userId));
+        profile.put("Follower", followRepo.getFollowerNames(userId));
+
+        return profile;
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/id/{id}/get_recommend")
     public ArrayList<Topic> getRecommendations(@PathVariable("id") int userId){
 
@@ -238,4 +265,6 @@ public class UserController {
         return recommended;
 
     }
+
+
 }
