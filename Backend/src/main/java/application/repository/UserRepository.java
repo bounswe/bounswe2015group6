@@ -31,11 +31,16 @@ public interface UserRepository extends CrudRepository<User, Integer>{
      */
     User findByEmail(String email);
 
+    ArrayList<User> findByUserNameContaining(String userName);
+
     /**
      *
      * @param facebookId
      * @return
      */
+
+
+
     User findByFacebookId(String facebookId);
 
     /**

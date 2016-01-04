@@ -29,6 +29,7 @@ public interface TopicRepository extends CrudRepository<Topic, Integer> {
     Topic findById(int id);
     Topic findByTitle(String title);
     ArrayList<Topic> findByOwnerId(int ownerId);
+    ArrayList<Topic> findByTitleContaining(String title);
 
     /**
      *

@@ -2,15 +2,16 @@ package application.controller;
 
 import application.core.Search;
 import application.core.Topic;
+import application.core.User;
 import application.repository.PostRepository;
 import application.repository.TopicRepository;
+import application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/search")
@@ -36,5 +37,41 @@ public class SearchController {
         }
 
         return topicNames;
+    }
+
+
+    @Autowired
+    private UserRepository userRepo;
+
+
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/*/{searchTerm}")
+    public Map<String, ArrayList<String>> searchForTopicAndUserName(@PathVariable("searchTerm") String searchTerm){
+
+        Map<String, ArrayList<String>> results = new HashMap<>();
+
+        ArrayList<User> users = userRepo.findByUserNameContaining(searchTerm);
+        ArrayList<Topic> topics = topicRepo.findByTitleContaining(searchTerm);
+
+        ArrayList<String> UserNames = new ArrayList<>();
+        for (User u :users){
+            UserNames.add(u.getUsername());
+        }
+
+        ArrayList<String> TopicTitles = new ArrayList<>();
+
+        for (Topic t: topics) {
+            TopicTitles.add(t.getTitle());
+        }
+
+        results.put("User", UserNames);
+        results.put("Topic", TopicTitles);
+
+
+        return results;
+
+
+
     }
 }
