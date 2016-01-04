@@ -135,7 +135,7 @@
       </div>
 
       <div class="row" style="margin-bottom:10px">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs nav-justified">
           <li class="active"><a data-toggle="tab" href="#Posts">Posts</a></li>
           <li><a data-toggle="tab" href="#Tags">Tags</a></li>
           <li><a data-toggle="tab" href="#Relations">Relations</a></li>
@@ -172,23 +172,17 @@
           <div id="Tags" class="tab-pane fade">
               <div style="display:none; clear:both; margin-top:20px" id="addTagMessages"></div>
               <h2><span id="tagsName"></span></h2>
-              <div class="input-group col-sm-4" style='margin-top:20px'>
+              <div class="input-group col-sm-4" style='margin-top:20px' id="newTagAddition">
                 <input type="text" class="form-control" placeholder="New tag" id="newTag">
                 <div class="input-group-btn">
                   <button class="btn btn-success" onClick="addNewTag('')"><i class="glyphicon glyphicon-plus" style='color:white'></i></button>
-                </div>
-              </div>
-              <div class="col-sm-5" style='margin-top:10px; padding-left:0px'>
-                <div class="well well-lg" style='padding-top:5px'>
-                  <h3>Recommendations</h3>
-                  <div class = "col-sm-12" id = "recommendationsTag"></div>
                 </div>
               </div>
           </div>
           <div id="Relations" class="tab-pane fade">
               <div style="display:none; clear:both; margin-top:20px" id="addRelationMessages"></div>
               <div class="col-sm-12" id="relationsName"></div>
-              <div class="col-sm-12" style='margin-top:20px; padding-left:0px'>
+              <div class="col-sm-12" style='margin-top:20px; padding-left:0px' id="newRelationAddition">
                     <div class="col-sm-5" style="padding-left:0px">
                       <input class="form-control" type="text" id="topic1" placeholder="Please enter a topic name" data-minlength="3" required>
                       <input style="display:none" type="text" id="topicId1" value="0">
@@ -245,6 +239,8 @@ $(function(){
     $('#downVoteTopic').show();
     $('#wannaPost').show();
     $(".upVote1").show();
+    $('#newTagAddition').show();
+    $('#newRelationAddition').show();
   } else {
     $('#logindetails').hide();
     $('#loginform').show();
@@ -252,6 +248,8 @@ $(function(){
     $('#downVoteTopic').hide();
     $('#wannaPost').hide();
     $('.upVote1').hide();
+    $('#newTagAddition').hide();
+    $('#newRelationAddition').hide();
   }
 
   $.ajax({
@@ -355,7 +353,7 @@ $('#topic1').change(function(){
 //FUNCTION FOR ADDING A NEW TAG TO AN EXISTING TOPIC
 function addNewTag(TagName){
   var newTagName = TagName.length>0 ? TagName : $('#newTag').val();
-  console.log(newTagName);
+
   $.ajax({
     method: "POST",
     url: api + "/api/topic/add_tag/id/" + id,
@@ -373,6 +371,7 @@ function addNewTag(TagName){
         setTimeout(function () {
           $('#addTagMessages').hide('slow');
         }, 1500);
+        $('#newTag').val('');
       })
       .fail(function( data ) {
         $('#addTagMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Something went wrong! Tag could\'nt be added!</strong></div>');
@@ -440,34 +439,6 @@ function addNewRelation(rID){
       $('#topic' + rID).css('border','3px solid red');
     }
   }
-  /*var newTagName = TagName.length>0 ? TagName : $('#newTag').val();
-  console.log(newTagName);
-  $.ajax({
-    method: "POST",
-    url: api + "/api/topic/add_tag/id/" + id,
-      contentType: "application/json",
-      dataType: "json",
-      data: JSON.stringify({
-        tagName: newTagName
-      })
-    })
-      .done(function( data ) {
-        $('#tagsName').append(', ' + newTagName + ' '); 
-        $('#addTagMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Tag is successfully added!</strong> </div>');
-        $('#addTagMessages').show('slow');
-
-        setTimeout(function () {
-          $('#addTagMessages').hide('slow');
-        }, 1500);
-      })
-      .fail(function( data ) {
-        $('#addTagMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Something went wrong! Tag could\'nt be added!</strong></div>');
-        $('#addTagMessages').show('slow');
-
-        setTimeout(function () {
-          $('#addTagMessages').hide('slow');
-        }, 1500);
-      });*/
 };
 //END OF FUNCTION FOR ADDING A NEW TAG TO AN EXISTING TOPIC
 

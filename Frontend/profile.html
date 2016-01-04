@@ -50,6 +50,17 @@
           <a class="navbar-brand" href="index.html">HodgePodge</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+          <form style="display:none;" id="loginform" class="navbar-form navbar-right">
+            <div class="form-group">
+              <input id="username" type="text" placeholder="Username" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input id="password" type="password" placeholder="Password" class="form-control" required>
+            </div>
+            <button id="loginButton" type="submit" class="btn btn-success">Sign in</button>
+            <button data-toggle="modal" data-target="#registerPage" type="button" class="btn btn-info">Sign up</button>
+          </form>
+        <div id="navbar" class="navbar-collapse collapse">
           <div id="logindetails">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#"><span class="glyphicon glyphicon-user"></span><span id="profile"></span></a></li>
@@ -59,13 +70,86 @@
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
+<!-- REGISTER PAGE MODAL -->
+    <div id="registerPage" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Register</h4>
+          </div>
+          <div class="modal-body">
+            <div style="display:none;" id="registerMessages"></div>
+            <form id="registerform" class="form-horizontal" role="form">
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="username">Username:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="registerUsername" placeholder="Enter username" data-minlength="6" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="registerEmail">Email:</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="registerEmail" placeholder="Enter email" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="registerPassword">Password:</label>
+                <div class="col-sm-10"> 
+                  <input type="password" class="form-control" id="registerPassword" placeholder="Enter password" required>
+                </div>
+              </div>
+              <div class="form-group"> 
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button id="registerButton" type="submit" class="btn btn-default">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="container theme-showcase" role="main">
-
+      <div class="row">
       <div style="display:none;" id="messages"></div>
 
-      <div class="row">
-        <span id="ro">Profile Page of </span>
+        <div class="col-sm-12" id="usernameAndFollows">
+          <div class="col-sm-10">
+            <h3><p id='userName'>User Name</p></h3>
+            <h4><p id='followsYou'><i>Follows you or not</i></p></h4>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-primary" id="followButton">Follow</button>
+            <input type="text" style="display:none" value="0">
+          </div>
+        </div>
+      </div>
+
+        <div class="row" style="margin-bottom:10px">
+        <ul class="nav nav-tabs nav-justified">
+          <li class="active"><a data-toggle="tab" href="#myActivities">Activities</a></li>
+          <li><a data-toggle="tab" href="#followers">Followers <span class="badge" id="totalFollowers">0</span></a></li>
+          <li><a data-toggle="tab" href="#following">Following <span class="badge" id="totalFollowing">0</span></a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="myActivities" class="tab-pane fade in active">
+
+          </div>
+
+          <div id="followers" class="tab-pane fade">
+
+          </div>
+          <div id="following" class="tab-pane fade">
+
+          </div>
+        </div>
       </div>
       <footer>
         <p>&copy; HodgePodge 2015</p>
@@ -92,12 +176,56 @@ var userID = Number(GetURLParameter('id'));
 
 $(function(){
   if($.cookie('username')) {
-    $('#profile').html($.cookie('username'));
-    $('#ro').append(userID);
-    console.log(userID);
+    if(userID == Number($.cookie('id'))){
+      window.location.href = './myprofile.html';
+    }
+    else{
+      $('#followButton').show();
+      $('#followsYou').show();
+      $('#loginform').hide();
+      $('#logindetails').show('slow');
+      $('#profile').html($.cookie('username'));
+    }
   } else {
-    window.location.href = "./index.html"
+      $('#followButton').hide();
+      $('#followsYou').hide();
+      $('#loginform').show('slow');
+      $('#logindetails').hide();
   }
+
+ $.ajax({
+    url: api + "/api/follow/followers/" + userID,
+    success: function(data){
+      for(var i=0; i<data.length; i++){
+        if(Number($.cookie('id'))==Number(data[i])){
+          $('#followButton').removeClass("btn-primary");
+          $('#followButton').addClass("btn-success");
+          $('#followButton').html('Following');
+          $('#followButton').prop('disabled', 'true');
+          break;
+        }
+      }
+    },
+    error: function(){
+
+    }, 
+  });
+});
+
+$('#followButton').on('click', function(){
+      $.ajax({
+        method: "POST",
+        url: api + "/api/follow/create?follower=" + Number($.cookie('id')) + "&followed=" + userID,
+      })
+        .done(function( data ) {
+          $('#followButton').removeClass("btn-primary");
+          $('#followButton').addClass("btn-success");
+          $('#followButton').html('Following');
+          $('#followButton').prop('disabled', 'true');
+        })
+        .fail(function( data ) {
+
+        })
 });
 
 function GetURLParameter(sParam)
@@ -118,6 +246,122 @@ function GetURLParameter(sParam)
   return title;
 };
 
+$('#loginform').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    // everything looks good!
+      var btn = $('#loginButton');
+      btn.button('loading');
+
+      $.ajax({
+        method: "GET",
+        url: api + "/api/user/login",
+        dataType: "json",
+        data: { 
+          username: $('#username').val(),
+          password: $('#password').val(),
+        },
+      })
+      .done(function( data ) {
+          
+          if (data.result.result === "OK") {
+            $.cookie('username', data.username, { expires: 1 });
+            $.cookie('id', data.id, { expires: 1 });
+            var currentusr = $.cookie('username');
+
+            $('#loginform').hide();
+            $('.jumbotron').hide();
+            $('#topicAndRelation').show();
+            $('#profile').html(data.username);
+            $('#logindetails').show('slow');
+            $('#newsFeed1').show();
+            $('#newsFeed2').hide();
+
+            $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+                window.location.href="./profile.html?id=" + userID;
+            }, 1500);
+          } else {
+
+            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+            }, 3000);
+
+          }  
+        })
+        .fail(function( data ) {
+            $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#messages').show('slow');
+
+            setTimeout(function () {
+                $('#messages').hide('slow');
+            }, 3000);
+          });
+  }
+})
+
+$('#registerform').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    // everything looks good!
+      var btn = $('#registerButton');
+      btn.button('loading');
+
+      $.ajax({
+        method: "POST",
+        url: api + "/api/user/signup",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ 
+          username: $('#registerUsername').val(),
+          email:    $('#registerEmail').val(),
+          password: $('#registerPassword').val()
+        })
+      })
+        .done(function( data ) {
+          
+          if (data.result.result === "OK") {
+
+            $('#registerMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
+            $('#registerMessages').show('slow');
+            
+            setTimeout(function () {
+              $('#registerMessages').hide('slow');
+              $('#registerPage').modal('hide');
+              window.location.href="./profile.html?id=" + userID;
+            }, 1500);
+          } else {
+
+            $('#registerMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+            $('#registerMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 1500);
+
+          }  
+        })
+        .fail(function( data ) {
+            $('#registerMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+            $('#registerMessages').show('slow');
+
+            setTimeout(function () {
+                $('#registerMessages').hide('slow');
+            }, 3000);
+          });
+  }
+});
+
 $('#logoutbtn').on('click', function(e){
     e.preventDefault();
     if($.removeCookie('username')) {
@@ -127,8 +371,8 @@ $('#logoutbtn').on('click', function(e){
 
       setTimeout(function () {
         $('#messages').hide('slow');
-        window.location.href = './index.html';
-      }, 2000);
+        window.location.href="./profile.html?id=" + userID;
+      }, 1500);
     }
   });
 </script>

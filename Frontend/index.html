@@ -256,12 +256,14 @@
         <p>Connections of a topic is not restricted with your aspect. Hodgepodge is an application that you can meet others who has common topics with you. You can subscript topics and discover points of a topic that you do not know. Thanks to Hodgepodge, you can discover new points and lose yourself in an advanture.</p>
       </div>
       <!-- SEARCH BAR -->
-      <div class="input-group col-sm-offset-2 col-sm-8" style="margin-bottom:20px">
-          <input type="text" class="form-control" placeholder="Search" name="search">
+      <form id='searchForm' class='form-vertical' role='form'>
+        <div class="input-group col-sm-offset-2 col-sm-8" style="margin-bottom:20px">
+          <input type="text" id="SearchField" class="form-control" placeholder="Search" name="search">
             <div class="input-group-btn">
-              <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-          </div>
-      </div>
+              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+      </form>
       <!-- END OF SEARCH BAR -->
       <!-- CREATE A TOPIC AND CREATE RELATION BUTTONS -->
       <div style="display:none; margin-bottom:20px;" class="col-sm-offset-4" id="topicAndRelation">
@@ -305,16 +307,6 @@
             </div>
             <div class="panel-body">
               <div class="list-group" id="newsFeed1" style="display:none">
-                <a href="#" class="list-group-item">hamzaozturk created a new topic.</a>
-                <a href="#" class="list-group-item">uskudarli created a new connection.</a>
-                <a href="#" class="list-group-item">kindiroglu created a new topic.</a>
-                <a href="#" class="list-group-item">berkdilek commented to post.</a>
-                <a href="#" class="list-group-item">andac created a new connection.</a>
-                <a href="#" class="list-group-item">civelek created a new post.</a>
-                <a href="#" class="list-group-item">hamzaozturk created a new connection.</a>
-                <a href="#" class="list-group-item">uskudarli created a new topic.</a>
-                <a href="#" class="list-group-item">samiyagmur created a new connection.</a>
-                <a href="#" class="list-group-item">oguzhan created a new post.</a>
               </div>
               <div class="list-group" id="newsFeed2">
                 <a href="#" class="list-group-item">Please login to see your News Feed</a>
@@ -377,10 +369,8 @@ $(function(){
     url: api + "/api/recent_popular/popular/",
     success: function(data){
       if (data) {
-        console.log(12);
         var recent = "<div class='list-group'>";
         for(var i = 0; i<(data.length>=10 ? 10 : data.length); i++){
-          var postLength = data[i].posts ? data[i].posts.length : 0 ;
           var rating = Number(data[i].upVote) + Number(data[i].downVote);
           recent += "<a href='topic.html?id=" + data[i].id + "' class='list-group-item'><span class='badge'>" + rating + "</span>" + data[i].title + "</a>";
           $('#popular').html(recent);
@@ -403,7 +393,6 @@ $(function(){
     $('.jumbotron').hide();
     $('#newsFeed2').hide();
     $('#newsFeed1').show();
-    $('#newsFeed').html("News Feed - NOT ACTIVE YET");
     $('#topicAndRelation').show();
     $('#profile').html($.cookie('username'));
   } else {
@@ -415,6 +404,32 @@ $(function(){
     $('#newsFeed1').hide();
   }
 });
+
+  $.ajax({
+    method: "GET",
+    url: api + "/api/feed/get_news_of?id=" + Number($.cookie('id')),
+  })
+    .done(function( data ) {
+    var news = "";
+    
+    for(var i = 0; i<(data.length>=10 ? 10 : data.length); i++){
+      if(data[i].feed.type == 1){
+        news += "<a href='topic.html?id=" + data[i].feed.subject + "' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + " " + data[i].subjectName +  "</a>";
+      }
+      else if(data[i].feed.type == 2){
+        news += "<a href='#' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + "</a>";        
+      }
+      else if(data[i].feed.type == 3){
+        news += "<a href='#' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + " " + data[i].subjectName + "</a>";        
+      }
+      else{
+        news += "<a href='#' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + "</a>";  
+      }
+    }
+    $('#newsFeed1').append(news);
+  })
+    .fail(function( data ) {
+  })
 
 //DYNAMICALLY ADDING AND DELETING TAG ROWS
 $('#addButton').on('click',function(){
@@ -499,7 +514,8 @@ $('#loginform').validator().on('submit', function (e) {
 
             setTimeout(function () {
                 $('#messages').hide('slow');
-            }, 3000);
+                window.location.reload();
+            }, 1500);
           } else {
 
             $('#messages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
@@ -758,6 +774,15 @@ $('#createRelationForm').validator().on('submit', function (e) {
   }
 });
 
+$('#searchForm').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    window.location.href = './search.html?query=' + $('#SearchField').val();
+  }
+});
+
 $('#logoutbtn').on('click', function(e){
     e.preventDefault();
     if($.removeCookie('username')) {
@@ -816,9 +841,6 @@ $( document ).ready(function() {
       }
     };
     var network = new vis.Network(container, data, options);
-
-    console.log(nodesDataset);
-    console.log(edgesDataset);
 
   });
 
