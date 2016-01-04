@@ -1,12 +1,8 @@
 package application.controller;
 
-import application.core.Follow;
-import application.core.User;
+import application.core.*;
 import application.miscalleneous.Result;
-import application.repository.FollowRepository;
-import application.repository.TopicFollowRepository;
-import application.repository.TopicRepository;
-import application.repository.UserRepository;
+import application.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -20,46 +16,34 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
-    /**
-     * repo is user repository
-     */
     @Autowired
     private UserRepository repo;
 
-    /**
-     * controller for follewers
-     */
     @Autowired
     private FollowController follow;
 
-    /**
-     *repo. of topics
-     */
     @Autowired
     private TopicRepository topicRepo;
 
-    /**
-     * post control class
-     */
     @Autowired
     private PostController postControl;
 
-    /**
-     * repo of topic follow
-     */
     @Autowired
     private TopicFollowRepository topicFollowRepo;
 
-    /**
-     * follow repo
-     */
     @Autowired
     private FollowRepository followRepo;
 
-    /**
-     * Method to get all users in the system
-     * @return list of all users
-     */
+    @Autowired
+    private TopicController topicControl;
+
+    @Autowired
+    private RecentController recentControl;
+
+    @Autowired
+    private TagTopicRelationRepository tagTopicRelationRepo;
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ArrayList<User> findAll(){
         ArrayList<User> list =  repo.findAll();
@@ -75,15 +59,6 @@ public class UserController {
         return list;
     }
 
-    /**
-     *
-     * Method to find users by id
-     * @param id if of wanted user
-     * @return if user is found, returns user with all its features
-     * such as Followers, Topics, Posts etc.
-     * If user couldn't be found, it returns "User not found" message
-     *
-     */
     @RequestMapping(method = RequestMethod.GET, value = "/id/{id}")
     public User findById(@PathVariable("id") int id){
         User user = repo.findById(id);
@@ -105,15 +80,6 @@ public class UserController {
         return user;
     }
 
-    /**
-     *
-     * Method to find user by their username
-     * @param username
-     * @return if user is found, returns user with all its features
-     * such as Followers, Topics, Posts etc.
-     * If user couldn't be found, it returns "User not found" message
-     *
-     */
     @RequestMapping(method = RequestMethod.GET, value = "/username/{username}")
     public User findByUsername(@PathVariable("username") String username){
         User user = repo.findByUsername(username);
@@ -135,15 +101,6 @@ public class UserController {
         return user;
     }
 
-
-    /**
-     *
-     *
-     * to set new variables of user
-     *
-     * @param user
-     * @return
-     */
     @RequestMapping(method = RequestMethod.POST, value = "/signup", headers = "Accept=application/json")
     public User save(
           @Valid @RequestBody User user)
@@ -179,15 +136,7 @@ public class UserController {
         repo.save(temp);
         return temp;
     }
-
-    /**
-     *
-     * Controller returns all available information even though password authentication fails
-     *
-     * @param username
-     * @param password
-     * @return
-     */
+    /* Controller returns all available information even though password authentication fails*/
     @RequestMapping(method = RequestMethod.GET, value = "/login")
     public User login(
             @RequestParam("username") String username, @RequestParam("password") String password) {
@@ -213,6 +162,80 @@ public class UserController {
         user.setFollowedUsers(followRepo.getFollowedNames(user.getId()));
 
         return user;
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/id/{id}/followed_topics")
+    public ArrayList<Topic> findFollowTopics(@PathVariable("id") int id){
+
+        ArrayList<Integer> follows = topicFollowRepo.getByFollowerId(id);
+        ArrayList<Topic> topics = new ArrayList<>();
+        for(Integer i: follows){
+            topics.add(topicControl.getById(i));
+        }
+
+        return topics;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/follow_topic")
+    public TopicFollow followTopic(@PathVariable("id") int userId, @RequestParam("topic_id") int topicId){
+
+        TopicFollow tf = topicFollowRepo.findByFollowerIdAndTopicId(userId, topicId);
+
+        if(tf == null){
+
+            tf = new TopicFollow();
+            tf.setResult(new Result(Result.RESULT_OK, "Topic followed"));
+            tf.setFollowerId(userId);
+            tf.setTopicId(topicId);
+            topicFollowRepo.save(tf);
+
+        }
+        else{
+
+            tf.setResult(new Result(Result.RESULT_FAILED, "Already followed"));
+
+        }
+
+        return tf;
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/id/{id}/get_recommend")
+    public ArrayList<Topic> getRecommendations(@PathVariable("id") int userId){
+
+        ArrayList<Integer> topicFollows = topicFollowRepo.getByFollowerId(userId);
+
+        if(topicFollows.size() == 0){
+            return recentControl.getPopularTopics();
+        }
+
+        ArrayList<Integer> tagIds = new ArrayList<>();
+        ArrayList<Topic> recommended = new ArrayList<>();
+        ArrayList<Integer> topicIds = new ArrayList<>();
+
+        for(Integer i: topicFollows){
+            ArrayList<TagTopicRelation> ttr = tagTopicRelationRepo.findByTopicId(i);
+
+            for(TagTopicRelation ttr1: ttr){
+                int tagId = ttr1.getTagId();
+                if(!tagIds.contains(tagId)) tagIds.add(tagId);
+            }
+        }
+
+        for(Integer i: tagIds){
+            ArrayList<TagTopicRelation> ttr = tagTopicRelationRepo.findByTagId(i);
+
+            for(TagTopicRelation ttr1: ttr){
+                int topicId = ttr1.getTopicId();
+                if(!topicFollows.contains(topicId) && !topicIds.contains(topicId)){
+                    topicIds.add(topicId);
+                    recommended.add(topicControl.getById(topicId));
+                }
+            }
+        }
+
+        return recommended;
 
     }
 }
