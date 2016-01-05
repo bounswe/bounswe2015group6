@@ -412,7 +412,7 @@ $(function(){
     .done(function( data ) {
     var news = "";
     
-    for(var i = 0; i<(data.length>=10 ? 10 : data.length); i++){
+    for(var i = (data.length>=10 ? 9 : data.length-1); i>=0; i--){
       if(data[i].feed.type == 1){
         news += "<a href='topic.html?id=" + data[i].feed.subject + "' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + " " + data[i].subjectName +  "</a>";
       }
@@ -669,7 +669,7 @@ $('#topicform').validator().on('submit', function (e) {
 //END OF CREATE TOPIC FORM
 
 //CREATE A RELATION - FIRST TOPIC INPUT VALIDATION
-$('#relation1').keyup(function(){
+$('#relation1').change(function(){
   var topicName = $('#relation1').val();
 
   $.ajax({
@@ -698,7 +698,7 @@ $('#relation1').keyup(function(){
 //END OF CREATE A RELATION - FIRST TOPIC INPUT VALIDATION
 
 //CREATE A RELATION - SECOND TOPIC INPUT VALIDATION
-$('#relation2').keyup(function(){
+$('#relation2').change(function(){
   var topicName = $('#relation2').val();
 
   $.ajax({

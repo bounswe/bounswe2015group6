@@ -195,12 +195,6 @@
                       <button class="btn btn-success" id="createRelationButton" onClick="addNewRelation(1)"><i class="glyphicon glyphicon-plus" style='color:white'></i></button>
                     </div>
               </div> 
-              <div class="col-sm-5" style='margin-top:10px; margin-left:0px; padding-left:0px'>
-                <div class="well well-lg" style='padding-top:5px'>
-                  <h3>Recommendations</h3>
-                  <div class = "col-sm-12" id = "recommendationsTag"></div>
-                </div>
-              </div>
           </div>
 
         </div>
@@ -364,7 +358,12 @@ function addNewTag(TagName){
       })
     })
       .done(function( data ) {
-        $('#tagsName').append(', ' + newTagName + ' '); 
+        if($('#tagsName').html().toString().length>0){
+          $('#tagsName').append(', ' + newTagName + ' ');
+        }
+        else{
+          $('#tagsName').append(newTagName + ' ');         
+        } 
         $('#addTagMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Tag is successfully added!</strong> </div>');
         $('#addTagMessages').show('slow');
 
