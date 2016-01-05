@@ -49,6 +49,7 @@ public class PostsListAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.layout_posts_list_item, null);
             postViewHolder = new PostViewHolder();
             convertView.setTag(postViewHolder);
+//            ((Button)convertView.findViewById(R.id.upVoteButton)).setOnClickListener(upVoteButtonClickedListener);
 
         } else {
             postViewHolder = (PostViewHolder)convertView.getTag();

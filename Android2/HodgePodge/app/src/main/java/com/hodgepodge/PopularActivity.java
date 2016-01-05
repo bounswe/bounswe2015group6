@@ -50,7 +50,7 @@ public class PopularActivity extends AppCompatActivity {
                     for (int i = 0; i < timeline.length(); i++) {
 
                         JSONObject topic = (JSONObject) timeline.get(i);
-                        id.add(i);
+                        id.add((Integer) topic.get("id"));
                         title.add((String) topic.get("title"));
                         System.out.println(title);
                         date.add(((String) topic.get("createDate")).substring(0, 10));
@@ -75,6 +75,7 @@ public class PopularActivity extends AppCompatActivity {
                         Intent intent = new Intent(context, PostsListActivity.class);
 
                         intent.putExtra("id" , item.getId());
+                        intent.putExtra("title", item.getContent());
                         startActivity(intent);
 
 

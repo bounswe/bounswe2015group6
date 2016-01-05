@@ -47,6 +47,8 @@
         </activity>
         <activity android:name=".CreateRelationActivity" >
         </activity>
+        <activity android:name=".RecentActivity" >
+        </activity>
     </application>
 
 </manifest>

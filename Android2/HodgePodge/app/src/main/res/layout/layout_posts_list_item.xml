@@ -34,8 +34,7 @@
         android:layout_alignTop="@+id/upVoteButton"
         android:layout_alignBottom="@+id/upVoteButton"
         android:background="@android:color/transparent"
-
-        android:src="@drawable/ic_downvote"
+        android:src="@drawable/ic_down_vote"
          />
 
     <TextView
@@ -70,7 +69,7 @@
         android:layout_alignTop="@+id/dateTextView"
         android:layout_alignBottom="@+id/dateTextView"
 
-        android:src="@drawable/ic_upvote"
+        android:src="@drawable/ic_upupupup"
          />
 
 

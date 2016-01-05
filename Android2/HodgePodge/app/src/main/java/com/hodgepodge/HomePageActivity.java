@@ -25,7 +25,7 @@ public class HomePageActivity extends AppCompatActivity
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        setTitle("Home");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +97,12 @@ public class HomePageActivity extends AppCompatActivity
             Intent intent = new Intent(context, LandingActivity.class);
             SharedPreferences settings = context.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
             settings.edit().clear().commit();
+            startActivity(intent);
+        } else if (id == R.id.nav_popular_topics_home) {
+            Intent intent = new Intent(context, PopularActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_recent_Topics_home) {
+            Intent intent = new Intent(context, RecentActivity.class);
             startActivity(intent);
         }
 

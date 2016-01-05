@@ -1,5 +1,7 @@
 package com.hodgepodge;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +19,7 @@ import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class SignUpActivity extends AppCompatActivity {
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,9 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                             System.out.println("Register Sucess");
+
+                            Intent intent = new Intent(context,HomePageActivity.class);
+                            startActivity(intent);
                             //Send user to homepage
                         }
 

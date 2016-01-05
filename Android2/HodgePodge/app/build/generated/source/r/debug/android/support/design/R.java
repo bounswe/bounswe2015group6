@@ -566,7 +566,7 @@ public final class R {
 		public static final int abc_textfield_search_material = 0x7f020044;
 		public static final int design_fab_background = 0x7f0200a8;
 		public static final int design_snackbar_background = 0x7f0200a9;
-		public static final int notification_template_icon_bg = 0x7f0200b3;
+		public static final int notification_template_icon_bg = 0x7f0200b7;
 	}
 	public static final class id {
 		public static final int action0 = 0x7f0c0094;
@@ -729,29 +729,29 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f040016;
 		public static final int abc_search_view = 0x7f040017;
 		public static final int abc_select_dialog_material = 0x7f040018;
-		public static final int design_layout_snackbar = 0x7f040026;
-		public static final int design_layout_snackbar_include = 0x7f040027;
-		public static final int design_layout_tab_icon = 0x7f040028;
-		public static final int design_layout_tab_text = 0x7f040029;
-		public static final int design_menu_item_action_area = 0x7f04002a;
-		public static final int design_navigation_item = 0x7f04002b;
-		public static final int design_navigation_item_header = 0x7f04002c;
-		public static final int design_navigation_item_separator = 0x7f04002d;
-		public static final int design_navigation_item_subheader = 0x7f04002e;
-		public static final int design_navigation_menu = 0x7f04002f;
-		public static final int design_navigation_menu_item = 0x7f040030;
-		public static final int notification_media_action = 0x7f040034;
-		public static final int notification_media_cancel_action = 0x7f040035;
-		public static final int notification_template_big_media = 0x7f040036;
-		public static final int notification_template_big_media_narrow = 0x7f040037;
-		public static final int notification_template_lines = 0x7f040038;
-		public static final int notification_template_media = 0x7f040039;
-		public static final int notification_template_part_chronometer = 0x7f04003a;
-		public static final int notification_template_part_time = 0x7f04003b;
-		public static final int select_dialog_item_material = 0x7f04003d;
-		public static final int select_dialog_multichoice_material = 0x7f04003e;
-		public static final int select_dialog_singlechoice_material = 0x7f04003f;
-		public static final int support_simple_spinner_dropdown_item = 0x7f040040;
+		public static final int design_layout_snackbar = 0x7f040027;
+		public static final int design_layout_snackbar_include = 0x7f040028;
+		public static final int design_layout_tab_icon = 0x7f040029;
+		public static final int design_layout_tab_text = 0x7f04002a;
+		public static final int design_menu_item_action_area = 0x7f04002b;
+		public static final int design_navigation_item = 0x7f04002c;
+		public static final int design_navigation_item_header = 0x7f04002d;
+		public static final int design_navigation_item_separator = 0x7f04002e;
+		public static final int design_navigation_item_subheader = 0x7f04002f;
+		public static final int design_navigation_menu = 0x7f040030;
+		public static final int design_navigation_menu_item = 0x7f040031;
+		public static final int notification_media_action = 0x7f040035;
+		public static final int notification_media_cancel_action = 0x7f040036;
+		public static final int notification_template_big_media = 0x7f040037;
+		public static final int notification_template_big_media_narrow = 0x7f040038;
+		public static final int notification_template_lines = 0x7f040039;
+		public static final int notification_template_media = 0x7f04003a;
+		public static final int notification_template_part_chronometer = 0x7f04003b;
+		public static final int notification_template_part_time = 0x7f04003c;
+		public static final int select_dialog_item_material = 0x7f04003e;
+		public static final int select_dialog_multichoice_material = 0x7f04003f;
+		public static final int select_dialog_singlechoice_material = 0x7f040040;
+		public static final int support_simple_spinner_dropdown_item = 0x7f040041;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f060000;

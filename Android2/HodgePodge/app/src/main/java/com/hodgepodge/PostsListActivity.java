@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -36,8 +37,10 @@ public class PostsListActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         int topicId = extras.getInt("id");
+        String titleStr = extras.getString("title");
+        setTitle(titleStr);
 
-        ServiceClient.get("topic/id/getpost/"+topicId, null, new JsonHttpResponseHandler() {
+        ServiceClient.get("topic/id/getpost/" + topicId, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray posts = null;
@@ -47,10 +50,10 @@ public class PostsListActivity extends AppCompatActivity {
                         for (int i = 0; i < posts.length(); i++) {
                             id.add(1);
                             JSONObject post = (JSONObject) posts.get(i);
-                            String contentString = (i+1)+". ";
-                            contentString = contentString +(String) post.get("content");
+                            String contentString = (i + 1) + ". ";
+                            contentString = contentString + (String) post.get("content");
                             content.add(contentString);
-                            date.add(((String) post.get("date")).substring(0,10));
+                            date.add(((String) post.get("date")).substring(0, 10));
                             rating.add((Integer) post.get("upVote"));
                             username.add("BerkDilek");
 
@@ -107,6 +110,9 @@ public class PostsListActivity extends AppCompatActivity {
 
     }
 
+    public void upVoteButtonClickedListener (View view) {
+        System.out.println("upVoteOnClick");
+    }
 
 
     private void getDataForList() {
@@ -121,4 +127,6 @@ public class PostsListActivity extends AppCompatActivity {
             postsList.add(postListData);
         }
     }
+
+
 }
