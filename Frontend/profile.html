@@ -272,12 +272,8 @@ $('#loginform').validator().on('submit', function (e) {
             var currentusr = $.cookie('username');
 
             $('#loginform').hide();
-            $('.jumbotron').hide();
-            $('#topicAndRelation').show();
             $('#profile').html(data.username);
             $('#logindetails').show('slow');
-            $('#newsFeed1').show();
-            $('#newsFeed2').hide();
 
             $('#messages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
             $('#messages').show('slow');
