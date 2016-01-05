@@ -3,8 +3,14 @@
 <head>
   <title>HodgePodge</title>
 
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap theme -->
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/vis.min.js"></script>
+  <script src="js/angular.min.js"></script>
   <link rel="stylesheet" href="css/vis.min.css">
 
   <script src="js/jquery.cookie.js"></script>
@@ -48,21 +54,211 @@
     }
     #sidebar {
       top: 0px;
-      width: 0px;
+      width: 320px;
       bottom: 0px;
-      background:green;
+      background: url('img/crosswordStrong.png');
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
     }
     #content {
       top: 0px;
-      left: 0px;
+      left: 320px;
       right: 0;
       bottom: 0px;
+    }
+    .topicName {
+      font-weight: 400;
+      color: #000;
+      padding: 25px 5px 0 5px;
+      text-align: center;
+      font-size: 24px;
+    }
+    .groupName {
+      font-weight: 400;
+      color: #4C4C4C;
+      padding: 15px 5px 25px 5px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .post {
+      -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.5);
+      -moz-box-shadow: 0 0 6px rgba(0,0,0,0.5);
+      box-shadow: 0 0 6px rgba(0,0,0,0.5);
+      background: #FFF;
+      margin: 15px;
+      padding: 5px;
+    }
+    .detail {
+      color: #666;
+      font-size: 14px;
+    }
+    .extras {
+      margin-top: 15px;
+      height: 20px;
+    }
+    .date {
+      color: #999;
+      font-size: 12px;
+      width: 80px;
+      float: left;
+      line-height: 20px;
+    }
+    .voting {
+      float: left;
+      width: 80px;
+      text-align: center;
+      color: #999;
+      font-size: 18px;
+    }
+    .username {
+      float: right;
+    }
+    .username a {
+      text-decoration: none;
+      color: #999;
+      font-size: 12px;
+      line-height: 20px;
+    }
+    .username a:hover {
+      cursor: pointer;
+    }
+    .tags {
+      margin-top: 5px;
+    }
+    .tags a {
+      text-decoration: none;
+      color: #004080;
+    }
+    #showPosts {
+      position: absolute;
+      top: 0px;
+      width: 320px;
+      bottom: 200px;
+      overflow-y: auto;
+    }
+    #addPost {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+    }
+    #addPost textarea {
+      margin: 8px 14px 7px 14px;
+      width: 292px;
+      height: 140px;
+    }
+    .postTags {
+      margin: 0 14px 4px 14px;
+      height: 26px;
+    }
+    .noresize {
+      resize: none; 
     }
   </style>
 </head>
 <body>
 
-<div id="sidebar"><button>close sidebar</button></div>
+<div id="sidebar">
+  <div id="showPosts">
+
+      <div class="topicName">Deatch of Eric Garner</div>
+  <div class="groupName">Black Murders in US</div>
+
+<div id="posts">
+  
+  <!-- post start -->
+  <div class="post">
+    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
+    <div class="extras">
+      <div class="date">01.01.2016</div>
+      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
+      <div class="username"><a href="#">hamzaozturk</a></div>
+      <div style="clear:both;"></div>
+    </div>
+    <div class="tags"><a href="">#aaa</a> <a href="#">#bbb</a> <a href="#">#ccc</a></div>
+  </div>
+  <!-- post end -->
+
+  <!-- post start -->
+  <div class="post">
+    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
+    <div class="extras">
+      <div class="date">01.01.2016</div>
+      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
+      <div class="username"><a href="#">hamzaozturk</a></div>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+  <!-- post end -->
+
+  <!-- post start -->
+  <div class="post">
+    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
+    <div class="extras">
+      <div class="date">01.01.2016</div>
+      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
+      <div class="username"><a href="#">hamzaozturk</a></div>
+      <div style="clear:both;"></div>
+    </div>
+    <div class="tags"><a href="">#aaa</a> <a href="#">#bbb</a> <a href="#">#ccc</a></div>
+  </div>
+  <!-- post end -->
+
+  <!-- post start -->
+  <div class="post">
+    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
+    <div class="extras">
+      <div class="date">01.01.2016</div>
+      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
+      <div class="username"><a href="#">hamzaozturk</a></div>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+  <!-- post end -->
+
+  <!-- post start -->
+  <div class="post">
+    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
+    <div class="extras">
+      <div class="date">01.01.2016</div>
+      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
+      <div class="username"><a href="#">hamzaozturk</a></div>
+      <div style="clear:both;"></div>
+    </div>
+    <div class="tags"><a href="">#aaa</a> <a href="#">#bbb</a> <a href="#">#ccc</a></div>
+  </div>
+  <!-- post end -->
+
+  <!-- post start -->
+  <div class="post">
+    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
+    <div class="extras">
+      <div class="date">01.01.2016</div>
+      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
+      <div class="username"><a href="#">hamzaozturk</a></div>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+  <!-- post end -->
+
+</div>
+
+
+  </div>
+  <div id="addPost">
+    <form>
+      <textarea placeholder="Write post detail.." class="form-control noresize" rows="4" id="postDetail" name="postDetail"></textarea>
+      <div class="input-group postTags">
+         <input type="text" class="form-control" placeholder="Add Tags" name="postTags" id="postTags">
+         <span class="input-group-btn">
+              <button class="btn btn-success" type="button" id="addNewPost">Add Post</button>
+         </span>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div id="content">
   <div id="network-popUp">
     <span id="operation">node</span> <br>
@@ -71,7 +267,10 @@
       <td>Id</td><td ><input id="node-id" value="new value" /></td>
     </tr>
       <tr>
-        <td>Name</td><td><input id="node-label" value="new value" /></td>
+        <td>Name</td><td><input id="node-label" value="" /></td>
+      </tr>
+      <tr>
+        <td>Group</td><td><input id="node-group" value="" /></td>
       </tr>
       <tr>
         <td>Tags</td><td><input id="node-tags" value="" /></td>
@@ -114,41 +313,41 @@
 
   function showGraph(nodesDataset, edgesDataset) {
 
-    // // create an array with nodes
-    // var nodes = new vis.DataSet([
-    //   {id: 1, value: 40, label: 'Death of Eric Garner', title: 'Death of Eric Garner', group: 'Black Murders in US'},
-    //   {id: 2, value: 20, label: 'Daniel Pantaleo', title: 'Daniel Pantaleo', group: 'Police'},
-    //   {id: 3, value: 10, label: 'Black Lives Matter', title: 'Black Lives Matter', group: 'Protest'},
-    //   {id: 4, value: 10, label: 'New York City Police Department', title: 'New York City Police Department', group: 'Police'},
-    //   {id: 5, value: 10, label: 'Out of court settlement', title: 'Out of court settlement', group: 'Judicial System'},
-    //   {id: 6, value: 10, label: 'Police Brutality', title: 'Police Brutality', group: 'Police'},
-    //   {id: 7, value: 20, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
-    //   {id: 8, value: 80, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
-    // ]);
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+      {id: 1, value: 40, label: 'Death of Eric Garner', title: 'Death of Eric Garner', group: 'Black Murders in US'},
+      {id: 2, value: 20, label: 'Daniel Pantaleo', title: 'Daniel Pantaleo', group: 'Police'},
+      {id: 3, value: 10, label: 'Black Lives Matter', title: 'Black Lives Matter', group: 'Protest'},
+      {id: 4, value: 10, label: 'New York City Police Department', title: 'New York City Police Department', group: 'Police'},
+      {id: 5, value: 10, label: 'Out of court settlement', title: 'Out of court settlement', group: 'Judicial System'},
+      {id: 6, value: 10, label: 'Police Brutality', title: 'Police Brutality', group: 'Police'},
+      {id: 7, value: 20, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
+      {id: 8, value: 80, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
+    ]);
 
-    // var edges = new vis.DataSet();
+    var edges = new vis.DataSet();
 
-    // // create an array with edges
-    // var edges = new vis.DataSet([
-    //   {from: 2, to: 1, label: 'Murders', title: 'Murders', arrows:'to'},
-    //   {from: 1, to: 3, label: 'causes', title: 'causes', arrows:'to'},
-    //   {from: 2, to: 4, label: 'member', title: 'member', arrows:'to'},
-    //   {from: 1, to: 7, label: 'causes', title: 'causes', arrows:'to'}, 
-    //   {from: 5, to: 7, label: 'result of', title: 'result of', arrows:'to'}, 
-    //   {from: 6, to: 1, label: 'causes', title: 'causes', arrows:'to'}, 
-    // ]);
+    // create an array with edges
+    var edges = new vis.DataSet([
+      {from: 2, to: 1, label: 'Murders', title: 'Murders', arrows:'to'},
+      {from: 1, to: 3, label: 'causes', title: 'causes', arrows:'to'},
+      {from: 2, to: 4, label: 'member', title: 'member', arrows:'to'},
+      {from: 1, to: 7, label: 'causes', title: 'causes', arrows:'to'}, 
+      {from: 5, to: 7, label: 'result of', title: 'result of', arrows:'to'}, 
+      {from: 6, to: 1, label: 'causes', title: 'causes', arrows:'to'}, 
+    ]);
 
     // create a network
     var container = document.getElementById('mynetwork');
 
-    var data = {
-      nodes: nodesDataset,
-      edges: edgesDataset
-    };
     // var data = {
-    //   nodes: nodes,
-    //   edges: edges
+    //   nodes: nodesDataset,
+    //   edges: edgesDataset
     // };
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
     var options = {
       nodes: {
           shape: 'dot',
@@ -248,6 +447,7 @@
 
     network.on("selectNode", function (params) {
         console.log('selectNode Event:', params);
+        $('#content').animate({left: 300});
         // network.setData(data);
         // network.clusterByConnection(1);
     });
@@ -271,6 +471,7 @@
     console.log(data);
     // data.id = lastTopicId;
     data.label = document.getElementById('node-label').value;
+    data.group = document.getElementById('node-group').value;
     var tags = document.getElementById('node-tags').value;
     clearPopUp();
 
@@ -284,6 +485,7 @@
       data: JSON.stringify({ 
         ownerId: $.cookie('id'),
         title: data.label,
+        group: data.group,
         tags: tagsarray
       })
     })
