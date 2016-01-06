@@ -8,12 +8,18 @@
   <!-- Bootstrap theme -->
   <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
+  <!-- Custom styles for this template -->
+  <link href="css/theme.css" rel="stylesheet">
+
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/vis.min.js"></script>
   <script src="js/angular.min.js"></script>
   <link rel="stylesheet" href="css/vis.min.css">
 
+  <script src="js/bootstrap.min.js"></script>
+
   <script src="js/jquery.cookie.js"></script>
+  <script src="js/validator.js"></script>
 
   <style type="text/css">
     html, body {
@@ -23,7 +29,7 @@
     }
     #mynetwork {
       position: absolute;
-      top: 0;
+      top: 50px;
       bottom: 0;
       right: 0;
       left: 0;
@@ -109,6 +115,7 @@
       text-align: center;
       color: #999;
       font-size: 18px;
+      line-height: 20px;
     }
     .username {
       float: right;
@@ -155,90 +162,39 @@
     .noresize {
       resize: none; 
     }
+    #topBar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: url('img/crosswordStrong.png');
+      padding: 10px;
+    }
   </style>
+
+
 </head>
 <body>
 
 <div id="sidebar">
   <div id="showPosts">
 
-      <div class="topicName">Deatch of Eric Garner</div>
-  <div class="groupName">Black Murders in US</div>
+  <div class="topicName">{{topic.name}}</div>
+  <div class="groupName">{{topic.group}}</div>
 
 <div id="posts">
   
   <!-- post start -->
-  <div class="post">
-    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
+  <div class="post" ng-repeat="post in topic.posts">
+    <div class="detail">{{post.detail}}</div>
     <div class="extras">
-      <div class="date">01.01.2016</div>
-      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
-      <div class="username"><a href="#">hamzaozturk</a></div>
+      <div class="date">{{post.date}}</div>
+      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> {{post.votes}} <a href="#"><img src="img/up.png" height="14px"></a></div>
+      <div class="username"><a href="#">{{post.username}}</a></div>
       <div style="clear:both;"></div>
     </div>
-    <div class="tags"><a href="">#aaa</a> <a href="#">#bbb</a> <a href="#">#ccc</a></div>
-  </div>
-  <!-- post end -->
-
-  <!-- post start -->
-  <div class="post">
-    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
-    <div class="extras">
-      <div class="date">01.01.2016</div>
-      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
-      <div class="username"><a href="#">hamzaozturk</a></div>
-      <div style="clear:both;"></div>
-    </div>
-  </div>
-  <!-- post end -->
-
-  <!-- post start -->
-  <div class="post">
-    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
-    <div class="extras">
-      <div class="date">01.01.2016</div>
-      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
-      <div class="username"><a href="#">hamzaozturk</a></div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="tags"><a href="">#aaa</a> <a href="#">#bbb</a> <a href="#">#ccc</a></div>
-  </div>
-  <!-- post end -->
-
-  <!-- post start -->
-  <div class="post">
-    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
-    <div class="extras">
-      <div class="date">01.01.2016</div>
-      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
-      <div class="username"><a href="#">hamzaozturk</a></div>
-      <div style="clear:both;"></div>
-    </div>
-  </div>
-  <!-- post end -->
-
-  <!-- post start -->
-  <div class="post">
-    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
-    <div class="extras">
-      <div class="date">01.01.2016</div>
-      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
-      <div class="username"><a href="#">hamzaozturk</a></div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="tags"><a href="">#aaa</a> <a href="#">#bbb</a> <a href="#">#ccc</a></div>
-  </div>
-  <!-- post end -->
-
-  <!-- post start -->
-  <div class="post">
-    <div class="detail">dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds dfdsfdsfds</div>
-    <div class="extras">
-      <div class="date">01.01.2016</div>
-      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> 24 <a href="#"><img src="img/up.png" height="14px"></a></div>
-      <div class="username"><a href="#">hamzaozturk</a></div>
-      <div style="clear:both;"></div>
-    </div>
+    <div class="tags"><span ng-repeat="tag in post.tags"><a href="">#{tag}</a> </span></div>
   </div>
   <!-- post end -->
 
@@ -260,6 +216,16 @@
 </div>
 
 <div id="content">
+  <div id="topBar">
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addTopicModal">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Topic
+    </button>
+    <button type="button" class="btn btn-info btn-sm" id="addConnection">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Connection
+    </button>
+  </div>
+  
+
   <div id="network-popUp">
     <span id="operation">node</span> <br>
     <table style="margin:auto;">
@@ -285,6 +251,8 @@
 
 
 <script type="text/javascript">
+
+  var nodes, edges, network;
 
   var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
   // var lastTopicId;
@@ -313,37 +281,34 @@
 
   function showGraph(nodesDataset, edgesDataset) {
 
-    // create an array with nodes
-    var nodes = new vis.DataSet([
-      {id: 1, value: 40, label: 'Death of Eric Garner', title: 'Death of Eric Garner', group: 'Black Murders in US'},
-      {id: 2, value: 20, label: 'Daniel Pantaleo', title: 'Daniel Pantaleo', group: 'Police'},
-      {id: 3, value: 10, label: 'Black Lives Matter', title: 'Black Lives Matter', group: 'Protest'},
-      {id: 4, value: 10, label: 'New York City Police Department', title: 'New York City Police Department', group: 'Police'},
-      {id: 5, value: 10, label: 'Out of court settlement', title: 'Out of court settlement', group: 'Judicial System'},
-      {id: 6, value: 10, label: 'Police Brutality', title: 'Police Brutality', group: 'Police'},
-      {id: 7, value: 20, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
-      {id: 8, value: 80, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
-    ]);
+    nodes = nodesDataset;
+    edges = edgesDataset;
 
-    var edges = new vis.DataSet();
+    // create an array with nodes
+    // nodes = new vis.DataSet([
+    //   {id: 1, value: 40, label: 'Death of Eric Garner', title: 'Death of Eric Garner', group: 'Black Murders in US'},
+    //   {id: 2, value: 20, label: 'Daniel Pantaleo', title: 'Daniel Pantaleo', group: 'Police'},
+    //   {id: 3, value: 10, label: 'Black Lives Matter', title: 'Black Lives Matter', group: 'Protest'},
+    //   {id: 4, value: 10, label: 'New York City Police Department', title: 'New York City Police Department', group: 'Police'},
+    //   {id: 5, value: 10, label: 'Out of court settlement', title: 'Out of court settlement', group: 'Judicial System'},
+    //   {id: 6, value: 10, label: 'Police Brutality', title: 'Police Brutality', group: 'Police'},
+    //   {id: 7, value: 20, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
+    //   {id: 8, value: 80, label: 'Lawsuit of Eric Garner Murder', title: 'Lawsuit of Eric Garner Murder', group: 'Judicial System'},
+    // ]);
 
     // create an array with edges
-    var edges = new vis.DataSet([
-      {from: 2, to: 1, label: 'Murders', title: 'Murders', arrows:'to'},
-      {from: 1, to: 3, label: 'causes', title: 'causes', arrows:'to'},
-      {from: 2, to: 4, label: 'member', title: 'member', arrows:'to'},
-      {from: 1, to: 7, label: 'causes', title: 'causes', arrows:'to'}, 
-      {from: 5, to: 7, label: 'result of', title: 'result of', arrows:'to'}, 
-      {from: 6, to: 1, label: 'causes', title: 'causes', arrows:'to'}, 
-    ]);
+    // var edges = new vis.DataSet([
+    //   {from: 2, to: 1, label: 'Murders', title: 'Murders', arrows:'to'},
+    //   {from: 1, to: 3, label: 'causes', title: 'causes', arrows:'to'},
+    //   {from: 2, to: 4, label: 'member', title: 'member', arrows:'to'},
+    //   {from: 1, to: 7, label: 'causes', title: 'causes', arrows:'to'}, 
+    //   {from: 5, to: 7, label: 'result of', title: 'result of', arrows:'to'}, 
+    //   {from: 6, to: 1, label: 'causes', title: 'causes', arrows:'to'}, 
+    // ]);
 
     // create a network
     var container = document.getElementById('mynetwork');
 
-    // var data = {
-    //   nodes: nodesDataset,
-    //   edges: edgesDataset
-    // };
     var data = {
       nodes: nodes,
       edges: edges
@@ -381,69 +346,94 @@
       layout: {
         randomSeed: 8
       },
-          manipulation: {
-        initiallyActive: true,
-        addNode: function (data, callback) {
-          // filling in the popup DOM elements
-          document.getElementById('operation').innerHTML = "Add Topic";
-          document.getElementById('node-id').value = data.id;
-          document.getElementById('node-label').value = data.label;
-          document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
-          document.getElementById('cancelButton').onclick = clearPopUp.bind();
-          document.getElementById('network-popUp').style.display = 'block';
-        },
-        editNode: function (data, callback) {
-          // filling in the popup DOM elements
-          document.getElementById('operation').innerHTML = "Edit Node";
-          document.getElementById('node-id').value = data.id;
-          document.getElementById('node-label').value = data.label;
-          document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
-          document.getElementById('cancelButton').onclick = cancelEdit.bind(this,callback);
-          document.getElementById('network-popUp').style.display = 'block';
-        },
-        addEdge: function (data, callback) {
-          if (data.from == data.to) {
-            // var r = confirm("Do you want to connect the node to itself?");
-            // if (r == true) {
-            //   callback(data);
-            // }
+      manipulation: {
+        enabled: false,
+        addEdge: function(edgeData,callback) {
+          console.log(edgeData);
+          if (edgeData.from === edgeData.to) {
+            var r = confirm("Do you want to connect the node to itself?");
+            if (r === true) {
+              callback(edgeData);
+            }
           }
           else {
-            callback(data);
 
-            $.ajax({
-              method: "POST",
-              url: api + "/api/edge/create_new",
-              contentType: "application/json",
-              dataType: "json",
-              data: { 
-                source: data.from,
-                dest: data.to
-              }
-            })
-            .done(function( data ) {
-              
-              console.log(data);
+            console.log(nodes);
+            var allNodes = nodes.get({returnType:"Object"});
 
-            })
-            .fail(function( data ) {
-                console.log(data);
-            });
+            $('#connectionSource').val(allNodes[edgeData.from].title); 
+            $('#connectionTarget').val(allNodes[edgeData.to].title); 
+            document.getElementById('addConnectionButton').onclick = saveData.bind(this, edgeData, callback);
+
+            $('#addConnectionModal').modal('show');
+
+            // callback(edgeData);
           }
-        },
-        deleteNode: function (data, callback) {
-          callback(data);
-          var nodeId = data.nodes[0];
-
-          $.get(api + "/api/topic/delete?id=" + nodeId, function(data) {
-
-          })
         }
-      },
+      }
+      //     manipulation: {
+      //   initiallyActive: true,
+      //   addNode: function (data, callback) {
+      //     // filling in the popup DOM elements
+      //     document.getElementById('operation').innerHTML = "Add Topic";
+      //     document.getElementById('node-id').value = data.id;
+      //     document.getElementById('node-label').value = data.label;
+      //     document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
+      //     document.getElementById('cancelButton').onclick = clearPopUp.bind();
+      //     document.getElementById('network-popUp').style.display = 'block';
+      //   },
+      //   editNode: function (data, callback) {
+      //     // filling in the popup DOM elements
+      //     document.getElementById('operation').innerHTML = "Edit Node";
+      //     document.getElementById('node-id').value = data.id;
+      //     document.getElementById('node-label').value = data.label;
+      //     document.getElementById('saveButton').onclick = saveData.bind(this, data, callback);
+      //     document.getElementById('cancelButton').onclick = cancelEdit.bind(this,callback);
+      //     document.getElementById('network-popUp').style.display = 'block';
+      //   },
+      //   addEdge: function (data, callback) {
+      //     if (data.from == data.to) {
+      //       // var r = confirm("Do you want to connect the node to itself?");
+      //       // if (r == true) {
+      //       //   callback(data);
+      //       // }
+      //     }
+      //     else {
+      //       callback(data);
+
+      //       $.ajax({
+      //         method: "POST",
+      //         url: api + "/api/edge/create_new",
+      //         contentType: "application/json",
+      //         dataType: "json",
+      //         data: { 
+      //           source: data.from,
+      //           dest: data.to
+      //         }
+      //       })
+      //       .done(function( data ) {
+              
+      //         console.log(data);
+
+      //       })
+      //       .fail(function( data ) {
+      //           console.log(data);
+      //       });
+      //     }
+      //   },
+      //   deleteNode: function (data, callback) {
+      //     callback(data);
+      //     var nodeId = data.nodes[0];
+
+      //     $.get(api + "/api/topic/delete?id=" + nodeId, function(data) {
+
+      //     })
+      //   }
+      // },
       // autoResize: true,
       // height: '100%',
     };
-    var network = new vis.Network(container, data, options);
+    network = new vis.Network(container, data, options);
 
     network.on("selectNode", function (params) {
         console.log('selectNode Event:', params);
@@ -467,15 +457,45 @@
     callback(null);
   }
 
-  function saveData(data,callback) {
-    console.log(data);
-    // data.id = lastTopicId;
-    data.label = document.getElementById('node-label').value;
-    data.group = document.getElementById('node-group').value;
-    var tags = document.getElementById('node-tags').value;
-    clearPopUp();
+  
+</script>
 
-    var tagsarray = tags.split(',');
+<script type="text/javascript">
+
+var showConnectionButton = true;
+
+$(document).ready(function() {
+
+$( "#addConnection" ).click(function() {
+  if (showConnectionButton) {
+      showConnectionButton = false;
+
+      $("#addConnection").html('<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back');
+      network.addEdgeMode();
+  } else {
+      showConnectionButton = true;
+
+      $("#addConnection").html('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Connection');
+      network.disableEditMode();
+  }
+});
+
+$('#addTopicForm').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+    
+    var topicName = $('#topicName').val();
+    var topicGroup = $('#topicGroup').val();
+    var topicTags = $('#topicTags').val();
+
+    console.log(topicTags);
+
+    var tagsarray = [];
+    if (topicTags.length > 0) {
+      tagsarray = topicTags.split(',');
+    };
 
     $.ajax({
       method: "POST",
@@ -484,37 +504,181 @@
       dataType: "json",
       data: JSON.stringify({ 
         ownerId: $.cookie('id'),
-        title: data.label,
-        group: data.group,
+        title: topicName,
+        group: topicGroup,
         tags: tagsarray
       })
     })
-    .done(function( response ) {
+    .done(function( data ) {
 
-      if (response.result.result === "OK") {
+      if (data.result.result === "OK") {
 
-          data.id = response.id;
+        $('#addTopicModal').modal('hide');
 
-          callback(data);
+        nodes.add({
+            id: data.id,
+            label: data.label,
+            title: data.title,
+            group: data.group,
+            value: data.value
+        });
 
       } else {
-        alert(response.result.resultMessage);
+
+        $('#addTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+        $('#addTopicMessages').show('slow');
+
+        setTimeout(function () {
+            $('#addTopicMessages').hide('slow');
+        }, 3000);
+
       }
-      
-      console.log(response);
-
-
-
     })
-    .fail(function( error ) {
-        console.log(error);
+    .fail(function( data ) {
+
+      $('#addTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+      $('#addTopicMessages').show('slow');
+
+      setTimeout(function () {
+          $('#addTopicMessages').hide('slow');
+      }, 3000);
     });
   }
+})
 
-  $( "button" ).click(function() {
-    $('#content').animate({left: 0});
+});
+
+function saveData(data,callback) {
+
+  data.label = $('#connectionLabel').val();
+  data.title = $('#connectionLabel').val();
+  data.arrows = 'to';
+
+  $.ajax({
+    method: "POST",
+    url: api + "/api/edge/create_new",
+    contentType: "application/json",
+    dataType: "json",
+    data: JSON.stringify({ 
+      from: data.from,
+      to: data.to,
+      label: data.label,
+      title: data.title
+    })
+  })
+  .done(function( data ) {
+
+    callback(data);
+    $('#addConnectionModal').modal('hide');
+
+    network.disableEditMode();
+    
+    console.log(data);
+
+  })
+  .fail(function( data ) {
+      console.log(data);
+
+      $('#addConnectionMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+      $('#addConnectionMessages').show('slow');
+
+      setTimeout(function () {
+          $('#addConnectionMessages').hide('slow');
+      }, 3000);
+
   });
+}
 </script>
+
+<!-- Add Topic Modal Start -->
+<div id="addTopicModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Topic</h4>
+      </div>
+      <div class="modal-body">
+        <div style="display:none;" id="addTopicMessages"></div>
+        <form id="addTopicForm" class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="topicName">Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="topicName" placeholder="Enter topic name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="topicGroup">Group:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="topicGroup" placeholder="Enter group name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="topicTags">Tags:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="topicTags" placeholder="Enter topic tags">
+            </div>
+          </div>
+          <div class="form-group"> 
+            <div class="col-sm-offset-2 col-sm-10">
+              <button id="addTopicButton" type="submit" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Add Topic Modal End -->
+
+<!-- Add Connection Modal Start -->
+<div id="addConnectionModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Connection</h4>
+      </div>
+      <div class="modal-body">
+        <div style="display:none;" id="addConnectionMessages"></div>
+        <div id="addConnectionForm" class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="connectionSource">From:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="connectionSource" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="connectionTarget">To:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="connectionTarget" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="connectionLabel">Label:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="connectionLabel" placeholder="Enter connection detail" required>
+            </div>
+          </div>
+          <div class="form-group"> 
+            <div class="col-sm-offset-2 col-sm-10">
+              <button id="addConnectionButton" type="button" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Add Connection Modal End -->
 
 </body>
 </html>
