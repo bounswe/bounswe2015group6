@@ -1,0 +1,248 @@
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<file:///C:/Users/User/Desktop/Backend/usedWith>
+      a       owl:ObjectProperty .
+
+<topicHasTag>
+      a       owl:ObjectProperty .
+
+<file:///C:/Users/User/Desktop/Backend/beer_shop>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/alcohol> , <file:///C:/Users/User/Desktop/Backend/sea> , <file:///C:/Users/User/Desktop/Backend/lezzetli> .
+
+<file:///C:/Users/User/Desktop/Backend/fruit>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/red> .
+
+<file:///C:/Users/User/Desktop/Backend/beer_shop,_kadikoy_moda>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/lovely> , <file:///C:/Users/User/Desktop/Backend/moda> .
+
+<file:///C:/Users/User/Desktop/Backend/moda>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/lovely> , <file:///C:/Users/User/Desktop/Backend/beer_shop,_kadikoy_moda> .
+
+<file:///C:/Users/User/Desktop/Backend/topicHasTag>
+      a       owl:ObjectProperty .
+
+<file:///C:/Users/User/Desktop/Backend/lezzetli>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/kadikoy_moda> , <file:///C:/Users/User/Desktop/Backend/beer_shop> , <file:///C:/Users/User/Desktop/Backend/alcohol> , <file:///C:/Users/User/Desktop/Backend/sea> , <file:///C:/Users/User/Desktop/Backend/city> .
+
+<file:///C:/Users/User/Desktop/Backend/topicRelatedTo>
+      a       owl:ObjectProperty .
+
+<file:///C:/Users/User/Desktop/Backend/_4_>
+      a       <file:///C:/Users/User/Desktop/Backend/Topic> ;
+      <file:///C:/Users/User/Desktop/Backend/topicHasTag>
+              <file:///C:/Users/User/Desktop/Backend/lovely> , <file:///C:/Users/User/Desktop/Backend/beer_shop,_kadikoy_moda> , <file:///C:/Users/User/Desktop/Backend/moda> .
+
+<file:///C:/Users/User/Desktop/Backend/_2_>
+      a       <file:///C:/Users/User/Desktop/Backend/Topic> ;
+      <file:///C:/Users/User/Desktop/Backend/topicHasTag>
+              <file:///C:/Users/User/Desktop/Backend/alcohol> , <file:///C:/Users/User/Desktop/Backend/yeast> .
+
+<User>
+      a       owl:Class .
+
+<file:///C:/Users/User/Desktop/Backend/_16_>
+      a       <file:///C:/Users/User/Desktop/Backend/Topic> ;
+      <file:///C:/Users/User/Desktop/Backend/topicHasTag>
+              <file:///C:/Users/User/Desktop/Backend/alcohol> , <file:///C:/Users/User/Desktop/Backend/yeast> ;
+      <file:///C:/Users/User/Desktop/Backend/topicRelatedTo>
+              <file:///C:/Users/User/Desktop/Backend/_19_> .
+
+<file:///C:/Users/User/Desktop/Backend/_18_>
+      a       <file:///C:/Users/User/Desktop/Backend/Topic> ;
+      <file:///C:/Users/User/Desktop/Backend/topicHasTag>
+              <file:///C:/Users/User/Desktop/Backend/red> , <file:///C:/Users/User/Desktop/Backend/fruit> .
+
+<file:///C:/Users/User/Desktop/Backend/User>
+      a       owl:Class .
+
+<alcohol>
+      a       <Tag> ;
+      <usedWith> <city> , <sea> , <beer_shop> , <lezzetli> , <kadikoy_moda> .
+
+<file:///C:/Users/User/Desktop/Backend/hasCreatedPost>
+      a       owl:ObjectProperty .
+
+<file:///C:/Users/User/Desktop/Backend/hasCreatedTopic>
+      a       owl:ObjectProperty .
+
+<_3_>
+      a       <Topic> ;
+      <topicHasTag> <alcohol> .
+
+<file:///C:/Users/User/Desktop/Backend/Post>
+      a       owl:Class .
+
+<sea>
+      a       <Tag> ;
+      <usedWith> <alcohol> .
+
+<file:///C:/Users/User/Desktop/Backend/Tag>
+      a       owl:Class .
+
+<file:///C:/Users/User/Desktop/Backend/lovely>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/beer_shop,_kadikoy_moda> , <file:///C:/Users/User/Desktop/Backend/moda> .
+
+<file:///C:/Users/User/Desktop/Backend/kadikoy_moda>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/alcohol> , <file:///C:/Users/User/Desktop/Backend/sea> , <file:///C:/Users/User/Desktop/Backend/lezzetli> .
+
+<file:///C:/Users/User/Desktop/Backend/Topic>
+      a       owl:Class .
+
+<file:///C:/Users/User/Desktop/Backend/shop>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/loudy> .
+
+<postHasTag>
+      a       owl:ObjectProperty .
+
+<city>
+      a       <Tag> ;
+      <usedWith> <alcohol> .
+
+<file:///C:/Users/User/Desktop/Backend/_3_>
+      a       <file:///C:/Users/User/Desktop/Backend/Topic> ;
+      <file:///C:/Users/User/Desktop/Backend/topicHasTag>
+              <file:///C:/Users/User/Desktop/Backend/beer_shop> , <file:///C:/Users/User/Desktop/Backend/sea> , <file:///C:/Users/User/Desktop/Backend/lezzetli> .
+
+<hasCreatedTopic>
+      a       owl:ObjectProperty .
+
+<lezzetli>
+      a       <Tag> ;
+      <usedWith> <alcohol> .
+
+<Post>
+      a       owl:Class .
+
+<file:///C:/Users/User/Desktop/Backend/_17_>
+      a       <file:///C:/Users/User/Desktop/Backend/Topic> ;
+      <file:///C:/Users/User/Desktop/Backend/topicHasTag>
+              <file:///C:/Users/User/Desktop/Backend/red> , <file:///C:/Users/User/Desktop/Backend/alcohol> .
+
+<file:///C:/Users/User/Desktop/Backend/city>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/alcohol> , <file:///C:/Users/User/Desktop/Backend/sea> , <file:///C:/Users/User/Desktop/Backend/lezzetli> .
+
+<file:///C:/Users/User/Desktop/Backend/_1_>
+      a       <file:///C:/Users/User/Desktop/Backend/Topic> ;
+      <file:///C:/Users/User/Desktop/Backend/topicHasTag>
+              <file:///C:/Users/User/Desktop/Backend/red> , <file:///C:/Users/User/Desktop/Backend/alcohol> , <file:///C:/Users/User/Desktop/Backend/yeast> .
+
+<file:///C:/Users/User/Desktop/Backend/_19_>
+      a       <file:///C:/Users/User/Desktop/Backend/Topic> ;
+      <file:///C:/Users/User/Desktop/Backend/topicHasTag>
+              <file:///C:/Users/User/Desktop/Backend/loudy> , <file:///C:/Users/User/Desktop/Backend/shop> ;
+      <file:///C:/Users/User/Desktop/Backend/topicRelatedTo>
+              <file:///C:/Users/User/Desktop/Backend/_16_> .
+
+<usedWith>
+      a       owl:ObjectProperty .
+
+<file:///C:/Users/User/Desktop/Backend/red>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/fruit> , <file:///C:/Users/User/Desktop/Backend/alcohol> .
+
+<topicRelatedTo>
+      a       owl:ObjectProperty .
+
+<Tag>
+      a       owl:Class .
+
+<file:///C:/Users/User/Desktop/Backend/alcohol>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/red> , <file:///C:/Users/User/Desktop/Backend/kadikoy_moda> , <file:///C:/Users/User/Desktop/Backend/beer_shop> , <file:///C:/Users/User/Desktop/Backend/sea> , <file:///C:/Users/User/Desktop/Backend/city> , <file:///C:/Users/User/Desktop/Backend/yeast> , <file:///C:/Users/User/Desktop/Backend/lezzetli> .
+
+<file:///C:/Users/User/Desktop/Backend/sea>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/kadikoy_moda> , <file:///C:/Users/User/Desktop/Backend/beer_shop> , <file:///C:/Users/User/Desktop/Backend/alcohol> , <file:///C:/Users/User/Desktop/Backend/city> , <file:///C:/Users/User/Desktop/Backend/lezzetli> .
+
+<beer_shop>
+      a       <Tag> ;
+      <usedWith> <alcohol> .
+
+<file:///C:/Users/User/Desktop/Backend/yeast>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/alcohol> .
+
+<hasCreatedPost>
+      a       owl:ObjectProperty .
+
+<file:///C:/Users/User/Desktop/Backend/postHasTag>
+      a       owl:ObjectProperty .
+
+<Topic>
+      a       owl:Class .
+
+<file:///C:/Users/User/Desktop/Backend/loudy>
+      a       <file:///C:/Users/User/Desktop/Backend/Tag> ;
+      <file:///C:/Users/User/Desktop/Backend/usedWith>
+              <file:///C:/Users/User/Desktop/Backend/shop> .
+
+<kadikoy_moda>
+      a       <Tag> ;
+      <usedWith> <alcohol> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<hasCreatedPost>
+      a       owl:ObjectProperty .
+
+<topicRelatedTo>
+      a       owl:ObjectProperty .
+
+<Tag>
+      a       owl:Class .
+
+<topicHasTag>
+      a       owl:ObjectProperty .
+
+<hasCreatedTopic>
+      a       owl:ObjectProperty .
+
+<User>
+      a       owl:Class .
+
+<Topic>
+      a       owl:Class .
+
+<_1_>
+      a       <Topic> ;
+      <topicRelatedTo> <_3_> .
+
+<Post>
+      a       owl:Class .
+
+<usedWith>
+      a       owl:ObjectProperty .
+
+<_3_>
+      a       <Topic> ;
+      <topicRelatedTo> <_1_> .
+
+<postHasTag>
+      a       owl:ObjectProperty .
