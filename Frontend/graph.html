@@ -107,6 +107,7 @@
       width: 80px;
       float: left;
       line-height: 20px;
+      overflow: hidden;
     }
     .voting {
       float: left;
@@ -468,6 +469,8 @@ function changeAddConnectionButton(show) {
 
 $(document).ready(function() {
 
+  $("#addPost").hide();
+
 $( "#addConnection" ).click(function() {
   if (showConnectionButton) {
       changeAddConnectionButton(false);
@@ -568,6 +571,7 @@ $('#addPostForm').validator().on('submit', function (e) {
         method: "POST",
         url: api + "/api/post/create?topicId=" + selectedTopicId,
         dataType: "json",
+        contentType: "application/json",
         data: JSON.stringify({ 
           ownerId: $.cookie('id'),
           content: newPostContent,
@@ -576,9 +580,39 @@ $('#addPostForm').validator().on('submit', function (e) {
       })
       .done(function( data ) {
 
-        console.log(data);
+        // console.log(data);
           
           if (data.result.result === "OK") {
+
+            var html = $('#posts').html();
+
+              var monthNames = [
+                "Jan", "Feb", "Mar",
+                "Apr", "May", "Jun", "Jul",
+                "Aug", "Sep", "Oct",
+                "Nov", "Dec"
+              ];
+
+              var date = new Date(data.date);
+              var day = date.getDate();
+              var monthIndex = date.getMonth();
+              var year = date.getFullYear();
+
+              var fullDate = day + ' ' + monthNames[monthIndex] + ' ' + year;
+
+              var tagHtml = "";
+              data.tagsOfPost.forEach(function(tag) {
+                tagHtml += '<a target="_blank" href="search.html?query='+tag.trim()+'">#'+tag.trim()+'</a> ';
+              });
+              var totalVote = data.upVote + data.downVote;
+                
+                var newHtml = '<div class="post"><div class="detail">'+data.content+'</div><div class="extras"><div class="date">'+fullDate+'</div><div class="voting"><img onclick="downVotePost('+data.id+')" src="img/down.png" height="14px"> <span id ="vote_'+data.id+'"">'+totalVote+'</span> <img onclick="upVotePost('+data.id+')" src="img/up.png" height="14px"></div><div class="username"><a target="_blank" href="profile.html?id='+data.ownerId+'">'+data.userName+'</a></div><div style="clear:both;"></div></div><div class="tags">'+tagHtml+'</div></div>';
+
+
+            $('#posts').html(newHtml+''+html);
+
+            $('#postDetail').val('');
+            $('#postTags').val('');
             
           } else {
 
@@ -594,68 +628,7 @@ $('#addPostForm').validator().on('submit', function (e) {
               btn.button('reset');
           });
 
-    
-    // var topicName = $('#topicName').val();
-    // var topicGroup = $('#topicGroup').val();
-    // var topicTags = $('#topicTags').val();
-
-    // console.log(topicTags);
-
-    // var tagsarray = [];
-    // if (topicTags.length > 0) {
-    //   tagsarray = topicTags.split(',');
-    // };
-
-    // $.ajax({
-    //   method: "POST",
-    //   url: api + "/api/topic/create",
-    //   contentType: "application/json",
-    //   dataType: "json",
-    //   data: JSON.stringify({ 
-    //     ownerId: $.cookie('id'),
-    //     title: topicName,
-    //     group: topicGroup,
-    //     tags: tagsarray
-    //   })
-    // })
-    // .done(function( data ) {
-
-    //   if (data.result.result === "OK") {
-
-    //     $('#addTopicModal').modal('hide');
-
-    //     nodes.add({
-    //         id: data.id,
-    //         label: data.label,
-    //         title: data.title,
-    //         group: data.group,
-    //         value: data.value
-    //     });
-
-    //         $('#topicName').val('');
-    //         $('#topicGroup').val('');
-    //         $('#topicTags').val('');
-
-    //   } else {
-
-    //     $('#addTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
-    //     $('#addTopicMessages').show('slow');
-
-    //     setTimeout(function () {
-    //         $('#addTopicMessages').hide('slow');
-    //     }, 3000);
-
-    //   }
-    // })
-    // .fail(function( data ) {
-
-    //   $('#addTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
-    //   $('#addTopicMessages').show('slow');
-
-    //   setTimeout(function () {
-    //       $('#addTopicMessages').hide('slow');
-    //   }, 3000);
-    // });
+   
   }
 })
 
@@ -713,19 +686,73 @@ function updateSideBar(data) {
   $('#topic_name').html(topicName);
   $('#topic_group').html(topicGroup);
 
+  $('#posts').html('');
+
+  $("#addPost").show();
+
   $.get(api + "/api/topic/id/"+data.id+"/get_posts", function(res) {
 
     var html = "";
 
     res.posts.forEach(function(entry) {
-        console.log(entry);
-    });
 
+      var monthNames = [
+        "Jan", "Feb", "Mar",
+        "Apr", "May", "Jun", "Jul",
+        "Aug", "Sep", "Oct",
+        "Nov", "Dec"
+      ];
+
+      var date = new Date(entry.date);
+      var day = date.getDate();
+      var monthIndex = date.getMonth();
+      var year = date.getFullYear();
+
+      var fullDate = day + ' ' + monthNames[monthIndex] + ' ' + year;
+
+      var tagHtml = "";
+      entry.tagsOfPost.forEach(function(tag) {
+        tagHtml += '<a target="_blank" href="search.html?query='+tag.trim()+'">#'+tag.trim()+'</a> ';
+      });
+      var totalVote = entry.upVote + entry.downVote;
+        
+        html += '<div class="post"><div class="detail">'+entry.content+'</div><div class="extras"><div class="date">'+fullDate+'</div><div class="voting"><img onclick="downVotePost('+entry.id+')" src="img/down.png" height="14px"> <span id ="vote_'+entry.id+'"">'+totalVote+'</span> <img onclick="upVotePost('+entry.id+')" src="img/up.png" height="14px"></div><div class="username"><a target="_blank" href="profile.html?id='+entry.ownerId+'">'+entry.userName+'</a></div><div style="clear:both;"></div></div><div class="tags">'+tagHtml+'</div></div>';
+
+    });
+    $('#posts').html(html);
 
     // console.log(res);
   });
 
 }
+
+function upVotePost(postId){
+  $.ajax({
+    method: "POST",
+    url: api + "/api/post/id/" + postId +"/up_vote",
+  })
+  .done(function( data ) {
+    var upVoteCurrent = Number($('#vote_' + Number(postId)).html());
+    $('#vote_' + Number(postId)).html(upVoteCurrent+1);
+  })
+  .fail(function( data ) {
+
+  });
+};
+
+function downVotePost(postId){
+  $.ajax({
+    method: "POST",
+    url: api + "/api/post/id/" + postId +"/down_vote",
+  })
+  .done(function( data ) {
+    var downVoteCurrent = Number($('#vote_' + Number(postId)).html());
+    $('#vote_' + Number(postId)).html(downVoteCurrent-1);
+  })
+  .fail(function( data ) {
+
+  });
+};
 </script>
 
 <!-- Add Topic Modal Start -->
