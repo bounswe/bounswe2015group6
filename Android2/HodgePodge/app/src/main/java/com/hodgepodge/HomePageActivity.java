@@ -21,6 +21,8 @@ public class HomePageActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,6 +87,9 @@ public class HomePageActivity extends AppCompatActivity
 
         if (id == R.id.nav_create_topic) {
             Intent intent = new Intent(context, CreateTopicActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_profile) {
+            Intent intent = new Intent(context, ProfilePage.class);
             startActivity(intent);
         }
 

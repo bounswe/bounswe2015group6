@@ -5,6 +5,10 @@
         <item android:id="@+id/nav_create_topic" android:icon="@android:drawable/ic_menu_add"
             android:title="Create Topic" />
     </group>
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_profile" android:icon="@android:drawable/ic_menu_add"
+            android:title="My Profile" />
+    </group>
 
 
 </menu>

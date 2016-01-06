@@ -6,6 +6,8 @@
             android:title="Sign Up" />
         <item android:id="@+id/nav_sign_in"
             android:title="Sign In" />
+        <item android:id="@+id/nav_profile"
+            android:title="My Profile" />
     </group>
 
 
