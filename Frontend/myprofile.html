@@ -186,8 +186,6 @@ $(function(){
   $.ajax({
     url: api + "/api/user/profile/" + userID,
     success: function(data){
-      console.log(data);
-      console.log();
       var i = 0;
       var html = '';
 
@@ -200,7 +198,7 @@ $(function(){
           html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.feeds[j].feed.subject) +'\'"><td>' + (i+1) + '</td><td>' + data.feeds[j].username + " " + data.feeds[j].feed.message + " <b>" + data.feeds[j].subjectName + '</b></td></tr>';
         }
         else if(Number(data.feeds[j].feed.type) == 2){
-          html += '<tr><td>' + (i+1) + '</td><td>' + data.feeds[j].username + " " + data.feeds[j].feed.message + '</td></tr>';
+          html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.feeds[j].feed.topicId) +'\'"><td>' + (i+1) + '</td><td>' + data.feeds[j].username + " <b>" + data.feeds[j].feed.message +  '</b> in <b>' + data.feeds[j].feed.topicName + '</b></td></tr>';
         }
         else{
           html += '<tr><td>' + (i+1) + '</td><td>' + data.feeds[j].username + " " + data.feeds[j].feed.message + ' <b>' + data.feeds[j].subjectName +'</b></td></tr>';
@@ -217,7 +215,7 @@ $(function(){
           html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.actions[j].feed.subject) +'\'"><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + " <b>" + data.actions[j].subjectName + '</b></td></tr>';
         }
         else if(Number(data.actions[j].feed.type) == 2){
-          html += '<tr><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + '</td></tr>';
+          html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.actions[j].feed.topicId) +'\'"><td>' + (i+1) + '</td><td><b>' + data.actions[j].feed.message + '</b> in <b>' + data.actions[j].feed.topicName + '</b></td></tr>';
         }
         else{
           html += '<tr><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + ' <b>' + data.actions[j].subjectName +'</b></td></tr>';

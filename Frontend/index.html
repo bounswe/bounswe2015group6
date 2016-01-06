@@ -417,7 +417,7 @@ $(function(){
         news += "<a href='topic.html?id=" + data[i].feed.subject + "' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + " <b>" + data[i].subjectName +  "</b></a>";
       }
       else if(data[i].feed.type == 2){
-        news += "<a href='#' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + "</a>";        
+        news += "<a href='topic.html?id=" + data[i].feed.topicId + "#" + data[i].feed.subject + "' class='list-group-item'>" + data[i].username + " <b>" + data[i].feed.message + "</b> in <b>" + data[i].feed.topicName + "</b></a>";        
       }
       else if(data[i].feed.type == 3){
         news += "<a href='#' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + " <b>" + data[i].subjectName + "</b></a>";        

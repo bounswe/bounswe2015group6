@@ -180,7 +180,6 @@ $(function(){
     url: api + "/api/search/?search=" + searchQuery,
   })
     .done(function( data ) {
-      console.log(data);
       var i = 0;
       var html = '<table class="table table-hover"><thead><th>#</th><th>Topic Name</th></thead><tbody>';
       $.each(data.Topic, function(idOfResult, nameOfResult){

@@ -250,7 +250,6 @@ $(function(){
     url: api + "/api/topic/id/" + id,
     success: function(data){
       if (data.result.result === "OK") {
-        console.log(data);
         var tagsOfTopic = [];
         var tagsTab = 'Tags: ';
         var html_1 = '<h2>' + data.title + '</h2>';
@@ -579,7 +578,6 @@ $('#sendPostButton').on('click', function () {
     if($('#tag4').val().length>2){
       tags.push($('#tag4').val());
     }
-    console.log(tags);
     $.ajax({
       method: "POST",
       url: api + "/api/post/create?topicId=" + id,
@@ -592,7 +590,6 @@ $('#sendPostButton').on('click', function () {
       })
     })
       .done(function( data ) {
-        console.log(data);
         $('#createPostMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Post is successfully created!</strong> </div>');
         $('#createPostMessages').show('slow');
 
@@ -603,7 +600,6 @@ $('#sendPostButton').on('click', function () {
         }, 1500);
       })
       .fail(function( data ) {
-        console.log(data);
         $('#createPostMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
         $('#createPostMessages').show('slow');
         setTimeout(function () {

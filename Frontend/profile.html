@@ -196,8 +196,6 @@ $(function(){
   $.ajax({
     url: api + "/api/user/profile/" + userID,
     success: function(data){
-      console.log(data);
-      console.log();
       var i = 0;
       var html = '';
 
@@ -210,7 +208,7 @@ $(function(){
           html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.actions[j].feed.subject) +'\'"><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + " <b>" + data.actions[j].subjectName + '</b></td></tr>';
         }
         else if(Number(data.actions[j].feed.type) == 2){
-          html += '<tr><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + '</td></tr>';
+          html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.actions[j].feed.topicId) +'\'"><td>' + (i+1) + '</td><td><b>' + data.actions[j].feed.message + '</b> in <b>' + data.actions[j].feed.topicName +'</b></td></tr>';
         }
         else{
           html += '<tr><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + ' <b>' + data.actions[j].subjectName +'</b></td></tr>';
@@ -240,6 +238,9 @@ $(function(){
       html = '<table class="table table-hover"><thead><th>#</th><th>Users</th></thead><tbody>';
       $.each(data.following, function(idOfResult, nameOfResult){
         i++;
+        if($.cookie('username').toString()==nameOfResult.toString()){
+          $('#followsYou').html('Follows You!');
+        }
         html += '<tr onclick="window.document.location=\'./profile.html?id='+ Number(idOfResult) +'\'"><td>' + i + '</td><td>' + nameOfResult + '</td></tr>';
       });
       html += '</tbody></table>';
