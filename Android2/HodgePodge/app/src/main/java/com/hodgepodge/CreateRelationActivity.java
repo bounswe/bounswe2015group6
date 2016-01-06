@@ -81,7 +81,7 @@ public class CreateRelationActivity extends AppCompatActivity {
                                                 });
                                     }else{
                                         errorText.setVisibility(View.VISIBLE);
-                                        errorText.setText("Destination Topic don't exist");
+                                        errorText.setText("Destination Topic doesn't exist");
                                     }
 
 
@@ -99,7 +99,7 @@ public class CreateRelationActivity extends AppCompatActivity {
                         });
                     }else{
                         errorText.setVisibility(View.VISIBLE);
-                        errorText.setText("Source Topic don't exist");
+                        errorText.setText("Source Topic doesn't exist");
 
                     }
 

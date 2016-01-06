@@ -55,7 +55,7 @@ public class PopularActivity extends AppCompatActivity {
                         System.out.println(title);
                         date.add(((String) topic.get("createDate")).substring(0, 10));
                         rating.add((Integer) topic.get("upVote") - (Integer) topic.get("downVote"));
-//                        username.add("BerkDilek");
+                        username.add("");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

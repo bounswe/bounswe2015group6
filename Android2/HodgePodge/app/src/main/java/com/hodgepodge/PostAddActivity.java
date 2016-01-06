@@ -10,10 +10,12 @@ import android.widget.EditText;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -44,8 +46,11 @@ public class PostAddActivity extends AppCompatActivity {
                     JSONObject jsonParams = new JSONObject();
                     jsonParams.put("ownerId", user.getString("ID", ""));
                     jsonParams.put("content", contentEditText.getText().toString());
-                    jsonParams.put("tagsOfPost", null);
 
+                    String delims = "[ ]+";
+                    String[] tags = tagsEditText.getText().toString().split(delims);
+                    JSONArray tagsJson = new JSONArray(Arrays.asList(tags));
+                    jsonParams.put("tagsOfPost", tagsJson);
                     StringEntity entity = null;
                     try {
                         entity = new StringEntity(jsonParams.toString());
