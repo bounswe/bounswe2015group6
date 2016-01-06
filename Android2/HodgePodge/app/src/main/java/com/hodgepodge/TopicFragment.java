@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -27,11 +26,9 @@ import cz.msebera.android.httpclient.Header;
 public class TopicFragment extends Fragment {
     public ListView listView;
 
-    String topicsString;
     ArrayList<String> Titles = new ArrayList<String>();
 
     public  JSONArray topics;
-    public   TextView textUsername;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.topic_fragment_layout, container, false);
