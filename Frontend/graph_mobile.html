@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>HodgePodge</title>
+
+
+    <link rel="stylesheet" href="css/vis.min.css">
+
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/vis.min.js"></script>
+
+    <style type="text/css">
+        #mynetwork {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+    </style>
+  </head>
+
+<body>
+
+<div id="mynetwork"></div>
+        
+<script type="text/javascript">
+
+var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
+
+$( document ).ready(function() {
+
+  var nodesDataset;
+  var edgesDataset
+
+  $.when(
+
+    $.get(api + "/api/topic/topics", function(data) {
+      nodesDataset = new vis.DataSet(data);
+    }),
+
+    $.get(api + "/api/edge/edges", function(data) {
+      edgesDataset = new vis.DataSet(data);
+    })
+
+  ).then(function() {
+
+    var container = document.getElementById('mynetwork');
+
+    var data = {
+      nodes: nodesDataset,
+      edges: edgesDataset
+    };
+
+    var options = {
+      autoResize: true,
+      height: '100%',
+      nodes: {
+        shape: 'dot'
+      },
+      layout:{
+        randomSeed:2
+      }
+    };
+    var network = new vis.Network(container, data, options);
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
