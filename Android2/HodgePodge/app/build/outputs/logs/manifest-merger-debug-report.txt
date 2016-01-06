@@ -1,128 +1,128 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:2:1-54:12
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:2:1-54:12
 	package
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:3:5-29
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:3:5-29
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.GET_ACCOUNTS
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:6:5-71
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:6:5-71
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:6:22-68
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:6:22-68
 uses-permission#android.permission.READ_PROFILE
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:7:5-71
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:7:5-71
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:7:22-68
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:7:22-68
 uses-permission#android.permission.READ_CONTACTS
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:8:5-72
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:8:5-72
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:8:22-69
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:8:22-69
 uses-permission#android.permission.INTERNET
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:9:5-67
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:9:5-67
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:9:22-64
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:9:22-64
 application
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:11:5-52:19
-MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:design:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:11:5-52:19
+MERGED from [com.android.support:appcompat-v7:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:22:5-20
 	android:label
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:14:9-41
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:14:9-41
 	android:supportsRtl
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:15:9-35
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:15:9-35
 	android:allowBackup
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:12:9-35
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:12:9-35
 	android:icon
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:13:9-43
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:13:9-43
 	android:theme
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:16:9-40
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:16:9-40
 activity#com.hodgepodge.LandingActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:17:9-26:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:17:9-26:20
 	android:label
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:19:13-45
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:19:13-45
 	android:theme
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:20:13-56
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:20:13-56
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:18:13-44
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:18:13-44
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:21:13-25:29
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:21:13-25:29
 action#android.intent.action.MAIN
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:22:17-69
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:22:17-69
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:22:25-66
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:22:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:24:17-77
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:24:17-77
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:24:27-74
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:24:27-74
 activity#com.hodgepodge.SignInActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:27:9-30:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:27:9-30:20
 	android:label
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:29:13-59
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:29:13-59
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:28:13-43
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:28:13-43
 activity#com.hodgepodge.SignUpActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:31:9-34:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:31:9-34:20
 	android:label
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:33:13-59
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:33:13-59
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:32:13-43
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:32:13-43
 activity#com.hodgepodge.HomePageActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:35:9-39:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:35:9-39:20
 	android:label
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:37:13-61
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:37:13-61
 	android:theme
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:38:13-56
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:38:13-56
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:36:13-45
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:36:13-45
 activity#com.hodgepodge.CreateTopicActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:40:9-41:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:40:9-41:20
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:40:19-54
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:40:19-54
 activity#com.hodgepodge.PostAddActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:42:9-43:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:42:9-43:20
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:42:19-50
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:42:19-50
 activity#com.hodgepodge.PostsListActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:44:9-45:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:44:9-45:20
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:44:19-52
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:44:19-52
 activity#com.hodgepodge.PopularActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:46:9-47:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:46:9-47:20
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:46:19-50
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:46:19-50
 activity#com.hodgepodge.CreateRelationActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:48:9-49:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:48:9-49:20
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:48:19-57
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:48:19-57
 activity#com.hodgepodge.RecentActivity
-ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:50:9-51:20
+ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:50:9-51:20
 	android:name
-		ADDED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml:50:19-49
+		ADDED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml:50:19-49
 uses-sdk
-INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:design:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:recyclerview-v7:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.0] /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
+INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/AndroidManifest.xml
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\mahmutsamiyagmur\Desktop\bounswe2015group6\Android2\HodgePodge\app\src\main\AndroidManifest.xml
