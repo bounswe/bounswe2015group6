@@ -1,5 +1,8 @@
 # **Boun SWE 2015 CMPE 352 Group #6** #
 
+## Project Description HodgePodge ##
+Connections of a topic is not restricted with your aspect. Hodgepodge is an application that you can meet others who has common topics with you. You can subscript topics and discover points of a topic that you do not know. Thanks to Hodgepodge, you can discover new points and lose yourself in an advanture.
+
 <a href="http://hodge-podge.info">HodgePodge Web Page</a>
 
 ## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Code-Reviews">Code Reviews</a>** ##
