@@ -764,10 +764,10 @@ $('#createRelationForm').validator().on('submit', function (e) {
         method: "POST",
         url: api + "/api/edge/create_new?user_id" + Number($.cookie('id')),
         data: {
-          source: topicId1,
-          dest: topicId2,
+          from: topicId1,
+          to: topicId2,
           label: reason,
-          user: userId
+          title: reason
         },
       })
         .done(function( data ) {

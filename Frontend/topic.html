@@ -400,10 +400,10 @@ function addNewRelation(rID){
         method: "POST",
         url: api + "/api/edge/create_new?user_id" + Number($.cookie('id')),
         data: {
-          source: id,
-          dest: $('#topicId' + rID).val(),
+          from: id,
+          to: $('#topicId' + rID).val(),
           label: $('#relation' + rID).val(),
-          user: Number($.cookie('id'))
+          title: $('#relation' + rID).val()
         },
       })
         .done(function( data ) {
