@@ -94,6 +94,12 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="control-label col-sm-3" for="group_">Topic Group:</label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" id="topicGroup" placeholder="Please enter a topic group name." data-minlength="3" required>
+                </div>
+              </div>
+              <div class="form-group">
                   <label class="control-label col-sm-3" for="tag_1">Tags:</label>
                   <div class="col-sm-6">
                   <input type="text" class="form-control" id="tag1" placeholder="Please enter a tag." data-minlength='2'>
@@ -163,6 +169,12 @@
           </div>
           <div class="modal-body">
             <div style="display:none;" id="createRelationMessages"></div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="toGraph_"></label>
+                <div class="col-sm-7" style="margin-bottom:10px">
+                  <a href="./graph.html"><button class="btn btn-success col-sm-12">Add relations on Graph here <span class="glyphicon glyphicon-arrow-right"></span></button></a>
+                </div>
+              </div>  
             <form id="createRelationForm" class="form-horizontal" role="form">
               <div class="form-group">
                 <label class="control-label col-sm-4" for="relation_1">First Topic:</label>
@@ -293,7 +305,7 @@
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title" style="height:29px;margin-top:11px;">Graph View<a style="float:right;" href="graph.html">Full Screen</a></h3>
+              <h3 class="panel-title" style="height:29px;"><a style="float:center;" href="graph.html"><button class="btn btn-primary col-sm-12" style="margin-top:0px">Full Screen Graph View <span class="glyphicon glyphicon-new-window"></span></button></a></h3>
             </div>
             <div class="panel-body">
               <div id="mynetwork"></div>
@@ -339,16 +351,17 @@
 var api = 'http://ec2-52-27-36-39.us-west-2.compute.amazonaws.com:8080';
 
 $(function(){
-
+  var rating = '';
+  var popular = '';
+  var recentOrPopular = '';
   //GETTING DATA FOR THE MOST RECENTLY ACTIVE TOPICS
  $.ajax({
     url: api + "/api/recent_popular/recent/",
     success: function(data){
-      var recentOrPopular = "<div class='list-group'>";
+      recentOrPopular = "<div class='list-group'>";
       if (data) {
         for(var i = 0; i<(data.length>=10 ? 10 : data.length); i++){
-         // var postLength = data[i].posts ? Number(data[i].posts.length) : 0 ;
-         var rating = data[i].upVote + data[i].downVote;
+          rating = data[i].upVote + data[i].downVote;
           recentOrPopular += "<a href='topic.html?id=" + data[i].id + "' class='list-group-item'><span class='badge'>" + rating + "</span>" + data[i].title + "</a>";
         }
         $('#recent').html(recentOrPopular);
@@ -369,9 +382,9 @@ $(function(){
     url: api + "/api/recent_popular/popular/",
     success: function(data){
       if (data) {
-        var recent = "<div class='list-group'>";
+        recent = "<div class='list-group'>";
         for(var i = 0; i<(data.length>=10 ? 10 : data.length); i++){
-          var rating = Number(data[i].upVote) + Number(data[i].downVote);
+          rating = Number(data[i].upVote) + Number(data[i].downVote);
           recent += "<a href='topic.html?id=" + data[i].id + "' class='list-group-item'><span class='badge'>" + rating + "</span>" + data[i].title + "</a>";
           $('#popular').html(recent);
         }
@@ -639,6 +652,7 @@ $('#topicform').validator().on('submit', function (e) {
         data: JSON.stringify({ 
           ownerId: $.cookie('id'),
           title: $('#topicTitle').val(),
+          group: $('#topicGroup').val(),
           tags: tagsArray
         })
       })
@@ -748,7 +762,7 @@ $('#createRelationForm').validator().on('submit', function (e) {
       var userId = $.cookie('id');
       $.ajax({
         method: "POST",
-        url: api + "/api/edge/create",
+        url: api + "/api/edge/create_new?user_id" + Number($.cookie('id')),
         data: {
           source: topicId1,
           dest: topicId2,

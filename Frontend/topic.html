@@ -120,7 +120,11 @@
       <div class="row">
         <div style="display:none;" id="loginMessages"></div>
         <div class="col-sm-12" id="titleAndRating">
-          <div class="col-sm-10" id="title"></div>
+          <div class="col-sm-10" id="titleAndGroup">
+            <div class="col-sm-12" id="title"></div>
+            <div class="col-sm-12" id="group"></div>
+            <div class="col-sm-12" id="seeGraph"></div>
+          </div>
           <div class="col-sm-2" style="border-left: solid #000000;">
             <div style="float:right" class="col-sm-12"><h3 style="text-align:center">Rating</h3></div>
             <div style="float:right; display:none" class="col-sm-12" id="upVoteTopic">
@@ -249,13 +253,17 @@ $(function(){
   $.ajax({
     url: api + "/api/topic/id/" + id,
     success: function(data){
+      console.log(data);
+      console.log('dsas');
       if (data.result.result === "OK") {
         var tagsOfTopic = [];
         var tagsTab = 'Tags: ';
         var html_1 = '<h2>' + data.title + '</h2>';
+        var html_3 = '<h4>Group: <i>' + data.group + '</i></h4>';
         rating = Number(data.upVote) + Number(data.downVote);
         var html_2 = "<h3 style='text-align:center; margin-top:0px' >" + rating + "</h3>";
         $('#title').html(html_1);
+        $('#group').html(html_3);
         $('#rating').html(html_2);
         html_1 = "";
 
@@ -271,7 +279,7 @@ $(function(){
           }
           var deleteCheck = Number(data.posts[i].ownerId) == Number($.cookie('id')) ? "block" : "none";
 
-          html_1 = "<div style='display:none;'' id='deleteMessage" + data.posts[i].id + "'></div><div id='" + id + "-" + data.posts[i].id + "' class='panel panel-primary' style='padding-top:0px; clear:both; height:250px'><div class='panel panel-heading' style='margin-top:0px; margin-bottom:0px'><div class='row'><div class='col-sm-9'>Post Id: "+ data.posts[i].id +"</div><div class='col-sm-2'><p style='text-align:right'>CreatedBy: <a href='./profile.html?id=" + data.posts[i].ownerId + "' style='color:white'>" + data.posts[i].userName + "</a></p></div><div class='deletePosts'><div class='col-sm-1' style='display:" + deleteCheck + "'><p style='text-align:right'><a href='#" + id + "-" + data.posts[i].id + "' id='deleePosts' onClick='deletePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-remove' style='font-size:1.2em; color:red'></span></a><p></div></div></div></div><div class='panel-body'><div class='col-sm-10' style='padding-left:0px'><div class='col-sm-12' style='margin-bottom:10px; height:90px'>" + data.posts[i].content + "</div></div><div class='col-sm-2' style='border-left: solid #000000;'><div class='col-sm-12'><h4 style='text-align:center'>Rating</h4></div><div class='upVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='upVote' onClick='upVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-up' style='font-size:1em'></span></a><p></div></div><div class='col-sm-12' id='ratingPost" + data.posts[i].id + "'><h4 style='text-align:center; margin-top:0px' id='r" + data.posts[i].id + "'>" + (Number(data.posts[i].upVote) + Number(data.posts[i].downVote)) + "</h4></div><div class='downVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='downVote' onClick='downVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-down' style='font-size:1em'></span></a><p></div></div></div><div class='col-sm-12' style='margin-bottom:10px'>" + tagsTab +"</div></div></div></div>";
+          html_1 = "<div style='display:none;'' id='deleteMessage" + data.posts[i].id + "'></div><div id='" + id + "-" + data.posts[i].id + "' class='panel panel-primary' style='padding-top:0px; clear:both; height:250px'><div class='panel panel-heading' style='margin-top:0px; margin-bottom:0px'><div class='row'><div class='col-sm-8'>Post Id: "+ data.posts[i].id +"</div><div class='col-sm-3'><p style='text-align:right'>CreatedBy: <a href='./profile.html?id=" + data.posts[i].ownerId + "' style='color:white'>" + data.posts[i].userName + "</a></p></div><div class='deletePosts'><div class='col-sm-1' style='display:" + deleteCheck + "'><p style='text-align:right'><a href='#" + id + "-" + data.posts[i].id + "' id='deleePosts' onClick='deletePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-remove' style='font-size:1.2em; color:red'></span></a><p></div></div></div></div><div class='panel-body'><div class='col-sm-10' style='padding-left:0px'><div class='col-sm-12' style='margin-bottom:10px; height:90px'>" + data.posts[i].content + "</div></div><div class='col-sm-2' style='border-left: solid #000000;'><div class='col-sm-12'><h4 style='text-align:center'>Rating</h4></div><div class='upVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='upVote' onClick='upVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-up' style='font-size:1em'></span></a><p></div></div><div class='col-sm-12' id='ratingPost" + data.posts[i].id + "'><h4 style='text-align:center; margin-top:0px' id='r" + data.posts[i].id + "'>" + (Number(data.posts[i].upVote) + Number(data.posts[i].downVote)) + "</h4></div><div class='downVotePost'><div class='col-sm-12'><p style='text-align:center'><a href='#" + id + "-" + data.posts[i].id + "' id='downVote' onClick='downVotePosts(" + data.posts[i].id + ")'><span class='glyphicon glyphicon-menu-down' style='font-size:1em'></span></a><p></div></div></div><div class='col-sm-12' style='margin-bottom:10px'>" + tagsTab +"</div></div></div></div>";
           $("#Posts").append(html_1);
         };
         tagsTab = '';
@@ -390,7 +398,7 @@ function addNewRelation(rID){
 
     $.ajax({
         method: "POST",
-        url: api + "/api/edge/create",
+        url: api + "/api/edge/create_new?user_id" + Number($.cookie('id')),
         data: {
           source: id,
           dest: $('#topicId' + rID).val(),
