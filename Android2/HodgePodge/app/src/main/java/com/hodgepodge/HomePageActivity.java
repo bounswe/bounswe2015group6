@@ -2,11 +2,11 @@ package com.hodgepodge;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.view.View;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,13 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.WebView;
 
 public class HomePageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +24,15 @@ public class HomePageActivity extends AppCompatActivity
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Home");
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
-        webView = (WebView) findViewById(R.id.graph);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("http://hodge-podge.info/graph_mobile.html");
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -93,23 +85,6 @@ public class HomePageActivity extends AppCompatActivity
 
         if (id == R.id.nav_create_topic) {
             Intent intent = new Intent(context, CreateTopicActivity.class);
-            startActivity(intent);
-        }else if (id == R.id.nav_add_post) {
-            Intent intent = new Intent(context, PostAddActivity.class);
-            startActivity(intent);
-        }else if (id == R.id.nav_create_relation){
-            Intent intent = new Intent(context, CreateRelationActivity.class);
-            startActivity(intent);
-        }else if (id == R.id.nav_log_out){
-            Intent intent = new Intent(context, LandingActivity.class);
-            SharedPreferences settings = context.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
-            settings.edit().clear().commit();
-            startActivity(intent);
-        } else if (id == R.id.nav_popular_topics_home) {
-            Intent intent = new Intent(context, PopularActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_recent_Topics_home) {
-            Intent intent = new Intent(context, RecentActivity.class);
             startActivity(intent);
         }
 

@@ -10,6 +10,8 @@
             android:title="Popular Topics" />
         <item android:id="@+id/nav_recent_Topics"
             android:title="Recent Topics" />
+        <item android:id="@+id/nav_profile"
+            android:title="My Profile" />
     </group>
 
 

@@ -41,6 +41,11 @@
         <activity
             android:name="com.hodgepodge.HomePageActivity"
             android:label="@string/title_activity_home_page"
+
+        </activity>
+        <activity
+            android:name="com.hodgepodge.ProfilePage"
+            android:label="@string/title_activity_profile_page"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name="com.hodgepodge.CreateTopicActivity" >
