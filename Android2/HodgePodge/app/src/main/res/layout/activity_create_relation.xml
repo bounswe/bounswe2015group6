@@ -17,7 +17,7 @@
         android:layout_alignParentEnd="true"
         android:textCursorDrawable="@drawable/color_cursor"
         android:background="@drawable/apptheme_textfield_activated_holo_light"
-        android:hint="Topic1" />
+        android:hint="Source" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -27,23 +27,32 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Topic2"
+        android:hint="Destination"
         android:textCursorDrawable="@drawable/color_cursor"
         android:background="@drawable/apptheme_textfield_activated_holo_light"
         android:id="@+id/editTxtTopic2" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTxtLabel"
+        android:layout_below="@+id/editTxtTopic2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTxtTopic2"
+        android:layout_alignEnd="@+id/editTxtTopic2"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
+        android:hint="Label" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Relation"
         android:id="@+id/createRelationButton"
-        android:layout_below="@+id/editTxtTopic2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:background="@drawable/apptheme_btn_default_focused_holo_light"
-        android:onClick="createRelation" />
+        android:onClick="createRelation"
+        android:layout_below="@+id/editTxtLabel"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,4 +66,6 @@
         android:layout_below="@id/createRelationButton"
         android:textColor="#FF0000"
         android:visibility="invisible" />
+
+
 </RelativeLayout>

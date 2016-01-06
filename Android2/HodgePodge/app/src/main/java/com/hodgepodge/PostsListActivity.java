@@ -40,7 +40,7 @@ public class PostsListActivity extends AppCompatActivity {
         String titleStr = extras.getString("title");
         setTitle(titleStr);
 
-        ServiceClient.get("topic/id/getpost/" + topicId, null, new JsonHttpResponseHandler() {
+        ServiceClient.get("topic/id/" + topicId +"/get_posts", null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray posts = null;
@@ -55,7 +55,7 @@ public class PostsListActivity extends AppCompatActivity {
                             content.add(contentString);
                             date.add(((String) post.get("date")).substring(0, 10));
                             rating.add((Integer) post.get("upVote"));
-                            username.add("BerkDilek");
+                            username.add((String)post.get("userName"));
 
                         }
                     } catch (JSONException e) {

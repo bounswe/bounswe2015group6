@@ -15,10 +15,13 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class CreateRelationActivity extends AppCompatActivity {
-    String URL = "edge/create?source=";
+    String URL = "edge/create_new";
     private int source;
     private int dest;
     @Override
@@ -30,8 +33,10 @@ public class CreateRelationActivity extends AppCompatActivity {
     public void createRelation(View view) throws JSONException {
         final EditText topic1Text = (EditText) findViewById(R.id.editTxtTopic1);
         final EditText topic2Text = (EditText) findViewById(R.id.editTxtTopic2);
+        final EditText labelText = (EditText) findViewById(R.id.editTxtLabel);
         final TextView errorText =  (TextView) findViewById(R.id.errorTextViewRelation);
         final Context context = this;
+
         ServiceClient.get("topic/title/" + topic1Text.getText(), null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -45,8 +50,18 @@ public class CreateRelationActivity extends AppCompatActivity {
                                 try {
                                     if(response.getInt("id") != 0){
                                         dest = response.getInt("id");
-
-                                        ServiceClient.post(getApplicationContext(), URL + source + "&dest=" + dest, null, "application/json",
+                                        JSONObject jsonParams = new JSONObject();
+                                        jsonParams.put("from", source);
+                                        jsonParams.put("to", dest);
+                                        jsonParams.put("label", labelText.getText().toString());
+                                        jsonParams.put("title", labelText.getText().toString());
+                                        StringEntity entity = null;
+                                        try {
+                                            entity = new StringEntity(jsonParams.toString());
+                                        } catch (UnsupportedEncodingException e) {
+                                            e.printStackTrace();
+                                        }
+                                        ServiceClient.post(getApplicationContext(),  URL , entity, "application/json",
                                                 new AsyncHttpResponseHandler() {
                                                     @Override
                                                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -66,6 +81,7 @@ public class CreateRelationActivity extends AppCompatActivity {
                                                 });
                                     }else{
                                         errorText.setVisibility(View.VISIBLE);
+                                        errorText.setText("Destination Topic don't exist");
                                     }
 
 
@@ -83,6 +99,8 @@ public class CreateRelationActivity extends AppCompatActivity {
                         });
                     }else{
                         errorText.setVisibility(View.VISIBLE);
+                        errorText.setText("Source Topic don't exist");
+
                     }
 
 

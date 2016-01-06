@@ -1,5 +1,7 @@
 package com.hodgepodge;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +33,10 @@ public class CreateTopicActivity extends AppCompatActivity {
     public void createTopic(View view) throws JSONException {
         final EditText titleEditText = (EditText) findViewById(R.id.titleEditText);
         final EditText tagsEditText = (EditText) findViewById(R.id.tagsEditText);
+        final EditText groupEditText = (EditText) findViewById(R.id.groupEditText);
         final TextView errorCreateTopicTextView = (TextView) findViewById(R.id.errorCreateTopicTextView);
         SharedPreferences user = getSharedPreferences("UserInfo", 0);
+        final Context context = this;
 
         String convertedTitle = titleEditText.getText().toString().replaceAll("\\s+", " ");
         titleEditText.setText(convertedTitle);
@@ -45,6 +49,7 @@ public class CreateTopicActivity extends AppCompatActivity {
             JSONObject jsonParams = new JSONObject();
             jsonParams.put("ownerId", user.getString("ID", ""));
             jsonParams.put("title", titleEditText.getText().toString());
+            jsonParams.put("group", groupEditText.getText().toString());
             // Taking tags which are  seperated by space
             String delims = "[ ]+";
             String[] tags = tagsEditText.getText().toString().split(delims);
@@ -64,6 +69,8 @@ public class CreateTopicActivity extends AppCompatActivity {
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                             System.out.println("Create Topic Sucess");
                             errorCreateTopicTextView.setText("The topic was created");
+                            Intent intent = new Intent(context, HomePageActivity.class);
+                            startActivity(intent);
                             //Send user to homepage
                         }
 

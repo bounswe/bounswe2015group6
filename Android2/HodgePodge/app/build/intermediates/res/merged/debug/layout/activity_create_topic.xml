@@ -34,18 +34,28 @@
         android:hint="Tags"
         android:id="@+id/tagsEditText" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/groupEditText"
+        android:hint="Group"
+        android:layout_below="@+id/tagsEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@drawable/apptheme_textfield_activated_holo_light"
+        android:layout_alignRight="@+id/tagsEditText"
+        android:layout_alignEnd="@+id/tagsEditText" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Topic"
         android:id="@+id/createTopicButton"
-        android:layout_below="@+id/tagsEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:background="@drawable/apptheme_btn_default_focused_holo_light"
-        android:onClick="createTopic" />
+        android:onClick="createTopic"
+        android:layout_below="@+id/groupEditText"
+        android:layout_centerHorizontal="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,5 +69,7 @@
         android:layout_below="@+id/createTopicButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>
 <!-- From: file:/Users/apple/Documents/bounswe2015group6.git/Android2/HodgePodge/app/src/main/res/layout/activity_create_topic.xml -->
