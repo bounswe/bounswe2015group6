@@ -289,10 +289,10 @@ $(function(){
         var html_2 = '';
 
         for(var i=0; i<data.toRelated.length; i++){
-          html_2 += "<h4><div class='col-sm-12' style='margin-bottom:20px'><div class='col-sm-2'>Topic Name: </div><div class='col-sm-4'>" + data.toRelated[i].topicName + "</div><div class='col-sm-2'>Relation: </div><div class='col-sm-4'>" + data.toRelated[i].label + "</div></div></h4>";
+          html_2 += "<h4><div class='col-sm-12' style='margin-bottom:20px'><div class='col-sm-2'>Topic Name: </div><div class='col-sm-4'>" + data.toRelated[i].topicName + "</div><div class='col-sm-2'>Relation Reason: </div><div class='col-sm-4'>" + data.toRelated[i].label + "</div></div></h4>";
         }
         for(var i=0; i<data.fromRelated.length; i++){
-          html_2 += "<h4><div class='col-sm-12' style='margin-bottom:20px'><div class='col-sm-2'>Topic Name: </div><div class='col-sm-4'>" + data.fromRelated[i].topicName + "</div><div class='col-sm-2'>Relation: </div><div class='col-sm-4'>" + data.fromRelated[i].label + "</div></div></h4>";
+          html_2 += "<h4><div class='col-sm-12' style='margin-bottom:20px'><div class='col-sm-2'>Topic Name: </div><div class='col-sm-4'>" + data.fromRelated[i].topicName + "</div><div class='col-sm-2'>Relation Reason: </div><div class='col-sm-4'>" + data.fromRelated[i].label + "</div></div></h4>";
         }  
         $('#relationsName').append(html_2); 
 

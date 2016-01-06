@@ -198,39 +198,53 @@ $(function(){
     success: function(data){
       console.log(data);
       console.log();
-      $('#userName').html(data.User[0]);
-      $('#totalFollowers').html(data.Follower.length);
-      $('#totalFollowing').html(data.Following.length);
+      var i = 0;
+      var html = '';
+
+      $('#userName').html(data.username);
+      $('#totalFollowing').html(data.following.length);
 
       var html = '<table class="table table-hover"><thead><th>#</th><th>Activity</th></thead><tbody>';
-      for(var i=0; i<data.Feed.length; i++){
-        html += '<tr><td>' + (i+1) + '</td><td>' + data.User[0] + " " + data.Feed[i] + '</td></tr>';
+      for(var j=data.actions.length-1; j>=(data.actions.length>=20 ? data.actions.length-20  : 0); j--){
+        if(Number(data.actions[j].feed.type) == 1){
+          html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.actions[j].feed.subject) +'\'"><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + " <b>" + data.actions[j].subjectName + '</b></td></tr>';
+        }
+        else if(Number(data.actions[j].feed.type) == 2){
+          html += '<tr><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + '</td></tr>';
+        }
+        else{
+          html += '<tr><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + ' <b>' + data.actions[j].subjectName +'</b></td></tr>';
+        }
+        i++;
       }
       html += '</tbody></table>';
       $('#myActivities').html(html);
 
+      i=0;
       html = '<table class="table table-hover"><thead><th>#</th><th>Users</th></thead><tbody>';
-      for(var i=0; i<data.Follower.length; i++){
-        if($.cookie('username').toString()==data.Follower[i].toString()){
+      $.each(data.followers, function(idOfResult, nameOfResult){
+        i++;
+        if($.cookie('username').toString()==nameOfResult.toString()){
           $('#followButton').removeClass("btn-primary");
           $('#followButton').addClass("btn-success");
           $('#followButton').html('Following');
           $('#followButton').prop('disabled', 'true');
         }
-        html += '<tr><td>' + (i+1) + '</td><td>' + data.Follower[i] + '</td></tr>';
-      }
+        html += '<tr onclick="window.document.location=\'./profile.html?id='+ Number(idOfResult) +'\'"><td>' + i + '</td><td>' + nameOfResult + '</td></tr>';
+      });
       html += '</tbody></table>';
       $('#followers').html(html);
+      $('#totalFollowers').html(i);
 
+      i=0;
       html = '<table class="table table-hover"><thead><th>#</th><th>Users</th></thead><tbody>';
-      for(var i=0; i<data.Following.length; i++){
-        if($.cookie('username').toString()==data.Follower[i].toString()){
-          $('#followsYou').html('Follows you');
-        }
-      html += '<tr><td>' + (i+1) + '</td><td>' + data.Following[i] + '</td></tr>';
-      }
+      $.each(data.following, function(idOfResult, nameOfResult){
+        i++;
+        html += '<tr onclick="window.document.location=\'./profile.html?id='+ Number(idOfResult) +'\'"><td>' + i + '</td><td>' + nameOfResult + '</td></tr>';
+      });
       html += '</tbody></table>';
       $('#following').html(html);
+      $('#totalFollowing').html(i);
     },
     error: function(){
 
@@ -250,6 +264,7 @@ $('#followButton').on('click', function(){
           $('#followButton').addClass("btn-success");
           $('#followButton').html('Following');
           $('#followButton').prop('disabled', 'true');
+          window.location.reload;
         })
         .fail(function( data ) {
 

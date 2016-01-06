@@ -412,15 +412,15 @@ $(function(){
     .done(function( data ) {
     var news = "";
     
-    for(var i = (data.length>=10 ? 9 : data.length-1); i>=0; i--){
+    for(var i = data.length-1; i>=(data.length>=10 ? data.length-10 : 0); i--){
       if(data[i].feed.type == 1){
-        news += "<a href='topic.html?id=" + data[i].feed.subject + "' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + " " + data[i].subjectName +  "</a>";
+        news += "<a href='topic.html?id=" + data[i].feed.subject + "' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + " <b>" + data[i].subjectName +  "</b></a>";
       }
       else if(data[i].feed.type == 2){
         news += "<a href='#' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + "</a>";        
       }
       else if(data[i].feed.type == 3){
-        news += "<a href='#' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + " " + data[i].subjectName + "</a>";        
+        news += "<a href='#' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + " <b>" + data[i].subjectName + "</b></a>";        
       }
       else{
         news += "<a href='#' class='list-group-item'>" + data[i].username + " " + data[i].feed.message + "</a>";  
@@ -452,6 +452,12 @@ $('#addButton').on('click',function(){
       setTimeout(function () {
         $('#createTopicMessages').hide('slow');
       }, 3000);
+    }
+});
+
+$("#SearchField").keyup(function (e) {
+    if (e.keyCode == 13) {
+      window.location.href = './search.html?query=' + $('#SearchField').val();
     }
 });
 

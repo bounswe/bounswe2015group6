@@ -128,13 +128,17 @@
 
         <div class="row" style="margin-bottom:10px">
         <ul class="nav nav-tabs nav-justified">
-          <li class="active"><a data-toggle="tab" href="#myActivities">My Activities</a></li>
+          <li class="active"><a data-toggle="tab" href="#newsFeed">News Feed</a></li>
+          <li><a data-toggle="tab" href="#myActivities">My Activities</a></li>
           <li><a data-toggle="tab" href="#followers">My Followers <span class="badge" id="totalFollowers">0</span></a></li>
           <li><a data-toggle="tab" href="#following">People I Follow <span class="badge" id="totalFollowing">0</span></a></li>
         </ul>
 
         <div class="tab-content">
-          <div id="myActivities" class="tab-pane fade in active">
+          <div id="newsFeed" class="tab-pane fade in active">
+
+          </div>          
+          <div id="myActivities" class="tab-pane fade">
 
           </div>
 
@@ -184,36 +188,64 @@ $(function(){
     success: function(data){
       console.log(data);
       console.log();
-      $('#userName').html(data.User[0]);
-      $('#totalFollowers').html(data.Follower.length);
-      $('#totalFollowing').html(data.Following.length);
+      var i = 0;
+      var html = '';
+
+      $('#userName').html(data.username);
+      $('#totalFollowing').html(data.following.length);
 
       var html = '<table class="table table-hover"><thead><th>#</th><th>Activity</th></thead><tbody>';
-      for(var i=0; i<data.Feed.length; i++){
-        html += '<tr><td>' + (i+1) + '</td><td>' + data.User[0] + " " + data.Feed[i] + '</td></tr>';
+      for(var j=data.feeds.length-1; j>=(data.feeds.length>=20 ? data.feeds.length-20  : 0); j--){
+        if(Number(data.feeds[j].feed.type) == 1){
+          html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.feeds[j].feed.subject) +'\'"><td>' + (i+1) + '</td><td>' + data.feeds[j].username + " " + data.feeds[j].feed.message + " <b>" + data.feeds[j].subjectName + '</b></td></tr>';
+        }
+        else if(Number(data.feeds[j].feed.type) == 2){
+          html += '<tr><td>' + (i+1) + '</td><td>' + data.feeds[j].username + " " + data.feeds[j].feed.message + '</td></tr>';
+        }
+        else{
+          html += '<tr><td>' + (i+1) + '</td><td>' + data.feeds[j].username + " " + data.feeds[j].feed.message + ' <b>' + data.feeds[j].subjectName +'</b></td></tr>';
+        }
+        i++;
+      }
+      html += '</tbody></table>';
+      $('#newsFeed').html(html);
+
+      i = 0;
+      html = '<table class="table table-hover"><thead><th>#</th><th>Activity</th></thead><tbody>';
+      for(var j=data.actions.length-1; j>=(data.actions.length>=20 ? data.actions.length-20  : 0); j--){
+        if(Number(data.actions[j].feed.type) == 1){
+          html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.actions[j].feed.subject) +'\'"><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + " <b>" + data.actions[j].subjectName + '</b></td></tr>';
+        }
+        else if(Number(data.actions[j].feed.type) == 2){
+          html += '<tr><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + '</td></tr>';
+        }
+        else{
+          html += '<tr><td>' + (i+1) + '</td><td>' + data.actions[j].feed.message + ' <b>' + data.actions[j].subjectName +'</b></td></tr>';
+        }
+        i++;
       }
       html += '</tbody></table>';
       $('#myActivities').html(html);
 
+      i=0;
       html = '<table class="table table-hover"><thead><th>#</th><th>Users</th></thead><tbody>';
-      for(var i=0; i<data.Follower.length; i++){
-        if($.cookie('username').toString()==data.Follower[i].toString()){
-          $('#followButton').removeClass("btn-primary");
-          $('#followButton').addClass("btn-success");
-          $('#followButton').html('Following');
-          $('#followButton').prop('disabled', 'true');
-        }
-        html += '<tr><td>' + (i+1) + '</td><td>' + data.Follower[i] + '</td></tr>';
-      }
+      $.each(data.followers, function(idOfResult, nameOfResult){
+        i++;
+        html += '<tr onclick="window.document.location=\'./profile.html?id='+ Number(idOfResult) +'\'"><td>' + i + '</td><td>' + nameOfResult + '</td></tr>';
+      });
       html += '</tbody></table>';
       $('#followers').html(html);
+      $('#totalFollowers').html(i);
 
+      i=0;
       html = '<table class="table table-hover"><thead><th>#</th><th>Users</th></thead><tbody>';
-      for(var i=0; i<data.Following.length; i++){
-        html += '<tr><td>' + (i+1) + '</td><td>' + data.Following[i] + '</td></tr>';
-      }
+      $.each(data.following, function(idOfResult, nameOfResult){
+        i++;
+        html += '<tr onclick="window.document.location=\'./profile.html?id='+ Number(idOfResult) +'\'"><td>' + i + '</td><td>' + nameOfResult + '</td></tr>';
+      });
       html += '</tbody></table>';
       $('#following').html(html);
+      $('#totalFollowing').html(i);
     },
     error: function(){
 
