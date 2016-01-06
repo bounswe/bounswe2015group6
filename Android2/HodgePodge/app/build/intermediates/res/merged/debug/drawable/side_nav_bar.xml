@@ -1,0 +1,9 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+    <gradient
+        android:startColor="@android:color/holo_blue_bright"
+        android:centerColor="@android:color/holo_blue_light"
+        android:endColor="@android:color/holo_blue_dark"
+        android:type="linear"
+        android:angle="135"/>
+</shape><!-- From: file:/C:/Users/mahmutsamiyagmur/Desktop/bounswe2015group6/Android2/HodgePodge/app/src/main/res/drawable/side_nav_bar.xml -->

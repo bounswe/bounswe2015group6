@@ -1,0 +1,25 @@
+<div class="modal" ui-if='aboutModal' ui-state='aboutModal'>
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close"
+                        ui-turn-off="aboutModal">&times;</button>
+                <h4 class="modal-title">About</h4>
+            </div>
+            <div class="modal-body">
+                <label>Made by Rotem Kellner</label>
+                <br><br>
+                <a href="http://www.facebook.com/rotem.kellner">Facebook</a>
+                <br><br>
+                <a href="http://www.linkedin.com/in/rotemkellner">LinkedIn</a>
+                <br><br>
+                <label>Email: kellner.rotem@gmail.com </label>
+            </div>
+        <div class="modal-footer">
+            <button ui-turn-off="aboutModal" class="btn btn-default">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+

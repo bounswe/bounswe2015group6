@@ -91,11 +91,16 @@ public class LandingActivity extends AppCompatActivity
         } else if (id == R.id.nav_sign_in) {
             Intent intent = new Intent(context, SignInActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_popular_topics) {
+            Intent intent = new Intent(context, PopularActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_recent_Topics) {
+            Intent intent = new Intent(context, RecentActivity.class);
+            startActivity(intent);
         }else if (id == R.id.nav_profile) {
             Intent intent = new Intent(context, ProfilePage.class);
             startActivity(intent);
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

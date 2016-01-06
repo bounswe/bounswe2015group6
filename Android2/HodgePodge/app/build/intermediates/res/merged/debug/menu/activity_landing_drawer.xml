@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_sign_up"
+            android:title="Sign Up" />
+        <item android:id="@+id/nav_sign_in"
+            android:title="Sign In" />
+        <item android:id="@+id/nav_popular_topics"
+            android:title="Popular Topics" />
+        <item android:id="@+id/nav_recent_Topics"
+            android:title="Recent Topics" />
+        <item android:id="@+id/nav_profile"
+            android:title="My Profile" />
+    </group>
+
+
+</menu><!-- From: file:/C:/Users/mahmutsamiyagmur/Desktop/bounswe2015group6/Android2/HodgePodge/app/src/main/res/menu/activity_landing_drawer.xml -->

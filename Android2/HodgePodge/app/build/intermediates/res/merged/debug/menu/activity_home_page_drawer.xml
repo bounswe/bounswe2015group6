@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_create_topic" android:icon="@drawable/ic_add"
+            android:title="Create Topic" />
+        <item android:id="@+id/nav_add_post" android:icon="@drawable/ic_add"
+            android:title="Add Post" />
+        <item android:id="@+id/nav_create_relation" android:icon="@drawable/ic_add"
+            android:title="Create Relation" />
+        <item android:id="@+id/nav_popular_topics_home" android:icon="@drawable/ic_popular"
+            android:title="Popular Topics" />
+        <item android:id="@+id/nav_recent_Topics_home"
+            android:title="Recent Topics" android:icon="@drawable/ic_arecent" />
+        <item android:id="@+id/nav_log_out" android:icon="@drawable/ic_logout"
+            android:title="Log Out" />
+
+
+    </group>
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_profile" android:icon="@android:drawable/ic_menu_add"
+            android:title="My Profile" />
+    </group>
+
+
+</menu><!-- From: file:/C:/Users/mahmutsamiyagmur/Desktop/bounswe2015group6/Android2/HodgePodge/app/src/main/res/menu/activity_home_page_drawer.xml -->

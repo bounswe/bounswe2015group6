@@ -16,6 +16,7 @@ public class Follow {
     @Column(name = "follower_id")
     private int followerId;
 
+
     public int getId() {
         return id;
     }
@@ -36,8 +37,7 @@ public class Follow {
         return followerId;
     }
 
-    public void setFollower(int follower)
-    {
+    public void setFollower(int follower) {
         this.followerId = follower;
     }
 }
