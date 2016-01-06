@@ -13,7 +13,6 @@
 
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/vis.min.js"></script>
-  <script src="js/angular.min.js"></script>
   <link rel="stylesheet" href="css/vis.min.css">
 
   <script src="js/bootstrap.min.js"></script>
@@ -180,35 +179,20 @@
 <div id="sidebar">
   <div id="showPosts">
 
-  <div class="topicName">{{topic.name}}</div>
-  <div class="groupName">{{topic.group}}</div>
+  <div class="topicName" id="topic_name"></div>
+  <div class="groupName" id="topic_group"></div>
 
-<div id="posts">
-  
-  <!-- post start -->
-  <div class="post" ng-repeat="post in topic.posts">
-    <div class="detail">{{post.detail}}</div>
-    <div class="extras">
-      <div class="date">{{post.date}}</div>
-      <div class="voting"><a href="#"><img src="img/down.png" height="14px"></a> {{post.votes}} <a href="#"><img src="img/up.png" height="14px"></a></div>
-      <div class="username"><a href="#">{{post.username}}</a></div>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="tags"><span ng-repeat="tag in post.tags"><a href="">#{tag}</a> </span></div>
-  </div>
-  <!-- post end -->
-
-</div>
+<div id="posts"></div>
 
 
   </div>
   <div id="addPost">
-    <form>
-      <textarea placeholder="Write post detail.." class="form-control noresize" rows="4" id="postDetail" name="postDetail"></textarea>
+    <form id="addPostForm">
+      <textarea placeholder="Write post detail.." class="form-control noresize" rows="4" id="postDetail" name="postDetail" required data-minlength="10"></textarea>
       <div class="input-group postTags">
          <input type="text" class="form-control" placeholder="Add Tags" name="postTags" id="postTags">
          <span class="input-group-btn">
-              <button class="btn btn-success" type="button" id="addNewPost">Add Post</button>
+              <button class="btn btn-success" type="submit" id="addPostButton">Add Post</button>
          </span>
       </div>
     </form>
@@ -251,6 +235,8 @@
 
 
 <script type="text/javascript">
+
+  var selectedTopicId;
 
   var nodes, edges, network;
 
@@ -436,8 +422,12 @@
     network = new vis.Network(container, data, options);
 
     network.on("selectNode", function (params) {
+
+      var allNodes = nodes.get({returnType:"Object"});
+
+      updateSideBar(allNodes[params.nodes[0]]);
         console.log('selectNode Event:', params);
-        $('#content').animate({left: 300});
+        // $('#content').animate({left: 300});
         // network.setData(data);
         // network.clusterByConnection(1);
     });
@@ -464,19 +454,25 @@
 
 var showConnectionButton = true;
 
+function changeAddConnectionButton(show) {
+  if (show) {
+      $("#addConnection").html('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Connection');
+      network.disableEditMode();
+      showConnectionButton = true;
+  } else {
+      $("#addConnection").html('<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back');
+      network.addEdgeMode();
+      showConnectionButton = false;
+  };
+}
+
 $(document).ready(function() {
 
 $( "#addConnection" ).click(function() {
   if (showConnectionButton) {
-      showConnectionButton = false;
-
-      $("#addConnection").html('<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back');
-      network.addEdgeMode();
+      changeAddConnectionButton(false);
   } else {
-      showConnectionButton = true;
-
-      $("#addConnection").html('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Connection');
-      network.disableEditMode();
+      changeAddConnectionButton(true);
   }
 });
 
@@ -523,6 +519,10 @@ $('#addTopicForm').validator().on('submit', function (e) {
             value: data.value
         });
 
+            $('#topicName').val('');
+            $('#topicGroup').val('');
+            $('#topicTags').val('');
+
       } else {
 
         $('#addTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
@@ -543,6 +543,119 @@ $('#addTopicForm').validator().on('submit', function (e) {
           $('#addTopicMessages').hide('slow');
       }, 3000);
     });
+  }
+})
+
+$('#addPostForm').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+  } else {
+    e.preventDefault();
+
+    var btn = $('#addPostButton');
+    btn.button('loading');
+
+    var newPostContent = $('#postDetail').val();
+
+    var postTags = $('#postTags').val();
+
+    var tagsarray = [];
+    if (postTags.length > 0) {
+      tagsarray = postTags.split(',');
+    };
+
+    $.ajax({
+        method: "POST",
+        url: api + "/api/post/create?topicId=" + selectedTopicId,
+        dataType: "json",
+        data: JSON.stringify({ 
+          ownerId: $.cookie('id'),
+          content: newPostContent,
+          tagsOfPost: tagsarray
+        })
+      })
+      .done(function( data ) {
+
+        console.log(data);
+          
+          if (data.result.result === "OK") {
+            
+          } else {
+
+           
+          }  
+            btn.button('reset');
+
+        })
+        .fail(function( data ) {
+
+           
+
+              btn.button('reset');
+          });
+
+    
+    // var topicName = $('#topicName').val();
+    // var topicGroup = $('#topicGroup').val();
+    // var topicTags = $('#topicTags').val();
+
+    // console.log(topicTags);
+
+    // var tagsarray = [];
+    // if (topicTags.length > 0) {
+    //   tagsarray = topicTags.split(',');
+    // };
+
+    // $.ajax({
+    //   method: "POST",
+    //   url: api + "/api/topic/create",
+    //   contentType: "application/json",
+    //   dataType: "json",
+    //   data: JSON.stringify({ 
+    //     ownerId: $.cookie('id'),
+    //     title: topicName,
+    //     group: topicGroup,
+    //     tags: tagsarray
+    //   })
+    // })
+    // .done(function( data ) {
+
+    //   if (data.result.result === "OK") {
+
+    //     $('#addTopicModal').modal('hide');
+
+    //     nodes.add({
+    //         id: data.id,
+    //         label: data.label,
+    //         title: data.title,
+    //         group: data.group,
+    //         value: data.value
+    //     });
+
+    //         $('#topicName').val('');
+    //         $('#topicGroup').val('');
+    //         $('#topicTags').val('');
+
+    //   } else {
+
+    //     $('#addTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
+    //     $('#addTopicMessages').show('slow');
+
+    //     setTimeout(function () {
+    //         $('#addTopicMessages').hide('slow');
+    //     }, 3000);
+
+    //   }
+    // })
+    // .fail(function( data ) {
+
+    //   $('#addTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
+    //   $('#addTopicMessages').show('slow');
+
+    //   setTimeout(function () {
+    //       $('#addTopicMessages').hide('slow');
+    //   }, 3000);
+    // });
   }
 })
 
@@ -569,9 +682,10 @@ function saveData(data,callback) {
   .done(function( data ) {
 
     callback(data);
+    $('#connectionLabel').val('');
     $('#addConnectionModal').modal('hide');
 
-    network.disableEditMode();
+    changeAddConnectionButton(true);
     
     console.log(data);
 
@@ -587,6 +701,30 @@ function saveData(data,callback) {
       }, 3000);
 
   });
+}
+
+function updateSideBar(data) {
+
+  selectedTopicId = data.id;
+  // console.log(data);
+  var topicName = data.title;
+  var topicGroup = data.group;
+
+  $('#topic_name').html(topicName);
+  $('#topic_group').html(topicGroup);
+
+  $.get(api + "/api/topic/id/"+data.id+"/get_posts", function(res) {
+
+    var html = "";
+
+    res.posts.forEach(function(entry) {
+        console.log(entry);
+    });
+
+
+    // console.log(res);
+  });
+
 }
 </script>
 
@@ -670,9 +808,6 @@ function saveData(data,callback) {
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 
