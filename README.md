@@ -9,21 +9,21 @@ Connections of a topic is not restricted with your aspect. Hodgepodge is an appl
 ## **Web Server Controller** ##
 <a href = 'http://ec2-54-68-47-54.us-west-2.compute.amazonaws.com:8080/WebApp/'>Check out the web application</a>
 
-## **<a href="Project-Plan">Project Plan</a>** ##
+## **<a href="Project-Plan">https://github.com/bounswe/bounswe2015group6/wiki/Project-Plan</a>** ##
 
-## **<a href="Test-Cases">Test Cases</a>** ##
+## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Test-Cases">Test Cases</a>** ##
 
 ## **Meeting Notes** ##
 
 <ul>
 	<li>
-		<a href="Meeting-9-(September-3,-2015)">Meeting 9 (September 3, 2015)</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Meeting-9-(September-3,-2015)">Meeting 9 (September 3, 2015)</a><br>
 	</li>
         <li>
-		<a href="Meeting-10-(October-6,-2015)">Meeting 10 (October 6, 2015)</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Meeting-10-(October-6,-2015)">Meeting 10 (October 6, 2015)</a><br>
 	</li>
         <li>
-                <a href="Meeting-11-(October-11,-2015)">Meeting 11(October 11, 2015)</a><br>
+                <a href="https://github.com/bounswe/bounswe2015group6/wiki/Meeting-11-(October-11,-2015)">Meeting 11(October 11, 2015)</a><br>
         </li>
 </ul>
 
@@ -31,10 +31,10 @@ Connections of a topic is not restricted with your aspect. Hodgepodge is an appl
 
 <ul>
 	<li>
-		<a href="Customer-Meeting-5-(November-24,-2015)">Customer Meeting 5 (November 24, 2015)</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Customer-Meeting-5-(November-24,-2015)">Customer Meeting 5 (November 24, 2015)</a><br>
 	</li>
 <li>
-		<a href="Customer-Meeting-6-(December-1,-2015)">Customer Meeting 6 (December 1, 2015)</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Customer-Meeting-6-(December-1,-2015)">Customer Meeting 6 (December 1, 2015)</a><br>
 	</li>
 </ul>
 
@@ -43,23 +43,23 @@ Connections of a topic is not restricted with your aspect. Hodgepodge is an appl
 ## **Project Documentation** ##
 <ul>
 	<li>
-		<a href="User-Stories">User Stories</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/User-Stories">User Stories</a><br>
 	</li>
 	<li>
-		<a href="Domain-Analysis">Domain Analysis</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Domain-Analysis">Domain Analysis</a><br>
 	</li>
 	<li>
-		<a href="Requirements">Requirements</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Requirements">Requirements</a><br>
 	</li>
 </ul>
 
 ## **Use Cases** ##
 <ul>
 	<li>
-		<a href="Scenarios">Scenarios</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Scenarios">Scenarios</a><br>
 	</li>
 	<li>
-		<a href="Use Cases">Use Cases</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Use%20Cases">Use Cases</a><br>
 	</li>
 </ul>
 
@@ -67,20 +67,20 @@ Connections of a topic is not restricted with your aspect. Hodgepodge is an appl
 
 <ul>
 	<li>
-		<a href="Website-Mock-ups">Website Mock-ups</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Website-Mock-ups">Website Mock-ups</a><br>
 	</li>
 	<li>
-		<a href="Android-Mock-ups">Android Mock-ups</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Android-Mock-ups">Android Mock-ups</a><br>
 	</li>
 </ul>
 
 ## **Diagrams** ##
 <ul>
 	<li>
-		<a href="Class-Diagrams">Class Diagrams</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Class-Diagrams">Class Diagrams</a><br>
 	</li>
 	<li>
-		<a href="Sequence-Diagrams">Sequence Diagrams</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Sequence-Diagrams">Sequence Diagrams</a><br>
 	</li>
 </ul>
 
@@ -88,40 +88,40 @@ Connections of a topic is not restricted with your aspect. Hodgepodge is an appl
 
 <ul>
 	<li>
-		<a href="Crowdsourcing-Application">Crowdsourcing Application</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Crowdsourcing-Application">Crowdsourcing Application</a><br>
 	</li>
 	<li>
-		<a href="Semantic-Tagging-and-Searching">Semantic Tagging and Searching</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Semantic-Tagging-and-Searching">Semantic Tagging and Searching</a><br>
 	</li>
 	<li>
-		<a href="Building-Android-Application">Building Android Application</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Building-Android-Application">Building Android Application</a><br>
 	</li>
 </ul>
 
-## **<a href="RAM">RAM</a>** ##
+## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/RAM">RAM</a>** ##
 
-## **<a href="Documentation-of-Mathematical-Operations">Documentation of Mathematical Operations</a>** ##
+## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Documentation-of-Mathematical-Operations">Documentation of Mathematical Operations</a>** ##
 
-## **<a href="Activity-Diagrams">Activity Diagrams</a>** ##
+## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Activity-Diagrams">Activity Diagrams</a>** ##
 
 ## **Team Leader** ##
 <ul>
 	<li>
-		<a href="Emre-Oral">Emre Oral</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Emre-Oral">Emre Oral</a><br>
 	</li>
 </ul>
 
 ## **Communicator** ##
 <ul>
 	<li>
-		<a href="Hamza-Temel-Can-Kandaz">Hamza Temel Can Kandaz</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Hamza-Temel-Can-Kandaz">Hamza Temel Can Kandaz</a><br>
 	</li>
 </ul>
 
 ## **Note Taker** ##
 <ul>
 	<li>
-		<a href="Oğuzhan-Karaçakır">Oğuzhan Karaçakır</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/O%C4%9Fuzhan-Kara%C3%A7ak%C4%B1r">Oğuzhan Karaçakır</a><br>
 	</li>
 </ul>
 
@@ -129,31 +129,31 @@ Connections of a topic is not restricted with your aspect. Hodgepodge is an appl
 
 <ul>
 	<li>
-		<a href="Berk-Dilek">Berk Dilek</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Berk-Dilek">Berk Dilek</a><br>
 	</li>
 	<li>
-		<a href="Emre-Oral">Emre Oral</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Emre-Oral">Emre Oral</a><br>
 	</li>
 	<li>
-		<a href="Evren-Civelek">Evren Civelek</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Evren-Civelek">Evren Civelek</a><br>
 	</li>
 	<li>
-		<a href="Hamza-Öztürk">Hamza Öztürk</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Hamza-%C3%96zt%C3%BCrk">Hamza Öztürk</a><br>
 	</li>
         <li>
-		<a href="H. Barış Özmen">H. Barış Özmen</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/H.%20Bar%C4%B1%C5%9F%20%C3%96zmen">H. Barış Özmen</a><br>
 	</li>
 	<li>
-		<a href="Mahmut-Sami-Yağmur">Mahmut Sami Yağmur</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Mahmut-Sami-Ya%C4%9Fmur">Mahmut Sami Yağmur</a><br>
 	</li>
 	<li>
-		<a href="Oğuzhan-Karaçakır">Oğuzhan Karaçakır</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/O%C4%9Fuzhan-Kara%C3%A7ak%C4%B1r">Oğuzhan Karaçakır</a><br>
 	</li>
 	<li>
-		<a href="Sina-Andaç-Tan">Sina Andaç Tan</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Sina-Anda%C3%A7-Tan">Sina Andaç Tan</a><br>
 	</li>
 	<li>
-		<a href="Hamza-Temel-Can-Kandaz">Hamza Temel Can Kandaz</a><br>
+		<a href="https://github.com/bounswe/bounswe2015group6/wiki/Hamza-Temel-Can-Kandaz">Hamza Temel Can Kandaz</a><br>
 	</li>
 </ul>
 
