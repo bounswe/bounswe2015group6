@@ -9,6 +9,8 @@ Connections of a topic is not restricted with your aspect. Hodgepodge is an appl
 ## **Web Server Controller** ##
 <a href = 'http://ec2-54-68-47-54.us-west-2.compute.amazonaws.com:8080/WebApp/'>Check out the web application</a>
 
+## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Requirements">Project Requirements</a>** ##
+
 ## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Project-Plan">Project Plan</a>** ##
 
 ## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Test-Cases">Test Cases</a>** ##
