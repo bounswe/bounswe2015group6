@@ -1,0 +1,14 @@
+﻿The posts and topics that are created by the user can be seen in his profile page.
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch android_profile
+# Your branch is up-to-date with 'origin/android_profile'.
+#
+# Changes to be committed:
+#	modified:   Android2/HodgePodge/app/src/main/java/com/hodgepodge/FollowedTopicFragment.java
+#	modified:   Android2/HodgePodge/app/src/main/java/com/hodgepodge/PostFragment.java
+#	modified:   Android2/HodgePodge/app/src/main/java/com/hodgepodge/TopicFragment.java
+#	modified:   Android2/HodgePodge/app/src/main/res/layout/followed_topic_fragment_layout.xml
+#	modified:   Android2/HodgePodge/app/src/main/res/layout/post_fragment_layout.xml
+#
+

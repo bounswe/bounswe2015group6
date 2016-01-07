@@ -22,6 +22,8 @@
     <string name="title_activity_sign_in">Sign In</string>
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="title_activity_home_page">HomePageActivity</string>
+
+    <string name="title_activity_profile_page">Profile</string>
     <style name="DefaultButtonText">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

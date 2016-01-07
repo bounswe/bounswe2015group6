@@ -10,13 +10,16 @@
             android:title="Create Relation" />
         <item android:id="@+id/nav_popular_topics_home" android:icon="@drawable/ic_popular"
             android:title="Popular Topics" />
-        <item android:id="@+id/nav_recent_Topics_home"
-            android:title="Recent Topics" android:icon="@drawable/ic_arecent" />
+        <item android:id="@+id/nav_recent_Topics" android:icon="@drawable/ic_arecent"
+            android:title="Recent Topics" />
+        <item android:id="@+id/nav_profile" android:icon="@android:drawable/ic_menu_add"
+            android:title="My Profile" />
         <item android:id="@+id/nav_log_out" android:icon="@drawable/ic_logout"
             android:title="Log Out" />
 
 
     </group>
+
 
 
 </menu>

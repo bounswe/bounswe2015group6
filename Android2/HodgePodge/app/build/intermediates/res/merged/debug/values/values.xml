@@ -350,6 +350,7 @@
     <eat-comment/>
     <string name="title_activity_home_page">HomePageActivity</string>
     <string name="title_activity_login">Log in</string>
+    <string name="title_activity_profile_page">Profile</string>
     <string name="title_activity_sign_in">Sign In</string>
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="title_sign_in_activity">Sign in</string>
@@ -362,7 +363,7 @@
     <!-- From: file:/C:/Users/mahmutsamiyagmur/Desktop/bounswe2015group6/Android2/HodgePodge/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-         Customize your theme here.
+        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
