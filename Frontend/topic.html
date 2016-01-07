@@ -260,10 +260,12 @@ $(function(){
         var tagsTab = 'Tags: ';
         var html_1 = '<h2>' + data.title + '</h2>';
         var html_3 = '<h4>Group: <i>' + data.group + '</i></h4>';
+        var html_4 = '<a href="./graph.html?nodeId=' + id + '"><button class="btn btn-primary col-sm-6">Wanna See ' + data.title +  ' on Graph?</button></a>';
         rating = Number(data.upVote) + Number(data.downVote);
         var html_2 = "<h3 style='text-align:center; margin-top:0px' >" + rating + "</h3>";
         $('#title').html(html_1);
         $('#group').html(html_3);
+        $('#seeGraph').html(html_4);
         $('#rating').html(html_2);
         html_1 = "";
 
