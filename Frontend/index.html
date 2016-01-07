@@ -167,15 +167,15 @@
             <button type="button" class="close" data-dismiss="modal" onClick='location.reload()'>&times;</button>
             <h4 class="modal-title">Create a Relation</h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" style="height:75px">
             <div style="display:none;" id="createRelationMessages"></div>
             <div class="form-group">
                 <label class="control-label col-sm-4" for="toGraph_"></label>
                 <div class="col-sm-7" style="margin-bottom:10px">
                   <a href="./graph.html"><button class="btn btn-success col-sm-12">Add relations on Graph here <span class="glyphicon glyphicon-arrow-right"></span></button></a>
                 </div>
-              </div>  
-            <form id="createRelationForm" class="form-horizontal" role="form">
+            </div>  
+           <!-- <form id="createRelationForm" class="form-horizontal" role="form">
               <div class="form-group">
                 <label class="control-label col-sm-4" for="relation_1">First Topic:</label>
                 <div class="col-sm-7" style="margin-bottom:10px">
@@ -207,10 +207,11 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" onClick='location.reload()'>Close</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
+  </div>
 <!-- END OF CREATE A RELATION MODAL -->
 
 <!-- REGISTER PAGE MODAL -->
@@ -660,11 +661,12 @@ $('#topicform').validator().on('submit', function (e) {
           if (data.result.result === "OK") {
             $('#createTopicMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> ' + data.result.resultMessage + '</div>');
             $('#createTopicMessages').show('slow');
-            
+            var url = './topic.html?id=' + Number(data.id);
+
             setTimeout(function () {
               $('#createTopicMessages').hide('slow');
               $('#topicPage').modal('hide');
-              window.location.reload();
+              window.location.href = url;
             }, 2000);
           } else {
             $('#createTopicMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> ' + data.result.resultMessage + '</div>');
@@ -760,15 +762,20 @@ $('#createRelationForm').validator().on('submit', function (e) {
       var topicId2 = $('#topicId2').val();
       var reason = $('#relationLabel').val();
       var userId = $.cookie('id');
+      console.log(topicId1);
+      console.log(topicId2);
+      console.log(reason);
       $.ajax({
         method: "POST",
-        url: api + "/api/edge/create_new?user_id" + Number($.cookie('id')),
-        data: {
+        url: api + "/api/edge/create_new?user_id=" + $.cookie('id'),
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
           from: topicId1,
           to: topicId2,
           label: reason,
           title: reason
-        },
+        }),
       })
         .done(function( data ) {
           if (data.id) {
