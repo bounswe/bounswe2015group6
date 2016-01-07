@@ -253,8 +253,7 @@ $(function(){
   $.ajax({
     url: api + "/api/topic/id/" + id,
     success: function(data){
-      console.log(data);
-      console.log('dsas');
+      
       if (data.result.result === "OK") {
         var tagsOfTopic = [];
         var tagsTab = 'Tags: ';
@@ -397,17 +396,20 @@ function addNewRelation(rID){
   if($('#relation' + rID).val().length>=3 && $('#topicId' + rID).val()!=0){
     $('#relation' + rID).css('border','1px solid #ccc');
     $('#topic' + rID).css('border','1px solid #ccc');
-
+    var label = $('#relation1').val().toString();
+    var toId = Number($('#topicId' + rID).val());
     $.ajax({
-        method: "POST",
-        url: api + "/api/edge/create_new?user_id" + Number($.cookie('id')),
-        data: {
-          from: id,
-          to: $('#topicId' + rID).val(),
-          label: $('#relation' + rID).val(),
-          title: $('#relation' + rID).val()
-        },
+      method: "POST",
+      url: api + "/api/edge/create_new?user_id=" + $.cookie('id'),
+      contentType: "application/json",
+      dataType: "json",
+      data: JSON.stringify({ 
+        from: id,
+        to: toId,
+        label: label,
+        title: label
       })
+    })
         .done(function( data ) {
           if (data.id) {
             $('#addRelationMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Relation is created</div>');
@@ -430,7 +432,6 @@ function addNewRelation(rID){
             setTimeout(function () {
                 $('#addMessages').hide('slow');
             }, 1500);
-              btn.button('reset');
           });
   }
   else{

@@ -167,7 +167,7 @@
             <button type="button" class="close" data-dismiss="modal" onClick='location.reload()'>&times;</button>
             <h4 class="modal-title">Create a Relation</h4>
           </div>
-          <div class="modal-body" style="height:75px">
+          <div class="modal-body">
             <div style="display:none;" id="createRelationMessages"></div>
             <div class="form-group">
                 <label class="control-label col-sm-4" for="toGraph_"></label>
@@ -175,7 +175,7 @@
                   <a href="./graph.html"><button class="btn btn-success col-sm-12">Add relations on Graph here <span class="glyphicon glyphicon-arrow-right"></span></button></a>
                 </div>
             </div>  
-           <!-- <form id="createRelationForm" class="form-horizontal" role="form">
+           <form id="createRelationForm" class="form-horizontal" role="form">
               <div class="form-group">
                 <label class="control-label col-sm-4" for="relation_1">First Topic:</label>
                 <div class="col-sm-7" style="margin-bottom:10px">
@@ -207,11 +207,10 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" onClick='location.reload()'>Close</button>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
 <!-- END OF CREATE A RELATION MODAL -->
 
 <!-- REGISTER PAGE MODAL -->
@@ -758,34 +757,33 @@ $('#createRelationForm').validator().on('submit', function (e) {
     // everything looks good!
       var btn = $('#createRelationButton');
       btn.button('loading');
-      var topicId1 = $('#topicId1').val();
-      var topicId2 = $('#topicId2').val();
-      var reason = $('#relationLabel').val();
+      var topicId1 = Number($('#topicId1').val());
+      var topicId2 = Number($('#topicId2').val());
+      var reason = $('#relationLabel').val().toString();
       var userId = $.cookie('id');
-      console.log(topicId1);
-      console.log(topicId2);
-      console.log(reason);
+      
       $.ajax({
         method: "POST",
         url: api + "/api/edge/create_new?user_id=" + $.cookie('id'),
         contentType: "application/json",
         dataType: "json",
-        data: JSON.stringify({
+        data: JSON.stringify({ 
           from: topicId1,
           to: topicId2,
           label: reason,
           title: reason
-        }),
+        })
       })
         .done(function( data ) {
           if (data.id) {
             $('#createRelationMessages').html('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Relation is created</div>');
             $('#createRelationMessages').show('slow');
+            var url = "./graph.html?nodeId=" + topicId1 ; 
             
             setTimeout(function () {
               $('#createRelationMessages').hide('slow');
               $('#createRelationPage').modal('hide');
-              window.location.reload();
+              window.location.href = url;
             }, 2000);
           }
         })
