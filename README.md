@@ -15,6 +15,8 @@ Connections of a topic is not restricted with your aspect. Hodgepodge is an appl
 
 ## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Test-Cases">Test Cases</a>** ##
 
+## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Milestones">Milestone Reports</a>** ##
+
 ## **Meeting Notes** ##
 
 <ul>
