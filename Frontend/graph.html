@@ -341,7 +341,7 @@
       interaction: {
         hover: true,
         navigationButtons: true,
-        keyboard: true,
+        keyboard: false,
       },
       physics: {
         // enabled: true,
@@ -685,18 +685,19 @@ function saveData(data,callback) {
   })
   .done(function( data ) {
 
+    callback(data);
+
     $('#connectionLabel').val('');
     $('#addConnectionModal').modal('hide');
 
     changeAddConnectionButton(true);
 
-    callback(data);
     
-    console.log(data);
+    // console.log(data);
 
   })
   .fail(function( data ) {
-      console.log(data);
+      // console.log(data);
 
       $('#addConnectionMessages').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning!</strong> Something went wrong!</div>');
       $('#addConnectionMessages').show('slow');
