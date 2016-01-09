@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+  <meta charset="utf-8">
   <title>HodgePodge</title>
 
   <!-- Bootstrap core CSS -->
@@ -530,7 +531,7 @@ $('#addTopicForm').validator().on('submit', function (e) {
     $.ajax({
       method: "POST",
       url: api + "/api/topic/create",
-      contentType: "application/json",
+      contentType: "application/json; charset=utf-8",
       dataType: "json",
       data: JSON.stringify({ 
         ownerId: $.cookie('id'),
@@ -602,7 +603,7 @@ $('#addPostForm').validator().on('submit', function (e) {
         method: "POST",
         url: api + "/api/post/create?topicId=" + selectedTopicId,
         dataType: "json",
-        contentType: "application/json",
+        contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ 
           ownerId: $.cookie('id'),
           content: newPostContent,
@@ -674,7 +675,7 @@ function saveData(data,callback) {
   $.ajax({
     method: "POST",
     url: api + "/api/edge/create_new?user_id=" + $.cookie('id'),
-    contentType: "application/json",
+    contentType: "application/json; charset=utf-8",
     dataType: "json",
     data: JSON.stringify({ 
       from: data.from,
@@ -714,7 +715,7 @@ function updateSideBar(data) {
   network.focus(data.id, {
     scale: 1.4,
     animation: {
-      duration: 500,
+      duration: 300,
       easingFunction: "easeInOutQuad"
     }
   });
