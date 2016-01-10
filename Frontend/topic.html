@@ -543,7 +543,7 @@ function downVotePosts(postId){
   })
   .done(function( data ) {
     console.log(data);
-    if(data.result.result = "OK"){
+    if(data.result.result == "OK"){
       var downVoteCurrent = Number($('#r' + Number(postId)).html());
       $('#r' + Number(postId)).html(downVoteCurrent-1);
     }
