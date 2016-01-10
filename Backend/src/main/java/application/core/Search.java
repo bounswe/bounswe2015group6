@@ -233,6 +233,8 @@ public class Search {
                 tagResults.add(tagTemp);
         }
 
+        for(String s: tagResults) System.out.println(s);
+
 
         ArrayList<String> topicResults = new ArrayList<>();
 
@@ -251,6 +253,8 @@ public class Search {
                     topicResults.add(topicTemp);
             }
         }
+
+        for(String s : topicResults) System.out.println(s);
 
         /* Now it is time to search for related topics */
 
