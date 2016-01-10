@@ -378,17 +378,37 @@ public class TopicController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/up_vote")
-    public int upVote(@PathVariable("id") int id){
+    public Vote upVote(@PathVariable("id") int id, @RequestParam("user_id") int userId){
 
         Topic temp = topicRepo.findById(id);
         if(temp == null){
-            temp = new Topic();
-            temp.setResult(new Result(Result.RESULT_OK, "Topic does not exist"));
-            return -1;
+            Vote vote = new Vote();
+            vote.setResult(new Result(Result.RESULT_FAILED, "Topic does not exist"));
         }
 
+        Vote vote = voteRepo.findByWhoVotedAndWhatVotedAndVoteType(userId, id, 0);
+        Vote vote2 = voteRepo.findByWhoVotedAndWhatVotedAndVoteType(userId, id, 1); /* peki down_vote yapmıs mı? */
+
+        if(vote != null){
+            vote.setResult(new Result(Result.RESULT_FAILED, "Already voted this topic"));
+            return vote;
+        }else{
+
+            vote = new Vote();
+            vote.setResult(new Result(Result.RESULT_OK, "Voted"));
+            vote.setVoteType(0);
+            vote.setWhatVoted(id);
+            vote.setWhoVoted(userId);
+            voteRepo.save(vote);
+            if(vote2 != null) voteRepo.delete(vote2);
+
+
+        }
+
+
+
         int i = topicRepo.updateUpVote(id);
-        return i;
+        return vote;
     }
 
     /**
@@ -396,18 +416,35 @@ public class TopicController {
      * @param id
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/down_vote")
-    public int downVote(@PathVariable("id") int id){
+   @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/down_vote")
+    public Vote downVote(@PathVariable("id") int id, @RequestParam("user_id") int userId){
 
         Topic temp = topicRepo.findById(id);
         if(temp == null){
-            temp = new Topic();
-            temp.setResult(new Result(Result.RESULT_OK, "Topic does not exist"));
-            return -1;
+            Vote vote = new Vote();
+            vote.setResult(new Result(Result.RESULT_FAILED, "Topic does not exist"));
+        }
+
+        Vote vote = voteRepo.findByWhoVotedAndWhatVotedAndVoteType(userId, id, 1);
+        Vote vote2 = voteRepo.findByWhoVotedAndWhatVotedAndVoteType(userId, id, 0); /* peki up_vote yapmis mi?*/
+
+        if(vote != null){
+            vote.setResult(new Result(Result.RESULT_FAILED, "Already voted this topic"));
+            return vote;
+        }else{
+
+            vote = new Vote();
+            vote.setResult(new Result(Result.RESULT_OK, "Voted"));
+            vote.setVoteType(1);
+            vote.setWhatVoted(id);
+            vote.setWhoVoted(userId);
+            voteRepo.save(vote);
+            if(vote2 != null) voteRepo.delete(vote2);
+
         }
 
         int i = topicRepo.updateDownVote(id);
-        return i;
+        return vote;
     }
 
     /**
