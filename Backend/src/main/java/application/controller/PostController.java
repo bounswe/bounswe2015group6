@@ -279,43 +279,75 @@ public class PostController {
         postTopicRelationRepo.deleteByPostId(post.getId());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/up_vote")
-	/**
-      * This method upvotes the desired post
-      * @param id: id of the post that will be upvoted
-	* @return i : integer number of votes
-      */
-
-    public int upVote(@PathVariable("id") int id){
+ @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/up_vote")
+    public PostVote upVote(@PathVariable("id") int id, @RequestParam("user_id") int userId){
 
         Post temp = postRepo.findById(id);
         if(temp == null){
-            temp = new Post();
-            temp.setResult(new Result(Result.RESULT_OK, "Topic does not exist"));
-            return -1;
+            PostVote pv = new PostVote();
+            pv.setResult(new Result(Result.RESULT_FAILED, "Post does not exist"));
+        }
+
+        PostVote pv = postVoteRepo.findByWhoVotedAndWhatVotedAndVoteType(userId, id, 0);
+        PostVote pv2 = postVoteRepo.findByWhoVotedAndWhatVotedAndVoteType(userId, id, 1);
+
+        if(pv != null){
+            pv.setResult(new Result(Result.RESULT_FAILED, "Already voted this post"));
+            return pv;
+        }else{
+
+            pv = new PostVote();
+            pv.setResult(new Result(Result.RESULT_OK, "Voted"));
+            pv.setVoteType(0);
+            pv.setWhoVoted(userId);
+            pv.setWhatVoted(id);
+            postVoteRepo.save(pv);
+            if(pv2 != null) postVoteRepo.delete(pv2);
+
         }
 
         int i = postRepo.updateUpVote(id);
-        return i;
+        return pv;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/down_vote")
 	/**
       * This method downvotes the desired post
       * @param id: id of the post that will be downvoted
 	* @return i : integer number of votes
       */
-    public int downVote(@PathVariable("id") int id){
+
+    @RequestMapping(method = RequestMethod.POST, value = "/id/{id}/down_vote")
+    public PostVote downVote(@PathVariable("id") int id, @RequestParam("user_id") int userId){
 
         Post temp = postRepo.findById(id);
         if(temp == null){
-            temp = new Post();
-            temp.setResult(new Result(Result.RESULT_OK, "Topic does not exist"));
-            return -1;
+            PostVote pv = new PostVote();
+            pv.setResult(new Result(Result.RESULT_FAILED, "Post does not exist"));
+            return pv;
+        }
+
+        PostVote pv = postVoteRepo.findByWhoVotedAndWhatVotedAndVoteType(userId, id, 1);
+        PostVote pv2 = postVoteRepo.findByWhoVotedAndWhatVotedAndVoteType(userId, id, 0);
+
+        if(pv != null){
+
+            pv.setResult(new Result(Result.RESULT_FAILED, "Already voted this post"));
+            return pv;
+
+        }else{
+
+            pv = new PostVote();
+            pv.setResult(new Result(Result.RESULT_OK, "Voted"));
+            pv.setVoteType(1);
+            pv.setWhoVoted(userId);
+            pv.setWhatVoted(id);
+            postVoteRepo.save(pv);
+            if(pv2 != null) postVoteRepo.delete(pv2);
+
         }
 
         int i = postRepo.updateDownVote(id);
-        return i;
+        return pv;
     }
 
     /**
