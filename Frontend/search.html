@@ -180,25 +180,23 @@ $(function(){
     url: api + "/api/search/?search=" + searchQuery,
   })
     .done(function( data ) {
-      var i = 0;
+      console.log(data);
       var html = '<table class="table table-hover"><thead><th>#</th><th>Topic Name</th></thead><tbody>';
-      $.each(data.Topic, function(idOfResult, nameOfResult){
-        i++;
-        html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(idOfResult) +'\'"><td>' + i + '</td><td>' + nameOfResult + '</td></tr>';
-      });
+      for(var i = 0; i < data.Topic.length; i++){
+        html += '<tr onclick="window.document.location=\'./topic.html?id='+ Number(data.Topic[i].id) +'\'"><td>' + (i + 1) + '</td><td>' + data.Topic[i].title + '</td></tr>';
+      }
       html += '</tbody></table>';
-      $('#totalTopics').html(i);
+      $('#totalTopics').html(data.Topic.length);
       $('#topicResults').html(html);
 
       i=0;
       html = '<table class="table table-hover"><thead><th>#</th><th>Username</th></thead><tbody>';
-      $.each(data.User, function(idOfResult, nameOfResult){
-        i++;        
-        html += '<tr onclick="window.document.location=\'./profile.html?id='+ Number(idOfResult) +'\'"><td>' + i + '</td><td>' + nameOfResult + '</td></tr>';
-      });
+      for(var i = 0; i < data.User.length; i++){
+        html += '<tr onclick="window.document.location=\'./profile.html?id='+ Number(data.User[i].id) +'\'"><td>' + (i+1) + '</td><td>' + data.User[i].title + '</td></tr>';
+      }
       html += '</tbody></table>';
       $('#userResults').html(html);
-      $('#totalUsers').html(i);
+      $('#totalUsers').html(data.User.length);
 
     })
     .fail(function( data ) {
