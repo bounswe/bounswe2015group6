@@ -5,14 +5,14 @@
 ## Project Description HodgePodge ##
 Connections of a topic is not restricted with your aspect. Hodgepodge is an application that you can meet others who has common topics with you. You can subscript topics and discover points of a topic that you do not know. Thanks to Hodgepodge, you can discover new points and lose yourself in an advanture.
 
-<img src="HodgePodge.gif" />
+<img src="HodgePodge.gif"/>
 
-<a href="http://hodge-podge.info">HodgePodge Web Page</a>
+<a href="https://github.com/bounswe/bounswe2015group6/blob/master/HodgePodge.mp4?raw=true">Download Video Tutorial</a>
 
 ## **<a href="https://github.com/BounSWE2015Group6/bounswe2015group6/wiki/Code-Reviews">Code Reviews</a>** ##
 
 ## **Web Server Controller** ##
-<a href = 'http://ec2-54-68-47-54.us-west-2.compute.amazonaws.com:8080/WebApp/'>Check out the web application</a>
+<a href="http://hodge-podge.info" target="_blank">HodgePodge Web Page</a>
 
 ## **<a href="https://github.com/bounswe/bounswe2015group6/wiki/Requirements">Project Requirements</a>** ##
 
